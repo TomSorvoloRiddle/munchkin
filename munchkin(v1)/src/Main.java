@@ -121,7 +121,7 @@ public class Main {
 					// La suerte hace que se encuentre con un objeto legendario
 				} else {
 					// Objeto normal
-					Weapon arma = new Weapon(1);
+					Weapon arma = new Weapon(randomNumber(4)); // Ahora mismo hay 4 armas y te tocará aleatoriamente una de las 4 armas...
 					arma.describe();
 				}
 			} else {

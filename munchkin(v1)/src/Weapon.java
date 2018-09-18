@@ -26,10 +26,22 @@ public class Weapon extends Item {
 			this.ataque = 1;
 			break;
 		case 2:
+			super.setNombre("Dentadura Postiza Aterradora");
+			super.setPeso(1);
+			super.setDescripcion("Dentadura con unos dientes un tanto especiales");
+			this.ataque = 1;			
 			break;
 		case 3:
+			super.setNombre("Capa de Sombras");
+			super.setPeso(1);
+			super.setDescripcion("Capa que te da fuerza");
+			this.ataque = 1;
 			break;
 		case 4:
+			super.setNombre("Pañuelo para tipos duros");
+			super.setPeso(1);
+			super.setDescripcion("Pañuelo que te hace sentir más fuerte");
+			this.ataque = 1;
 			break;
 		case 5:
 			break;
