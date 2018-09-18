@@ -1,0 +1,180 @@
+/**
+ * 
+ */
+package base;
+import java.util.Scanner;
+import java.io.*;
+import java.util.Random;
+
+/**
+ * @author Christian y Miquel
+ *
+ */
+public class Main {
+	//Constantes que no varían durante la partida
+	public static final int DifPifia = 40; // Posibilidades de que cada turno te salga una pifia...
+	
+	
+	
+	public static void main(String[] args) throws IOException {
+		
+		System.out.println("Bienvenido a Munchkin, aventura escrita");			
+		System.out.println("¿Cómo quieres que se llame tu personaje?");
+		
+		//Creamos String name para almacenar el nombre del personaje y se lo asignamos al Player
+		String name;
+		Scanner userIn = new Scanner(System.in);
+		BufferedReader userInput = new BufferedReader(new InputStreamReader (System.in));
+		name = userInput.readLine(); // Leemos variable String
+		Player personaje = new Player(name); // Creamos personaje
+		//personaje.setName(name); // Le asignamos el nombre
+		
+		// Variables para controlar el flujo del programa
+		boolean atack = true; // Controlar si entramos en el bucle para asignar puntos de ataque
+		boolean defense = true; // Controlar si entramos en el bucle de asignar puntos de defensa
+		boolean speed = true;
+		
+		int atkIn= 0;
+		int dfsIn = 0;
+		int spdIn = 0;
+		
+		System.out.println("Genial, ahora tienes que repartirle los puntos de habilidad para que "+ name + " se haga muy fuerte...");
+		while(atack) {
+			System.out.println("Reparte 10 puntos entre ataque, defensa y velocidad. Elige sabiamente...");
+			System.out.println("¿Cuantos puntos de ataque quieres tener?");
+			atkIn = userIn.nextInt();
+			if(isMoreThanTen(atkIn)) {
+				System.out.println("No puedes asignar más de 10 puntos de habilidad");
+			}else {
+				personaje.setAtaque(atkIn);
+				if(atkIn == 10){
+					defense = false;
+					speed = false;
+				}
+				//System.out.println(defense);
+				atack = false;
+			}
+		}
+		while(defense) {
+			System.out.println("¿Cuantos puntos de defensa quieres tener?");
+			dfsIn = userIn.nextInt();
+			if(isMoreThanTen(dfsIn+personaje.getAtaque())) {
+				System.out.println("No puedes asignar más de 10 puntos de habilidad");
+			}else {
+				personaje.setDefensa(dfsIn);
+				//System.out.println(defense);
+				//if(atkIn + dfsIn == 10) { --> Cód. Christian 
+				if(personaje.getAtaque() + personaje.getDefensa() == 10) {
+					speed = false;
+				}
+				defense = false;
+			}
+		}
+		while(speed) {
+			System.out.println("¿Cuantos puntos de velocidad quieres tener?");
+			spdIn = userIn.nextInt();
+			if(isMoreThanTen(spdIn+personaje.getAtaque()+personaje.getDefensa())) {
+				 System.out.println("No puedes asignar mas de 10 puntos de habilidad");
+			}else {
+				personaje.setVelocidad(spdIn);
+				speed = false;
+			}
+		}
+		personaje.describe();
+		
+		//  Empezar partida
+		// Variables de control de flujo
+		int estado = 1; // Estado marcará en qué parte de la partida te encuentras... Cuando llegues a 100, te enfrentarás al monstruo final
+		int turn = 1; // Variable que nos indicará cuantos turnos hemos jugado
+		// Mientras la variable estado sea menor de 100 iremos haciendo turnos de partida
+		while(estado < 100) {
+			//Reseteamos los valores de pifia y suerte cada turno
+			int numberPL = 0;
+			boolean pifia = false; // Tirada de pifia al principio del turno... Si sale 1 es pifia.
+			boolean lucky = false; // Tirada de suerte al principio del turno... Si sale difPifia el jugador tendrá suerte.
+			int numberAction = 0; // Número que nos dirá si nos enfrentamos a un enemigo o nos encontramos un item
+			// Todo turno empieza con una tirada de pifia...
+			numberPL = randomNumber(DifPifia);
+			if(isPifia(numberPL)) {
+				System.out.println("Te ha tocado una pifia");
+				pifia = true;
+			}
+			//Tirada para ver si tenemos suerte en el turno...
+			if(numberPL == DifPifia) {
+				System.out.println("Vas a tener suerte este turno");
+				lucky = true;
+				// TO DO realizar sucesos por tener suerte, encontrarse algún tesoro (objeto, armadura, poción,...)
+			
+				
+			
+			}
+			
+			System.out.flush();
+			System.out.println("Empezamos el turno");
+			// TO DO
+			// Tirada aleatoria para saber si nos encontramos un item o luchamos contra un enemigo
+			numberAction = randomNumber(2); // Si el número es 2, conseguiremos un item. Si el número es 1, nos enfrentaremos a un enemigo.
+			if(numberAction == 2) {
+				// Nos encontramos un item
+				System.out.println("Mientras andabas en busca de aventuras, te has encontrado con un objeto");
+				if (lucky) {
+					// La suerte hace que se encuentre con un objeto legendario
+				} else {
+					// Objeto normal
+					Weapon arma = new Weapon(1);
+					arma.describe();
+				}
+			} else {
+				// Nos enfrentamos a un enemigo
+				System.out.println("Las aventuras llevan a encontrarte con un enemigo...");
+			}
+			userIn.nextLine();
+			// Al final de cada turno, el jugador podrá repartirse la experiencia adquirida en sus atributos...
+			
+		}
+	}
+	
+	/**
+	 *  Método isMoreThanTen(int);
+	 *  Método que que devuelve verdadero si el número pasado es mayor de 10 y falso si no lo es...
+	 *  @param int
+	 *  @return boolean
+	 */
+	static boolean isMoreThanTen(int number) {
+		if( number > 10 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 *  Método randomNumber(int);
+	 *  Método que genera un número aleatorio dependiendo del número que le pases
+	 *  @return int aleatorio
+	 */
+	static int randomNumber(int dice) {
+		int number;
+		Random rnd = new Random();
+		number = rnd.nextInt()%dice;
+		number = Math.abs(number);
+		if(number == 0) {
+			number = dice;
+		}
+		return number;
+	}
+	
+	/**
+	 * Método isPifia(int);
+	 * Devuelve true si el número aleatorio es un 1
+	 * @param number Le pasamos el número aleatorio que ha salido
+	 * @return boolean
+	 */
+	static boolean isPifia(int number) {
+		if(number == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
