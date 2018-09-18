@@ -1,7 +1,7 @@
 /**
  * 
  */
-package base;
+
 import java.util.Scanner;
 import java.io.*;
 import java.util.Random;

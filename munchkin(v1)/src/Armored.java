@@ -1,5 +1,3 @@
-package base;
-
 public class Armored extends Item{
 	// Atributos de la clase Armored
 	private int defensa;

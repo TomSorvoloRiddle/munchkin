@@ -1,4 +1,3 @@
-package base;
 
 public class Weapon extends Item {
 	// Atribtuos de la clase Weapon
