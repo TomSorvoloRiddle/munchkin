@@ -113,8 +113,8 @@ public class Main {
 			System.out.println("Empezamos el turno");
 			// TO DO
 			// Tirada aleatoria para saber si nos encontramos un item o luchamos contra un enemigo
-			numberAction = randomNumber(2); // Si el número es 2, conseguiremos un item. Si el número es 1, nos enfrentaremos a un enemigo.
-			if(numberAction == 2) {
+			numberAction = randomNumber(10); // Si el número es 2, conseguiremos un item. Si el número es 1, nos enfrentaremos a un enemigo.
+			if(numberAction >= 8) {
 				// Nos encontramos un item
 				System.out.println("Mientras andabas en busca de aventuras, te has encontrado con un objeto");
 				if (lucky) {
