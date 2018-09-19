@@ -215,4 +215,12 @@ public class Weapon extends Item {
 		System.out.println("Ataque: "+ this.getAtaque());
 		System.out.println("Descripción: "+ this.getDescripcion());
 	}
+	/**
+	 * Método que transforma un arma en legendaria
+	 * Simplemente le añadimos al nombre legendaria y le sumamos +5 al ataque
+	 */
+	public void toLegend() {
+		this.setNombre(this.getNombre() + " Legendaria");
+		this.setAtaque(this.getAtaque() + 5);
+	}
 }

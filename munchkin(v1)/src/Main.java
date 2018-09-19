@@ -102,11 +102,10 @@ public class Main {
 			//Tirada para ver si tenemos suerte en el turno...
 			if(numberPL == DifPifia) {
 				System.out.println("Vas a tener suerte este turno");
-				lucky = true;
 				// TO DO realizar sucesos por tener suerte, encontrarse algún tesoro (objeto, armadura, poción,...)
+				lucky = true;
 			
 			}
-			
 			System.out.flush();
 			System.out.println("Empezamos el turno");
 			// TO DO
@@ -117,9 +116,17 @@ public class Main {
 				System.out.println("Mientras andabas en busca de aventuras, te has encontrado con un objeto");
 				if (lucky) {
 					// La suerte hace que se encuentre con un objeto legendario
+					Weapon armaLegend = new Weapon(randomNumber(27));
+					System.out.println("Has tenido mucha suerte y te has encontrado con un arma legendaria!");
+					// Transformamos arma aleatoria en legendaria, aquí de forma manual
+					//armaLegend.setAtaque(armaLegend.getAtaque() + 5);
+					//armaLegend.setNombre(armaLegend.getNombre() + " Legendaria");
+					// Transformamos arma aleatoria en legendaria, aquí mediante un método de la clase Weapon
+					armaLegend.toLegend();
+					armaLegend.describe();
 				} else {
 					// Objeto normal
-					Weapon arma = new Weapon(randomNumber(4)); // Ahora mismo hay 4 armas y te tocará aleatoriamente una de las 4 armas...
+					Weapon arma = new Weapon(randomNumber(27)); // Tocará una weapon aleatoria dentro de las 27 definidas
 					arma.describe();
 				}
 			} else {
