@@ -105,15 +105,13 @@ public class Main {
 				lucky = true;
 				// TO DO realizar sucesos por tener suerte, encontrarse algún tesoro (objeto, armadura, poción,...)
 			
-				
-			
 			}
 			
 			System.out.flush();
 			System.out.println("Empezamos el turno");
 			// TO DO
 			// Tirada aleatoria para saber si nos encontramos un item o luchamos contra un enemigo
-			numberAction = randomNumber(10); // Si el número es 2, conseguiremos un item. Si el número es 1, nos enfrentaremos a un enemigo.
+			numberAction = randomNumber(10); // Si el número es mayor o igual a 8, nos encontraremos un objeto
 			if(numberAction >= 8) {
 				// Nos encontramos un item
 				System.out.println("Mientras andabas en busca de aventuras, te has encontrado con un objeto");
