@@ -19,6 +19,7 @@ public class Player {
 	private String genero;
 	private String raza;
 	private String clase;
+	private Weapon armaPuesta[];
 	
 	public Player() {
 		
