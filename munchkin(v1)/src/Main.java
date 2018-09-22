@@ -118,16 +118,25 @@ public class Main {
 					// La suerte hace que se encuentre con un objeto legendario
 					Weapon armaLegend = new Weapon(randomNumber(27));
 					System.out.println("Has tenido mucha suerte y te has encontrado con un arma legendaria!");
-					// Transformamos arma aleatoria en legendaria, aquí de forma manual
-					//armaLegend.setAtaque(armaLegend.getAtaque() + 5);
-					//armaLegend.setNombre(armaLegend.getNombre() + " Legendaria");
-					// Transformamos arma aleatoria en legendaria, aquí mediante un método de la clase Weapon
+					// Transformamos arma aleatoria en legendaria
 					armaLegend.toLegend();
 					armaLegend.describe();
 				} else {
-					// Objeto normal
-					Weapon arma = new Weapon(randomNumber(27)); // Tocará una weapon aleatoria dentro de las 27 definidas
-					arma.describe();
+					// Aleatoriamente tocará un objeto (3), una armadura(2) o un arma(1)
+					switch(randomNumber(3)) {
+						case 1:
+							Weapon arma = new Weapon(randomNumber(27)); // Tocará una weapon aleatoria dentro de las 27 definidas
+							arma.describe();
+							break;
+						case 2:
+							//TO DO
+							// Creación de armadura
+							break;
+						default:
+							//TO DO
+							//Creación de objeto
+							break;
+					}
 				}
 			} else {
 				// Nos enfrentamos a un enemigo
@@ -135,7 +144,6 @@ public class Main {
 			}
 			userIn.nextLine();
 			// Al final de cada turno, el jugador podrá repartirse la experiencia adquirida en sus atributos...
-			
 		}
 	}
 	

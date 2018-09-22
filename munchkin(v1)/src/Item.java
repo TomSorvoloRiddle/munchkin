@@ -1,9 +1,4 @@
 /**
- * 
- */
-
-
-/**
  * @author Christian y Miquel
  * Superclase Item, todos los objetos del juego, serán subclases de item
  * 
