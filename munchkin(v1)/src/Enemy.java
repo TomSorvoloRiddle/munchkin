@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * 
  */
@@ -15,6 +17,10 @@ public class Enemy {
 	private int velocidad;
 	private String genero;
 	private String raza;
+	private String descripcionFisica;
+	private int objectos;
+	private int pHabilidad;
+	
 	
 	/**
 	 * Constructor vacío clase Enemy
@@ -26,90 +32,325 @@ public class Enemy {
 	/**
 	 * Constructor Clase Enemy
 	 * Se le pasa el estado de la partida y se genera el enemigo en base al momento de la partida en el que estemos
-	 * 
+	 * Constructor muy abstracto ya que de aquí depende la partida
 	 */
-	public Enemy(int partida) {
-		generateRandom(partida);
+	public Enemy(int partida, boolean badLuck) {
+		int result = 13;
+		if(badLuck) { //Si el jugador ha tenido mala suerte, se tendrá que enfrentar a un enemigo mucho más fuerte que él
+			// TO DO
+		}else { // Si no ha tenido mala suerte, se genera un enemigo normal para su nivel
+			if(partida >= 3 && partida <= 5) { // Si la partida va por debajo del turno 5
+				
+			} else if( partida < 10) { // Si la partida va por debajo del turno 10
+				
+			} else if( partida < 15) { // Si la partida va por debajo del turno 15
+				
+			} else if( partida < 19) { // Si la partida va por debajo del turno 19
+				
+			} else { // Turno final
+				
+			}
+		}
+		
+		switch(randomNumber(result)) {
+			case 1:
+				this.setNombre("Rata muy enfadada");
+				this.setAtaque(2);
+				this.setDefensa(1);
+				this.setVelocidad(2);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Rata que ha aprendido a sostenerse con sus dos piernas traseras y va de pie. Con sus patas delanteras lleva una maza");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 2:
+				this.setNombre("Ladillas");
+				this.setAtaque(1);
+				this.setDefensa(2);
+				this.setVelocidad(3);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Ladillas furiosas que se meten... que provocan muchos picores!");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 3:
+				this.setNombre("Araña diminutita");
+				this.setAtaque(2);
+				this.setDefensa(1);
+				this.setVelocidad(2);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Araña diminuta capaz de pasar inadvertida y causar estragos");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 4:
+				this.setNombre("Babosa babeante");
+				this.setAtaque(3);
+				this.setDefensa(2);
+				this.setVelocidad(1);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Babosa asquerosa pegajosa");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 5:
+				this.setNombre("Planta en un tiesto");
+				this.setAtaque(1);
+				this.setDefensa(1);
+				this.setVelocidad(0);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Planta enredadera capaz de ... nada");
+				this.setObjectos(1);
+				this.setPHabilidad(1);
+				break;
+			case 6:
+				this.setNombre("Huevo gigante");
+				this.setAtaque(1);
+				this.setDefensa(4);
+				this.setVelocidad(0);
+				this.setGenero("Masculino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Huevo gigante, ¿cómo romperlo?");
+				this.setObjectos(1);
+				this.setPHabilidad(1);
+				break;
+			case 7:
+				this.setNombre("Goblin cojo");
+				this.setAtaque(3);
+				this.setDefensa(2);
+				this.setVelocidad(1);
+				this.setGenero("Masculino");
+				this.setRaza("Goblin");
+				this.setDescripcionFisica("Goblin verde que va con muletas debido a un accidente");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 8:
+				this.setNombre("Abejas enfermas");
+				this.setAtaque(2);
+				this.setDefensa(2);
+				this.setVelocidad(4);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Abejas rociadas con insecticida que están medio muertas");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 9:
+				this.setNombre("Ranas voladoras");
+				this.setAtaque(3);
+				this.setDefensa(2);
+				this.setVelocidad(3);
+				this.setGenero("Femenino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Ranas con alas y dientes, cuidado!");
+				this.setObjectos(1);
+				this.setPHabilidad(2);
+				break;
+			case 10:
+				this.setNombre("Huesitos");
+				this.setAtaque(4);
+				this.setDefensa(3);
+				this.setVelocidad(2);
+				this.setGenero("Masculino");
+				this.setRaza("Criatura");
+				this.setDescripcionFisica("De pequeño lo estudiábamos en el colegio, ahora está enfadado y va con un bastón y un sombrero de copa");
+				this.setObjectos(1);
+				this.setPHabilidad(3);
+				break;
+			case 11:
+				this.setNombre("Pitbull");
+				this.setAtaque(5);
+				this.setDefensa(2);
+				this.setVelocidad(3);
+				this.setGenero("Masculino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Perro o cantante? Perro peligroso capaz de darte un buen mordisco");
+				this.setObjectos(1);
+				this.setPHabilidad(3);
+				break;
+			case 12:
+				this.setNombre("Reloj despertador");
+				this.setAtaque(3);
+				this.setDefensa(5);
+				this.setVelocidad(1);
+				this.setGenero("Masculino");
+				this.setRaza("Criatura");
+				this.setDescripcionFisica("Reloj de los antiguos que no se apaga ni a la de tres");
+				this.setObjectos(1);
+				this.setPHabilidad(3);
+				break;
+			case 13:
+				this.setNombre("Pollo dopado con esteroides");
+				this.setAtaque(4);
+				this.setDefensa(3);
+				this.setVelocidad(3);
+				this.setGenero("Masculino");
+				this.setRaza("Animal");
+				this.setDescripcionFisica("Pollo rabioso con más fuerza de lo normal");
+				this.setObjectos(1);
+				this.setPHabilidad(3);
+				break;
+			default:
+				System.out.println("Ha tocado un número de enemigo no controlado");
+				break;
+		}
 	}
+	// Getters y Setters
 	/**
-	 * @return the nombre
+	 * Getter de nombre
+	 * @return String nombre;
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 	/**
-	 * @param nombre the nombre to set
+	 * Setter del nombre
+	 * @param String nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	/**
-	 * @return the ataque
+	 * Getter de ataque
+	 * @return int ataque
 	 */
 	public int getAtaque() {
 		return ataque;
 	}
 	/**
-	 * @param ataque the ataque to set
+	 * Setter ataque
+	 * @param int ataque
 	 */
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
 	}
+	
 	/**
-	 * @return the defensa
+	 * Getter defensa
+	 * @return int defensa
 	 */
 	public int getDefensa() {
 		return defensa;
 	}
 	/**
-	 * @param defensa the defensa to set
+	 * Setter defensa
+	 * @param int defensa
 	 */
 	public void setDefensa(int defensa) {
 		this.defensa = defensa;
 	}
+	
 	/**
-	 * @return the velocidad
+	 * Getter velocidad
+	 * @return int velocidad
 	 */
 	public int getVelocidad() {
 		return velocidad;
 	}
 	/**
-	 * @param velocidad the velocidad to set
+	 * Setter de velocidad
+	 * @param int velocidad
 	 */
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
+	
 	/**
-	 * @return the genero
+	 * Getter de género (Masculino/Femenino) v.2
+	 * @return String genero
 	 */
 	public String getGenero() {
 		return genero;
 	}
 	/**
-	 * @param genero the genero to set
+	 * Setter género (Masculino/Femenino) v.2
+	 * @param String genero
 	 */
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	
 	/**
-	 * @return the raza
+	 * Getter de raza v.2
+	 * @return String raza
 	 */
 	public String getRaza() {
 		return raza;
 	}
 	/**
-	 * @param raza the raza to set
+	 * Setter de raza v.2
+	 * @param String raza
 	 */
 	public void setRaza(String raza) {
 		this.raza = raza;
 	}
 	
 	/**
-	 * generateRandom(int)
-	 * 	Genera unos stats de enemigo basándose en el momento de la partida en el que nos encontremos
-	 * @param int partida
+	 * Getter de descripciónFísica
+	 * @return String descripcion
 	 */
-	public void generateRandom(int partida) {
-		// TO DO
+	public String getDescripcionFisica() {
+		return descripcionFisica;
+	}
+	/**
+	 * Setter Descripción Física
+	 * @param String descripcion
+	 */
+	public void setDescripcionFisica(String descripcionFisica) {
+		this.descripcionFisica = descripcionFisica;
+	}
+	
+	/**
+	 * Getter objectos (Cuantos objetos entrega ganarle al monstruo)
+	 * @return int objetos
+	 */
+	public int getObjectos() {
+		return objectos;
+	}
+	/**
+	 * Setter objetos
+	 * @param int objectos
+	 */
+	public void setObjectos(int objectos) {
+		this.objectos = objectos;
+	}
+	
+	/**
+	 * Getter puntos habilidad
+	 * @return int puntos
+	 */
+	public int getPHabilidad() {
+		return pHabilidad;
+	}
+	/**
+	 * Setter de puntos de habilidad
+	 * @param int puntos
+	 */
+	public void setPHabilidad(int pHabilidad) {
+		this.pHabilidad = pHabilidad;
+	}
+	
+	// Métodos de la clase Enemy
+	/**
+	 *  Método randomNumber(int);
+	 *  Método que genera un número aleatorio dependiendo del número que le pases
+	 *  @return int aleatorio
+	 */
+	static int randomNumber(int dice) {
+		int number;
+		Random rnd = new Random();
+		number = rnd.nextInt()%dice;
+		number = Math.abs(number);
+		if(number == 0) {
+			number = dice;
+		}
+		return number;
 	}
 }
