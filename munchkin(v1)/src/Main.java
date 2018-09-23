@@ -87,7 +87,7 @@ public class Main {
 		int estado = 1; // Estado marcará en qué parte de la partida te encuentras... Cuando llegues a 20, te enfrentarás al monstruo final
 		int turn = 1; // Variable que nos indicará cuantos turnos hemos jugado
 		// Mientras la variable estado sea menor de 100 iremos haciendo turnos de partida
-		while(estado < 100) {
+		while(estado < 25) {
 			//Reseteamos los valores de pifia y suerte cada turno
 			int numberPL = 0;
 			boolean pifia = false; // Tirada de pifia al principio del turno... Si sale 1 es pifia.
@@ -142,7 +142,9 @@ public class Main {
 				// Nos enfrentamos a un enemigo
 				System.out.println("Las aventuras llevan a encontrarte con un enemigo...");
 				Enemy enemigo = new Enemy(estado, pifia);
-				
+				enemigo.describe();
+				//COMBATE
+				// TO DO
 				// Después de una pelea, el jugador podrá repartirse los puntos de habilidad pertinentes
 				estado += 1;
 			}

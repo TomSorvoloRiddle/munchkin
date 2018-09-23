@@ -18,7 +18,7 @@ public class Enemy {
 	private String genero;
 	private String raza;
 	private String descripcionFisica;
-	private int objectos;
+	private int objetos;
 	private int pHabilidad;
 	
 	
@@ -61,7 +61,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Rata que ha aprendido a sostenerse con sus dos piernas traseras y va de pie. Con sus patas delanteras lleva una maza");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 2:
@@ -72,7 +72,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Ladillas furiosas que se meten... que provocan muchos picores!");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 3:
@@ -83,7 +83,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Araña diminuta capaz de pasar inadvertida y causar estragos");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 4:
@@ -94,7 +94,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Babosa asquerosa pegajosa");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 5:
@@ -105,7 +105,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Planta enredadera capaz de ... nada");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(1);
 				break;
 			case 6:
@@ -116,7 +116,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Huevo gigante, ¿cómo romperlo?");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(1);
 				break;
 			case 7:
@@ -127,7 +127,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Goblin");
 				this.setDescripcionFisica("Goblin verde que va con muletas debido a un accidente");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 8:
@@ -138,7 +138,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Abejas rociadas con insecticida que están medio muertas");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 9:
@@ -149,7 +149,7 @@ public class Enemy {
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Ranas con alas y dientes, cuidado!");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(2);
 				break;
 			case 10:
@@ -160,7 +160,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Criatura");
 				this.setDescripcionFisica("De pequeño lo estudiábamos en el colegio, ahora está enfadado y va con un bastón y un sombrero de copa");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(3);
 				break;
 			case 11:
@@ -171,7 +171,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Perro o cantante? Perro peligroso capaz de darte un buen mordisco");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(3);
 				break;
 			case 12:
@@ -182,7 +182,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Criatura");
 				this.setDescripcionFisica("Reloj de los antiguos que no se apaga ni a la de tres");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(3);
 				break;
 			case 13:
@@ -193,7 +193,7 @@ public class Enemy {
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
 				this.setDescripcionFisica("Pollo rabioso con más fuerza de lo normal");
-				this.setObjectos(1);
+				this.setObjetos(1);
 				this.setPHabilidad(3);
 				break;
 			default:
@@ -311,15 +311,15 @@ public class Enemy {
 	 * Getter objectos (Cuantos objetos entrega ganarle al monstruo)
 	 * @return int objetos
 	 */
-	public int getObjectos() {
-		return objectos;
+	public int getObjetos() {
+		return objetos;
 	}
 	/**
 	 * Setter objetos
 	 * @param int objectos
 	 */
-	public void setObjectos(int objectos) {
-		this.objectos = objectos;
+	public void setObjetos(int objectos) {
+		this.objetos = objectos;
 	}
 	
 	/**
@@ -352,5 +352,19 @@ public class Enemy {
 			number = dice;
 		}
 		return number;
+	}
+	/**
+	 * Método que describe por pantalla al enemigo
+	 */
+	public void describe() {
+		System.out.println("Nombre: " + this.getNombre());
+		System.out.println("Atributos");
+		System.out.println("Ataque: " + this.getAtaque());
+		System.out.println("Defensa: " + this.getDefensa());
+		System.out.println("Velocidad: " + this.getVelocidad());
+		System.out.println(this.getDescripcionFisica());
+		System.out.println("Recompensas");
+		System.out.println("Objetos: " + this.getObjetos());
+		System.out.println("Puntos de habilidad: " + this.getPHabilidad());	
 	}
 }
