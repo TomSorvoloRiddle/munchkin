@@ -210,10 +210,10 @@ public class Main {
 			System.out.println(p.getName() + ": " + p.getVelocidad());
 			System.out.println(e.getNombre() + ": " + e.getVelocidad());
 			if(p.getVelocidad() > e.getVelocidad()) { // El personaje es más rápido que el enemigo, empieza atacando
-				e.setDefensa(p.getAtaque() - e.getDefensa());
+				e.setDefensa((byte) (p.getAtaque() - e.getDefensa()));
 				if(p.getVelocidad()/e.getVelocidad() >= 2 && e.getDefensa() > 0) { // El personaje es el doble de rápido que el enemigo  y además le queda defensa del ataque anterior, por eso, atacará dos veces antes que el enemigo
 					System.out.println("El jugador hace uso de su velocidad desmesurada en comparación a su enemigo y le azota con dos golpes");
-					e.setDefensa(p.getAtaque() - e.getDefensa());
+					e.setDefensa((byte) (p.getAtaque() - e.getDefensa()));
 					if(e.getDefensa() <= 0) {
 						System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate _2");
 						break;

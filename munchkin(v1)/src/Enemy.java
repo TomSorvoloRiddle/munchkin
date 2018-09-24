@@ -56,7 +56,7 @@ public class Enemy {
 			case 1:
 				this.setNombre("Rata muy enfadada");
 				this.setAtaque(2);
-				this.setDefensa(1);
+				this.setDefensa((byte) 1);
 				this.setVelocidad(2);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -67,7 +67,7 @@ public class Enemy {
 			case 2:
 				this.setNombre("Ladillas");
 				this.setAtaque(1);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(3);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -78,7 +78,7 @@ public class Enemy {
 			case 3:
 				this.setNombre("Araña diminutita");
 				this.setAtaque(2);
-				this.setDefensa(1);
+				this.setDefensa((byte) 1);
 				this.setVelocidad(2);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -89,7 +89,7 @@ public class Enemy {
 			case 4:
 				this.setNombre("Babosa babeante");
 				this.setAtaque(3);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(1);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -100,7 +100,7 @@ public class Enemy {
 			case 5:
 				this.setNombre("Planta en un tiesto");
 				this.setAtaque(1);
-				this.setDefensa(1);
+				this.setDefensa((byte) 1);
 				this.setVelocidad(0);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -111,7 +111,7 @@ public class Enemy {
 			case 6:
 				this.setNombre("Huevo gigante");
 				this.setAtaque(1);
-				this.setDefensa(4);
+				this.setDefensa((byte) 4);
 				this.setVelocidad(0);
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
@@ -122,7 +122,7 @@ public class Enemy {
 			case 7:
 				this.setNombre("Goblin cojo");
 				this.setAtaque(3);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(1);
 				this.setGenero("Masculino");
 				this.setRaza("Goblin");
@@ -133,7 +133,7 @@ public class Enemy {
 			case 8:
 				this.setNombre("Abejas enfermas");
 				this.setAtaque(2);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(4);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -144,7 +144,7 @@ public class Enemy {
 			case 9:
 				this.setNombre("Ranas voladoras");
 				this.setAtaque(3);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(3);
 				this.setGenero("Femenino");
 				this.setRaza("Animal");
@@ -155,7 +155,7 @@ public class Enemy {
 			case 10:
 				this.setNombre("Huesitos");
 				this.setAtaque(4);
-				this.setDefensa(3);
+				this.setDefensa((byte) 3);
 				this.setVelocidad(2);
 				this.setGenero("Masculino");
 				this.setRaza("Criatura");
@@ -166,7 +166,7 @@ public class Enemy {
 			case 11:
 				this.setNombre("Pitbull");
 				this.setAtaque(5);
-				this.setDefensa(2);
+				this.setDefensa((byte) 2);
 				this.setVelocidad(3);
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
@@ -177,7 +177,7 @@ public class Enemy {
 			case 12:
 				this.setNombre("Reloj despertador");
 				this.setAtaque(3);
-				this.setDefensa(5);
+				this.setDefensa((byte) 5);
 				this.setVelocidad(1);
 				this.setGenero("Masculino");
 				this.setRaza("Criatura");
@@ -188,7 +188,7 @@ public class Enemy {
 			case 13:
 				this.setNombre("Pollo dopado con esteroides");
 				this.setAtaque(4);
-				this.setDefensa(3);
+				this.setDefensa((byte) 3);
 				this.setVelocidad(3);
 				this.setGenero("Masculino");
 				this.setRaza("Animal");
