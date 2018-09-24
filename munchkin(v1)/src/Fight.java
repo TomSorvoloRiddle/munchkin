@@ -95,6 +95,14 @@ public class Fight {
 		return ko;
 	}
 	
+	public boolean playerIsDead() {
+		boolean died = false;
+		if( this.jugador.getVida() == 1 ) {
+			died = true;
+		}
+		return died;
+	}
+	
 	// ---------------------- Métodos para el enemigo -------------------------------------------
 	/**
 	 * enemyIsFaster();

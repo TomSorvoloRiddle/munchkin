@@ -243,6 +243,15 @@ public class Main {
 						}
 					}
 				}
+				// Turno del enemigo después que el jugador haya atacado
+				pelea.enemyAtack();
+				// Comprobamos si el jugador a muerto
+				if( pelea.playerIsKo() ) {
+					// El jugador ha perdido, le quedan vidas?
+					if( pelea.playerIsDead() ) {
+						// El jugador está muerto...
+					}
+				}
 			} else {
 				System.out.println("El enemigo es más rápido que " + p.getName() );
 			}
