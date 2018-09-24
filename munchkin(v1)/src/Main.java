@@ -141,13 +141,23 @@ public class Main {
 			} else {
 				// Nos enfrentamos a un enemigo
 				System.out.println("Las aventuras llevan a encontrarte con un enemigo...");
+				boolean playerWin = false;
 				Enemy enemigo = new Enemy(estado, pifia);
 				enemigo.describe();
 				//COMBATE
 				// TO DO
-				fight(personaje, enemigo);
+				playerWin = goToFight(personaje, enemigo);
 				// Después de una pelea, el jugador podrá repartirse los puntos de habilidad pertinentes
-				estado += 1;
+				if(playerWin) {
+					// Si el jugador ha ganado la pelea, se tiene que repartir los puntos de habilidad
+					// TO DO
+					System.out.println(personaje.getName() + " ha ganado la batalla, ahora puedes repartirte la experiencia adquirida");
+					estado += 1;
+				} else {
+					// El jugador ha perdido la batalla y por lo tanto se le resta una vida, si ha perdido las 2 vidas, pierde la partida
+					// TO DO
+					System.out.println(personaje.getName() + " ha perdido la batalla");
+				}
 			}
 			turn += 1;
 			userIn.nextLine();
@@ -203,24 +213,38 @@ public class Main {
 	 * @param Player p
 	 * @param Enemy e
 	 */
-	static boolean fight(Player p, Enemy e) {
+	static boolean goToFight(Player p, Enemy e) {
+		// Creamos una variable pelea donde encontraremos los métodos necesarios para realizar las comprobaciones de la pelea. Esta clase nos servirá para limpiar el Main();
+		Fight pelea = new Fight(p,e);
+		
 		boolean combatResult = true;
 		while(p.getDefensa() > 0 || e.getDefensa() > 0) { // El combate seguirá hasta que una de las dos defensas llegue a 0
 			System.out.println("Comparando las velocidades de los combatientes...");
 			System.out.println(p.getName() + ": " + p.getVelocidad());
 			System.out.println(e.getNombre() + ": " + e.getVelocidad());
-			if(p.getVelocidad() > e.getVelocidad()) { // El personaje es más rápido que el enemigo, empieza atacando
-				e.setDefensa((byte) (p.getAtaque() - e.getDefensa()));
-				if(p.getVelocidad()/e.getVelocidad() >= 2 && e.getDefensa() > 0) { // El personaje es el doble de rápido que el enemigo  y además le queda defensa del ataque anterior, por eso, atacará dos veces antes que el enemigo
-					System.out.println("El jugador hace uso de su velocidad desmesurada en comparación a su enemigo y le azota con dos golpes");
-					e.setDefensa((byte) (p.getAtaque() - e.getDefensa()));
-					if(e.getDefensa() <= 0) {
-						System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate _2");
-						break;
+			
+			if( pelea.playerIsFaster() ) { // El personaje es más rápido que el enemigo, empieza atacando
+				// El personaje ataca
+				//e.setDefensa((byte) (p.getAtaque() - e.getDefensa())); 
+				pelea.playerAtack();
+				// Comprobamos si el enemigo está muerto
+				if( pelea.enemyIsKo() ) {
+					System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate");
+					break;
+				} else {
+					if( pelea.playerIsDoubleFaster() ) { // El personaje es el doble de rápido que el enemigo y atacará dos veces antes que el enemigo
+						System.out.println("El jugador hace uso de su velocidad desmesurada en comparación a su enemigo y le azota con dos golpes");
+						// El personaje vuelve a atacar
+						pelea.playerAtack();
+						// Volvemos a comprobar si el enemigo está muerto
+						if( pelea.enemyIsKo() ) {
+							System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate _2");
+							break;
+						}
 					}
 				}
 			} else {
-				System.out.println("El enemigo es más rápido que " + p.getName());
+				System.out.println("El enemigo es más rápido que " + p.getName() );
 			}
 		}
 		return combatResult;

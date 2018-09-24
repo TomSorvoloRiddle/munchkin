@@ -1,11 +1,6 @@
 import java.util.Random;
 
 /**
- * 
- */
-
-
-/**
  * @author Christian y Miquel
  * Clase Enemy
  *  Cada vez que se enfrente a un enemigo, se generará una instancia de enemigo que se hará dependiendo de momento de la partida que te encuentres
