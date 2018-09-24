@@ -145,6 +145,7 @@ public class Main {
 				enemigo.describe();
 				//COMBATE
 				// TO DO
+				fight(personaje, enemigo);
 				// Después de una pelea, el jugador podrá repartirse los puntos de habilidad pertinentes
 				estado += 1;
 			}
@@ -196,5 +197,32 @@ public class Main {
 		} else {
 			return false;
 		}
+	}
+	/**
+	 * Método fight que simula la pelea. Se le pasan los dos parámetros principales, el personaje y el enemigo al que se enfrenta
+	 * @param Player p
+	 * @param Enemy e
+	 */
+	static boolean fight(Player p, Enemy e) {
+		boolean combatResult = true;
+		while(p.getDefensa() > 0 || e.getDefensa() > 0) { // El combate seguirá hasta que una de las dos defensas llegue a 0
+			System.out.println("Comparando las velocidades de los combatientes...");
+			System.out.println(p.getName() + ": " + p.getVelocidad());
+			System.out.println(e.getNombre() + ": " + e.getVelocidad());
+			if(p.getVelocidad() > e.getVelocidad()) { // El personaje es más rápido que el enemigo, empieza atacando
+				e.setDefensa(p.getAtaque() - e.getDefensa());
+				if(p.getVelocidad()/e.getVelocidad() >= 2 && e.getDefensa() > 0) { // El personaje es el doble de rápido que el enemigo  y además le queda defensa del ataque anterior, por eso, atacará dos veces antes que el enemigo
+					System.out.println("El jugador hace uso de su velocidad desmesurada en comparación a su enemigo y le azota con dos golpes");
+					e.setDefensa(p.getAtaque() - e.getDefensa());
+					if(e.getDefensa() <= 0) {
+						System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate _2");
+						break;
+					}
+				}
+			} else {
+				System.out.println("El enemigo es más rápido que " + p.getName());
+			}
+		}
+		return combatResult;
 	}
 }
