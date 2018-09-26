@@ -95,9 +95,14 @@ public class Fight {
 		return ko;
 	}
 	
+	/**
+	 * playerIsDead();
+	 * Método que nos dirá si el personaje del jugador está muerto o no.
+	 * @return boolean died;
+	 */
 	public boolean playerIsDead() {
 		boolean died = false;
-		if( this.jugador.getVida() == 1 ) {
+		if( this.jugador.getVida() > 0 ) {
 			died = true;
 		}
 		return died;

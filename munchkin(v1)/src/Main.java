@@ -32,7 +32,7 @@ public class Main {
 		// Variables para controlar el flujo del programa
 		boolean atack = true; // Controlar si entramos en el bucle para asignar puntos de ataque
 		boolean defense = true; // Controlar si entramos en el bucle de asignar puntos de defensa
-		boolean speed = true;
+		boolean speed = true; // Controlar si entramos en el bucle de asignar puntos de velocidad
 		
 		int atkIn= 0;
 		int dfsIn = 0;
@@ -147,11 +147,12 @@ public class Main {
 				//COMBATE
 				// TO DO
 				playerWin = goToFight(personaje, enemigo);
+				personaje.setDefensa(dfsIn);
 				// Después de una pelea, el jugador podrá repartirse los puntos de habilidad pertinentes
 				if(playerWin) {
 					// Si el jugador ha ganado la pelea, se tiene que repartir los puntos de habilidad
 					// TO DO
-					System.out.println(personaje.getName() + " ha ganado la batalla, ahora puedes repartirte la experiencia adquirida");
+					System.out.println(personaje.getName() + " ha ganado la batalla, ahora puedes repartirte la experiencia adquirida: " + enemigo.getPHabilidad() + " puntos de habilidad");
 					estado += 1;
 				} else {
 					// El jugador ha perdido la batalla y por lo tanto se le resta una vida, si ha perdido las 2 vidas, pierde la partida
@@ -247,13 +248,65 @@ public class Main {
 				pelea.enemyAtack();
 				// Comprobamos si el jugador a muerto
 				if( pelea.playerIsKo() ) {
+					p.setVida( p.getVida() - 1 );
 					// El jugador ha perdido, le quedan vidas?
 					if( pelea.playerIsDead() ) {
-						// El jugador está muerto...
+						// El jugador está muerto... Si le queda más de 0 está vivo
+						System.out.println("Has perdido la partida. Esta vez, los enemigos han sido más fuertes que tu");
+					} else {
+						// El jugador a perdido la pelea, pero no está muerto
+						System.out.println("Has perdido una de tus vidas, ves con más cuidado la próxima vez");
+					}
+				} else {
+					// Después del ataque del enemigo, el jugador sigue vivo
+					System.out.println("Resumen: " + p.getName() + " ha atacado primero dejando a " + e.getNombre() + " con " + e.getDefensa() + " de vida");
+					System.out.println("Después, " + e.getNombre() + " ha contraatacado dejando a " + p.getName() + " con " + p.getDefensa() + " de vida");
+				}
+
+			} else {
+				System.out.println("El enemigo es más rápido que " + p.getName() + ". Por lo tanto, ataca primero" );
+				pelea.enemyAtack();
+				if( pelea.playerIsKo() ) {
+					combatResult = false;
+					System.out.println("El ataque de "+ e.getNombre() + " ha dejado KO a " + p.getName() );
+					p.setVida( p.getVida() - 1 );
+					if( pelea.playerIsDead() ) {
+						// El jugador ha perdido y está muerto
+						System.out.println("Has perdido la partida. Esta vez, los enemigos han sido más fuertes que tu");
+						break;
+					} else {
+						// El jugador ha perdido la batalla pero no está muerto
+						System.out.println("Has perdido una de tus vidas, ves con más cuidado la próxima vez");
+						break;
+					}
+				} else if( pelea.enemyIsDoubleFaster() ) {
+					System.out.println("El enemigo ha hecho uso de su velocidad para atacad 2 veces seguidas...");
+					pelea.enemyAtack();
+					if( pelea.playerIsKo() ) {
+						combatResult = false;
+						System.out.println("El ataque de "+ e.getNombre() + " ha dejado KO a " + p.getName() );
+						p.setVida( p.getVida() - 1 );
+						if( pelea.playerIsDead() ) {
+							// El jugador ha perdido y está muerto
+							System.out.println("Has perdido la partida. Esta vez, los enemigos han sido más fuertes que tu");
+							break;
+						} else {
+							// El jugador ha perdido la batalla pero no está muerto
+							System.out.println("Has perdido una de tus vidas, ves con más cuidado la próxima vez");
+							break;
+						}
+					} else {
+						pelea.playerAtack();
+						if( pelea.enemyIsKo() ) {
+							System.out.println("El enemigo ha perdido el conocimiento, " + p.getName() + " gana el combate");
+							break;
+						} else {
+							// Después del ataque del enemigo, el jugador sigue vivo
+							System.out.println("Resumen: " + p.getName() + " ha atacado primero dejando a " + e.getNombre() + " con " + e.getDefensa() + " de vida");
+							System.out.println("Después, " + e.getNombre() + " ha contraatacado dejando a " + p.getName() + " con " + p.getDefensa() + " de vida");
+						}
 					}
 				}
-			} else {
-				System.out.println("El enemigo es más rápido que " + p.getName() );
 			}
 		}
 		return combatResult;
