@@ -209,6 +209,7 @@ public class Main {
 			return false;
 		}
 	}
+	
 	/**
 	 * Método fight que simula la pelea. Se le pasan los dos parámetros principales, el personaje y el enemigo al que se enfrenta
 	 * @param Player p
