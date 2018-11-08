@@ -153,6 +153,7 @@ public class Main {
 					// Si el jugador ha ganado la pelea, se tiene que repartir los puntos de habilidad
 					// TO DO
 					System.out.println(personaje.getName() + " ha ganado la batalla, ahora puedes repartirte la experiencia adquirida: " + enemigo.getPHabilidad() + " puntos de habilidad");
+					addExperience( personaje, enemigo.getPHabilidad() );
 					estado += 1;
 				} else {
 					// El jugador ha perdido la batalla y por lo tanto se le resta una vida, si ha perdido las 2 vidas, pierde la partida
@@ -312,4 +313,67 @@ public class Main {
 		}
 		return combatResult;
 	}
+	/* Método que le pasamos el jugador y la experiencia para repartirse y se le añade según quiera el jugador.
+	 * @param Player, int
+	 * 
+	 */
+	static void addExperience(Player jugador, int experiencia) throws IOException {
+		while(experiencia > 0){
+			System.out.println("Quieres repartir todos los puntos a un solo aspecto? Indicar con si o no. (Ataque, Defensa, Velocidad)");
+			String respuesta1;
+			String respuesta2;
+			String respuesta3;
+			BufferedReader userInput = new BufferedReader(new InputStreamReader (System.in));
+			respuesta1 = userInput.readLine(); // Leemos variable String
+			// Revisamos si la respuesta es si o no
+			switch(respuesta1.toLowerCase()) {
+				case "si":
+					System.out.println("Has decidido asignar todos los puntos a un mismo aspecto");
+					System.out.println("Al ataque, a la defensa o la velocidad");
+					respuesta2 = userInput.readLine();
+					switch(respuesta2.toLowerCase()) {
+						case "ataque":
+							jugador.setAtaque(jugador.getAtaque() + experiencia);
+							experiencia = 0;
+							break;
+						case "defensa":
+							jugador.setDefensa(jugador.getDefensa() + experiencia);
+							experiencia = 0;
+							break;
+						case "velocidad":
+							jugador.setVelocidad(jugador.getVelocidad() + experiencia);
+							experiencia = 0;
+							break;
+						default:
+							System.out.println("La respuesta no es la esperada, podrías volver a intentarlo?");
+							break;
+					}
+					break;
+				case "no":
+					System.out.println("Dónde quieres asignar puntos de experiencia: al ataque,a la defensa o a la velocidad");
+					respuesta3 = userInput.readLine();
+					switch(respuesta3.toLowerCase()) {
+						case "ataque":
+							jugador.setAtaque(jugador.getAtaque() + experiencia);
+							experiencia--;
+							break;
+						case "defensa":
+							jugador.setDefensa(jugador.getDefensa() + experiencia);
+							experiencia--;
+							break;
+						case "velocidad":
+							jugador.setVelocidad(jugador.getVelocidad() + experiencia);
+							experiencia--;
+							break;
+						default:
+							System.out.println("La respuesta no es la esperada, podrías volver a intentarlo?");
+							break;
+					}
+				default:
+					System.out.println("No se ha dado una respuesta válida, vuelve a intentarlo.");
+					break;
+			}
+		}
+	}
+	
 }
