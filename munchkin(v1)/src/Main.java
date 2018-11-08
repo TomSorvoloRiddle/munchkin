@@ -373,6 +373,7 @@ public class Main {
 					System.out.println("No se ha dado una respuesta válida, vuelve a intentarlo.");
 					break;
 			}
+			jugador.describe();
 		}
 	}
 	

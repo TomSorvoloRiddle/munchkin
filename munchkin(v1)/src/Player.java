@@ -180,7 +180,7 @@ public class Player {
 	 * @return None
 	 */
 	public void describe() {
-		System.out.println("El personaje creado tiene las siguientes características:");
+		System.out.println("El personaje tiene las siguientes características:");
 		System.out.println("Nombre: "+ this.name);
 		System.out.println("Ataque: "+ this.ataque);
 		System.out.println("Defensa: "+ this.defensa);
