@@ -16,7 +16,7 @@ public class Main {
 	
 	
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		System.out.println("Bienvenido a Munchkin, aventura escrita");			
 		System.out.println("¿Cómo quieres que se llame tu personaje?");
@@ -81,7 +81,7 @@ public class Main {
 			}
 		}
 		personaje.describe();
-		
+		pausar(4000);
 		//  Empezar partida
 		// Variables de control de flujo
 		int estado = 1; // Estado marcará en qué parte de la partida te encuentras... Cuando llegues a 20, te enfrentarás al monstruo final
@@ -98,13 +98,14 @@ public class Main {
 			if(isPifia(numberPL)) {
 				System.out.println("Te ha tocado una pifia");
 				pifia = true;
+				pausar(2000);
 			}
 			//Tirada para ver si tenemos suerte en el turno...
 			if(numberPL == DifPifia) {
 				System.out.println("Vas a tener suerte este turno");
 				// TO DO realizar sucesos por tener suerte, encontrarse algún tesoro (objeto, armadura, poción,...)
 				lucky = true;
-			
+				pausar(2000);
 			}
 			System.out.flush();
 			System.out.println("Empezamos el turno");
@@ -144,8 +145,8 @@ public class Main {
 				boolean playerWin = false;
 				Enemy enemigo = new Enemy(estado, pifia);
 				enemigo.describe();
+				pausar(3000);
 				//COMBATE
-				// TO DO
 				playerWin = goToFight(personaje, enemigo);
 				personaje.setDefensa(dfsIn);
 				// Después de una pelea, el jugador podrá repartirse los puntos de habilidad pertinentes
@@ -154,14 +155,17 @@ public class Main {
 					// TO DO
 					System.out.println(personaje.getName() + " ha ganado la batalla, ahora puedes repartirte la experiencia adquirida: " + enemigo.getPHabilidad() + " puntos de habilidad");
 					addExperience( personaje, enemigo.getPHabilidad() );
+					pausar(2000);
 					estado += 1;
 				} else {
 					// El jugador ha perdido la batalla y por lo tanto se le resta una vida, si ha perdido las 2 vidas, pierde la partida
 					// TO DO
 					System.out.println(personaje.getName() + " ha perdido la batalla");
+					pausar(2000);
 				}
 			}
 			turn += 1;
+			pausar(4000);
 			userIn.nextLine();
 			// Al final de cada turno...
 		}
@@ -313,7 +317,7 @@ public class Main {
 		}
 		return combatResult;
 	}
-	/* Método que le pasamos el jugador y la experiencia para repartirse y se le añade según quiera el jugador.
+	/** Método que le pasamos el jugador y la experiencia para repartirse y se le añade según quiera el jugador.
 	 * @param Player, int
 	 * 
 	 */
@@ -375,6 +379,13 @@ public class Main {
 			}
 			jugador.describe();
 		}
+	}
+	/** Método que le indicas un tiempo en milisegundos (1000 -> 1seg) y pausará la ejecución del programa
+	 * @throws InterruptedException 
+	 * @param int - Tiempo que estará pausado el programa
+	 */
+	static void pausar(int tiempo) throws InterruptedException {
+		Thread.sleep(tiempo);
 	}
 	
 }
