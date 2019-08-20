@@ -18,6 +18,10 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
+		// Realizando la aplicación de forma visual
+		WelcomeWindow ww = new WelcomeWindow();
+		ww.setVisible(true);
+		
 		System.out.println("Bienvenido a Munchkin, aventura escrita");			
 		System.out.println("¿Cómo quieres que se llame tu personaje?");
 		
