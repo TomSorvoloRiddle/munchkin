@@ -17,6 +17,8 @@ public class WelcomeWindow extends JFrame {
 	
 	private JTextField tFNombreP;
 	private JTextField tFAtaqueRep;
+	private JTextField tFDefensaRep;
+	private JTextField tFVelocidadRep;
 	private JButton btnEmpezar;
 	private JButton btnCrearPersonaje;
 	
@@ -117,7 +119,7 @@ public class WelcomeWindow extends JFrame {
 		lblDefensaRep.setBounds(25, 75, 70, 15);
 		panelRepartir.add(lblDefensaRep);
 		
-		JTextField tFDefensaRep = new JTextField();
+		tFDefensaRep = new JTextField();
 		tFDefensaRep.setBounds(110, 72, 70, 20);
 		panelRepartir.add(tFDefensaRep);
 		
@@ -125,7 +127,7 @@ public class WelcomeWindow extends JFrame {
 		lblVelocidadRep.setBounds(25, 100, 70, 15);
 		panelRepartir.add(lblVelocidadRep);
 		
-		JTextField tFVelocidadRep = new JTextField();
+		tFVelocidadRep = new JTextField();
 		tFVelocidadRep.setBounds(110, 97, 70, 20);
 		panelRepartir.add(tFVelocidadRep);
 		
@@ -152,6 +154,14 @@ public class WelcomeWindow extends JFrame {
 			ctrlAtqHab = false;
 			String isNum = tFAtaqueRep.getText();
 			int num;
+			puntos = TotalPuntos; // Como la comprobación se tiene que hacer siempre, reseteamos la variable para que tenga 10 puntos, que se restarán si en los otros TextFields hay datos
+			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields
+			if(!tFDefensaRep.getText().isEmpty()) {
+				puntos = Integer.parseInt(tFDefensaRep.getText());
+			}
+			if(!tFVelocidadRep.getText().isEmpty()) {
+				puntos = puntos + Integer.parseInt(tFVelocidadRep.getText());
+			}
 			boolean atqOk = true;
 			// Aquí comprobamos que lo que el usuario introduce sea un número y no una letra
 			try {
@@ -193,11 +203,13 @@ public class WelcomeWindow extends JFrame {
 	private void comprobacionFinal() {
 		if(ctrlAtqHab) {
 			btnCrearPersonaje.setEnabled(true);
-		} else {
+		} else { // Este else es para probar el control del ataque, eliminar una vez probado
 			btnCrearPersonaje.setEnabled(false);
 		}
 		if(ctrlGeneral) {
 			btnCrearPersonaje.setEnabled(true);
+		}else {
+			//btnCrearPersonaje.setEnabled(false);
 		}
 	}
 	/*
