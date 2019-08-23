@@ -23,6 +23,8 @@ public class WelcomeWindow extends JFrame {
 	private boolean ctrlAtqHab = false;
 	private boolean ctrlDefHab = false;
 	private boolean ctrlVelHab = false;
+	private boolean ctrlGeneral = false;
+	private final int TotalPuntos = 10;
 	private int puntos = 10;
 	
 	// Constructor vacío de la clase
@@ -147,17 +149,31 @@ public class WelcomeWindow extends JFrame {
 	private void comprobarDatosIniciales(String habilidad) {
 		switch(habilidad) {
 		case "Ataque":
+			ctrlAtqHab = false;
 			String isNum = tFAtaqueRep.getText();
 			int num;
+			boolean atqOk = true;
+			// Aquí comprobamos que lo que el usuario introduce sea un número y no una letra
 			try {
 				num = Integer.parseInt(isNum);
+				//Controlamos que el número no sea mayor a 10
+				if(num > puntos) {
+					ctrlAtqHab = false;
+					atqOk = false;
+				} else {
+					puntos = puntos-num;
+				}
 			} catch(NumberFormatException nFE) {
 				btnCrearPersonaje.setEnabled(false);
+				ctrlAtqHab = false;
+				atqOk = false;
 				if(!tFAtaqueRep.getText().isEmpty()) {
 					System.err.println("No has introducido un número válido");
 				}
 			}
-			//ctrlAtqHab = true;
+			if(atqOk) {
+				ctrlAtqHab = true;
+			}
 			break;
 		case "Defensa":
 			break;
@@ -176,6 +192,11 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private void comprobacionFinal() {
 		if(ctrlAtqHab) {
+			btnCrearPersonaje.setEnabled(true);
+		} else {
+			btnCrearPersonaje.setEnabled(false);
+		}
+		if(ctrlGeneral) {
 			btnCrearPersonaje.setEnabled(true);
 		}
 	}
