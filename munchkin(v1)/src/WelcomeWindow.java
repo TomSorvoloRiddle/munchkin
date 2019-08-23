@@ -14,7 +14,15 @@ public class WelcomeWindow extends JFrame {
 	// Atributos de la clase
 	private JPanel panelStart;
 	private JPanel panelRepartir;
+	
 	private JTextField tFNombreP;
+	private JTextField tFAtaqueRep;
+	private JButton btnEmpezar;
+	private JButton btnCrearPersonaje;
+	
+	private boolean ctrlAtqHab = false;
+	private boolean ctrlDefHab = false;
+	private boolean ctrlVelHab = false;
 	private int puntos = 10;
 	
 	// Constructor vacío de la clase
@@ -32,15 +40,15 @@ public class WelcomeWindow extends JFrame {
 		lblLogo.setBounds(234, 68, 46, 14);
 		panelStart.add(lblLogo);
 		
-		JLabel lblEmpezarPartida = new JLabel("\u00BFQuieres empezar una nueva aventura?");
+		JLabel lblEmpezarPartida = new JLabel("¿Quieres empezar una nueva aventura?");
 		lblEmpezarPartida.setBounds(143, 131, 241, 14);
 		panelStart.add(lblEmpezarPartida);
 		
-		JLabel lblNombrePersonaje = new JLabel("\u00BFC\u00F3mo quieres que se llame el personaje?");
+		JLabel lblNombrePersonaje = new JLabel("¿Cómo quieres que se llame el personaje?");
 		lblNombrePersonaje.setBounds(132, 156, 241, 14);
 		panelStart.add(lblNombrePersonaje);
 		
-		JButton btnEmpezar = new JButton("\u00A1Empezar!");
+		btnEmpezar = new JButton("¡Empezar!");
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				initRepartirPanel();
@@ -73,19 +81,103 @@ public class WelcomeWindow extends JFrame {
 		panelRepartir = new JPanel();
 		panelRepartir.setLayout(null);
 		
+		btnCrearPersonaje = new JButton("Empezar aventura");
+		btnCrearPersonaje.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent aE) {
+				initPanelPartida1();
+			}
+		});
+		btnCrearPersonaje.setBounds(200, 47, 140, 70);
+		btnCrearPersonaje.setEnabled(false);
+		panelRepartir.add(btnCrearPersonaje);
+		
 		JLabel lblReparticionHab = new JLabel("Repartición de habilidad (Puntos totales: "+puntos+")");
 		lblReparticionHab.setBounds(20, 20, 250, 15);
 		panelRepartir.add(lblReparticionHab);
 		
 		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
-		lblAtaqueRep.setBounds(25, 50, 50, 15);
+		lblAtaqueRep.setBounds(25, 50, 70, 15);
 		panelRepartir.add(lblAtaqueRep);
 		
-		JLabel lblDefensaRep = new JLabel("ATAQUE:");
-		lblAtaqueRep.setBounds(25, 50, 50, 15);
-		panelRepartir.add(lblAtaqueRep);
+		tFAtaqueRep = new JTextField();
+		tFAtaqueRep.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent kE) {
+				comprobarDatosIniciales("Ataque");
+				comprobacionFinal();
+			}
+		});
+		tFAtaqueRep.setBounds(110, 47, 70, 20);
+		panelRepartir.add(tFAtaqueRep);
 		
-		changePanel(this, panelStart, panelRepartir);
+		JLabel lblDefensaRep = new JLabel("DEFENSA:");
+		lblDefensaRep.setBounds(25, 75, 70, 15);
+		panelRepartir.add(lblDefensaRep);
+		
+		JTextField tFDefensaRep = new JTextField();
+		tFDefensaRep.setBounds(110, 72, 70, 20);
+		panelRepartir.add(tFDefensaRep);
+		
+		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
+		lblVelocidadRep.setBounds(25, 100, 70, 15);
+		panelRepartir.add(lblVelocidadRep);
+		
+		JTextField tFVelocidadRep = new JTextField();
+		tFVelocidadRep.setBounds(110, 97, 70, 20);
+		panelRepartir.add(tFVelocidadRep);
+		
+		changePanel(panelStart, panelRepartir);
+	}
+	
+	/*
+	 * initPanelPartida1();
+	 * 
+	 */
+	private void initPanelPartida1(){
+		System.out.println("Se ha pulsado el botón Empezar aventura");
+	}
+	
+	/*
+	 * comprobarDatosIniciales();
+	 * 
+	 * @param
+	 * @return boolean
+	 */
+	private void comprobarDatosIniciales(String habilidad) {
+		switch(habilidad) {
+		case "Ataque":
+			String isNum = tFAtaqueRep.getText();
+			int num;
+			try {
+				num = Integer.parseInt(isNum);
+			} catch(NumberFormatException nFE) {
+				btnCrearPersonaje.setEnabled(false);
+				if(!tFAtaqueRep.getText().isEmpty()) {
+					System.err.println("No has introducido un número válido");
+				}
+			}
+			//ctrlAtqHab = true;
+			break;
+		case "Defensa":
+			break;
+		case "Velocidad":
+			break;
+		default:
+			System.err.println("No se ha pasado una opción válida de habilidad");
+			break;
+		}
+	}
+	/*
+	 * comprobacionFinal();
+	 * Método al que le pasaremos las variables de control de los diferentes JTextField y cambiará el botón en activo si todo está correcto
+	 * @param
+	 * @return
+	 */
+	private void comprobacionFinal() {
+		if(ctrlAtqHab) {
+			btnCrearPersonaje.setEnabled(true);
+		}
 	}
 	/*
 	 * changePanel()
@@ -94,8 +186,9 @@ public class WelcomeWindow extends JFrame {
 	 * @param JFrame activo, JPanel que queremos retirar, JPanel que queramos activar
 	 * @return void
 	 */
-	private void changePanel(JFrame activeWindow, JPanel pnlDesactivar, JPanel pnlActivar) {
+	private void changePanel(JPanel pnlDesactivar, JPanel pnlActivar) {
 		pnlDesactivar.setVisible(false);
-		activeWindow.getContentPane().add(pnlActivar);
+		this.getContentPane().add(pnlActivar);
+		pnlActivar.setVisible(true);
 	}
 }
