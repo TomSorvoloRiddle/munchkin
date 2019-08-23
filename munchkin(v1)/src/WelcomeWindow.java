@@ -7,6 +7,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -120,6 +121,13 @@ public class WelcomeWindow extends JFrame {
 		panelRepartir.add(lblDefensaRep);
 		
 		tFDefensaRep = new JTextField();
+		tFDefensaRep.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent kE) {
+				comprobarDatosIniciales("Defensa");
+				comprobacionFinal();
+			}
+		});
 		tFDefensaRep.setBounds(110, 72, 70, 20);
 		panelRepartir.add(tFDefensaRep);
 		
@@ -128,6 +136,13 @@ public class WelcomeWindow extends JFrame {
 		panelRepartir.add(lblVelocidadRep);
 		
 		tFVelocidadRep = new JTextField();
+		tFVelocidadRep.addKeyListener(new KeyAdapter() {		
+			@Override
+			public void keyReleased(KeyEvent kE) {
+				comprobarDatosIniciales("Velocidad");
+				comprobacionFinal();
+			}
+		});
 		tFVelocidadRep.setBounds(110, 97, 70, 20);
 		panelRepartir.add(tFVelocidadRep);
 		
@@ -152,7 +167,7 @@ public class WelcomeWindow extends JFrame {
 		switch(habilidad) {
 		case "Ataque":
 			ctrlAtqHab = false;
-			String isNum = tFAtaqueRep.getText();
+			String isNumAtq = tFAtaqueRep.getText();
 			int num;
 			puntos = TotalPuntos; // Como la comprobación se tiene que hacer siempre, reseteamos la variable para que tenga 10 puntos, que se restarán si en los otros TextFields hay datos
 			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields
@@ -160,12 +175,16 @@ public class WelcomeWindow extends JFrame {
 				puntos = Integer.parseInt(tFDefensaRep.getText());
 			}
 			if(!tFVelocidadRep.getText().isEmpty()) {
-				puntos = puntos + Integer.parseInt(tFVelocidadRep.getText());
+				if(puntos >= Integer.parseInt(tFVelocidadRep.getText())) {
+					puntos = puntos - Integer.parseInt(tFVelocidadRep.getText());
+				} else {
+					puntos =  Integer.parseInt(tFVelocidadRep.getText()) - puntos;
+				}
 			}
 			boolean atqOk = true;
 			// Aquí comprobamos que lo que el usuario introduce sea un número y no una letra
 			try {
-				num = Integer.parseInt(isNum);
+				num = Integer.parseInt(isNumAtq);
 				//Controlamos que el número no sea mayor a 10
 				if(num > puntos) {
 					ctrlAtqHab = false;
@@ -173,12 +192,13 @@ public class WelcomeWindow extends JFrame {
 				} else {
 					puntos = puntos-num;
 				}
-			} catch(NumberFormatException nFE) {
+			} catch(NumberFormatException nFEAtq) {
 				btnCrearPersonaje.setEnabled(false);
 				ctrlAtqHab = false;
 				atqOk = false;
 				if(!tFAtaqueRep.getText().isEmpty()) {
-					System.err.println("No has introducido un número válido");
+					tFAtaqueRep.setText("");
+					System.err.println("No has introducido un número válido en Ataque");
 				}
 			}
 			if(atqOk) {
@@ -186,8 +206,82 @@ public class WelcomeWindow extends JFrame {
 			}
 			break;
 		case "Defensa":
+			ctrlDefHab = false;
+			String isNumDef = tFDefensaRep.getText();
+			int x;
+			puntos = TotalPuntos;
+			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields
+			if(!tFAtaqueRep.getText().isEmpty()) {
+				puntos = Integer.parseInt(tFAtaqueRep.getText());
+			}
+			if(!tFVelocidadRep.getText().isEmpty()) {
+				if(puntos >= Integer.parseInt(tFVelocidadRep.getText())) {
+					puntos = puntos - Integer.parseInt(tFVelocidadRep.getText());
+				} else {
+					puntos =  Integer.parseInt(tFVelocidadRep.getText()) - puntos;
+				}
+			}
+			boolean defOk = true;
+			try {
+				x = Integer.parseInt(isNumDef);
+				//Controlamos que el número no sea mayor a 10
+				if(x > puntos) {
+					ctrlDefHab = false;
+					defOk = false;
+				} else {
+					puntos = puntos - x;
+				}
+			} catch(NumberFormatException nFEDef) {
+				btnCrearPersonaje.setEnabled(false);
+				ctrlDefHab = false;
+				defOk = false;
+				if(!tFDefensaRep.getText().isEmpty()) {
+					tFDefensaRep.setText("");
+					System.err.println("No has introducido un número válido en Defensa");
+				}
+			}
+			if(defOk) {
+				ctrlDefHab = true;
+			}
 			break;
 		case "Velocidad":
+			ctrlVelHab = false;
+			String isNumVel = tFVelocidadRep.getText();
+			int i;
+			puntos = TotalPuntos;
+			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields anteriores
+			if(!tFAtaqueRep.getText().isEmpty()) {
+				puntos = Integer.parseInt(tFAtaqueRep.getText());
+			}
+			if(!tFDefensaRep.getText().isEmpty()) {
+				if(puntos >= Integer.parseInt(tFDefensaRep.getText())) {
+					puntos = puntos - Integer.parseInt(tFDefensaRep.getText());
+				} else {
+					puntos = Integer.parseInt(tFDefensaRep.getText()) - puntos;
+				}
+			}
+			boolean velOk = true;
+			try {
+				i = Integer.parseInt(isNumVel);
+				// Controlamos que el número no sea mayor a 10
+				if(i > puntos) {
+					ctrlVelHab = false;
+					velOk = false;
+				} else {
+					puntos = puntos - i;
+				}
+			} catch(NumberFormatException nFEVel) {
+				btnCrearPersonaje.setEnabled(false);
+				ctrlVelHab = false;
+				velOk = false;
+				if(!tFVelocidadRep.getText().isEmpty()) {
+					tFVelocidadRep.setText("");
+					System.err.println("No has introducido un número válido en Velocidad");
+				}
+			}
+			if(velOk) {
+				ctrlVelHab = true;
+			}
 			break;
 		default:
 			System.err.println("No se ha pasado una opción válida de habilidad");
@@ -201,16 +295,20 @@ public class WelcomeWindow extends JFrame {
 	 * @return
 	 */
 	private void comprobacionFinal() {
-		if(ctrlAtqHab) {
+		if(ctrlAtqHab && ctrlDefHab && ctrlVelHab) {
+			ctrlGeneral = true;
 			btnCrearPersonaje.setEnabled(true);
 		} else { // Este else es para probar el control del ataque, eliminar una vez probado
+			ctrlGeneral = false;
 			btnCrearPersonaje.setEnabled(false);
 		}
+		/*
 		if(ctrlGeneral) {
 			btnCrearPersonaje.setEnabled(true);
 		}else {
 			//btnCrearPersonaje.setEnabled(false);
 		}
+		*/
 	}
 	/*
 	 * changePanel()
