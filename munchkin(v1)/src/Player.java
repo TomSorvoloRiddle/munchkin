@@ -10,15 +10,15 @@
 public class Player {
 // Atributos
 	private String name;
-	private int carga;
-	private int nivel;
+	private int carga; // Peso por objetos equipados
+	private int nivel; // Cada batalla ganada proporciona +1 (puede ser cómo un récord conseguir un personaje de mucho nivel)
 	private int ataque;
 	private int defensa;
 	private int velocidad;
 	private int vida; // Los jugadores tendrán 2 vidas, cuando pierdan contra un enemigo, perderán una vida
-	private String genero;
-	private String raza;
-	private String clase;
+	private String genero; // Se trabajará más adelante
+	private String raza; // Se trabajará más adelante
+	private String clase; // Se trabajará más adelante
 	private Weapon armaPuesta[];
 	
 	public Player() {

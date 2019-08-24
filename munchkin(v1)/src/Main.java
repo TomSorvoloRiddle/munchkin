@@ -21,7 +21,8 @@ public class Main {
 		// Realizando la aplicación de forma visual
 		WelcomeWindow ww = new WelcomeWindow();
 		ww.setVisible(true);
-		
+		System.out.println("Munchkin en ejecución...");
+		/*
 		System.out.println("Bienvenido a Munchkin, aventura escrita");			
 		System.out.println("¿Cómo quieres que se llame tu personaje?");
 		
@@ -173,6 +174,7 @@ public class Main {
 			userIn.nextLine();
 			// Al final de cada turno...
 		}
+		*/
 	}
 	
 	/**
@@ -384,7 +386,9 @@ public class Main {
 			jugador.describe();
 		}
 	}
-	/** Método que le indicas un tiempo en milisegundos (1000 -> 1seg) y pausará la ejecución del programa
+	/** 
+	 * pausar();
+	 * Método que le indicas un tiempo en milisegundos (1000 -> 1seg) y pausará la ejecución del programa
 	 * @throws InterruptedException 
 	 * @param int - Tiempo que estará pausado el programa
 	 */

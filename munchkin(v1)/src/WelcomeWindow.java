@@ -13,22 +13,34 @@ import java.awt.event.ActionEvent;
 
 public class WelcomeWindow extends JFrame {
 	// Atributos de la clase
+	// Paneles con los que se trabaja
 	private JPanel panelStart;
 	private JPanel panelRepartir;
 	
+	// Objetos de datos
 	private JTextField tFNombreP;
 	private JTextField tFAtaqueRep;
 	private JTextField tFDefensaRep;
 	private JTextField tFVelocidadRep;
+	private JLabel lblReparticionHab;
+	
+	// Control de botones
 	private JButton btnEmpezar;
 	private JButton btnCrearPersonaje;
 	
+	// Player
+	private Player jugador;
+	private int atqDefinitivo;
+	private int defDefinitiva;
+	private int velDefinitiva;
+	
+	// Variables de control
 	private boolean ctrlAtqHab = false;
 	private boolean ctrlDefHab = false;
 	private boolean ctrlVelHab = false;
-	private boolean ctrlGeneral = false;
 	private final int TotalPuntos = 10;
 	private int puntos = 10;
+
 	
 	// Constructor vacío de la clase
 	public WelcomeWindow() {
@@ -50,12 +62,13 @@ public class WelcomeWindow extends JFrame {
 		panelStart.add(lblEmpezarPartida);
 		
 		JLabel lblNombrePersonaje = new JLabel("¿Cómo quieres que se llame el personaje?");
-		lblNombrePersonaje.setBounds(132, 156, 241, 14);
+		lblNombrePersonaje.setBounds(132, 156, 250, 14);
 		panelStart.add(lblNombrePersonaje);
 		
 		btnEmpezar = new JButton("¡Empezar!");
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				jugador = new Player(tFNombreP.getText());
 				initRepartirPanel();
 			}
 		});
@@ -67,8 +80,10 @@ public class WelcomeWindow extends JFrame {
 		tFNombreP.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				if(tFNombreP.getText() != "") {
+				if(!tFNombreP.getText().isEmpty()) {
 					btnEmpezar.setEnabled(true);
+				} else {
+					btnEmpezar.setEnabled(false);
 				}
 			}
 		});
@@ -80,11 +95,14 @@ public class WelcomeWindow extends JFrame {
 	
 	/*
 	 * initRepartirPanel();
-	 * Método que iniciará el panel panelRepartir para solicitar los datos
+	 * Método que iniciará el panel panelRepartir para solicitar los datos ataque, defensa y velocidad
+	 * @param void
+	 * @return void
 	 */
 	private void initRepartirPanel() {
 		panelRepartir = new JPanel();
 		panelRepartir.setLayout(null);
+		this.setTitle("Aventura Munchkin: "+ jugador.getName());
 		
 		btnCrearPersonaje = new JButton("Empezar aventura");
 		btnCrearPersonaje.addActionListener(new ActionListener() {
@@ -97,8 +115,8 @@ public class WelcomeWindow extends JFrame {
 		btnCrearPersonaje.setEnabled(false);
 		panelRepartir.add(btnCrearPersonaje);
 		
-		JLabel lblReparticionHab = new JLabel("Repartición de habilidad (Puntos totales: "+puntos+")");
-		lblReparticionHab.setBounds(20, 20, 250, 15);
+		lblReparticionHab = new JLabel("Repartición de habilidad (Puntos totales: "+puntos+")");
+		lblReparticionHab.setBounds(20, 20, 260, 15);
 		panelRepartir.add(lblReparticionHab);
 		
 		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
@@ -132,7 +150,7 @@ public class WelcomeWindow extends JFrame {
 		panelRepartir.add(tFDefensaRep);
 		
 		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
-		lblVelocidadRep.setBounds(25, 100, 70, 15);
+		lblVelocidadRep.setBounds(25, 100, 80, 15);
 		panelRepartir.add(lblVelocidadRep);
 		
 		tFVelocidadRep = new JTextField();
@@ -151,15 +169,21 @@ public class WelcomeWindow extends JFrame {
 	
 	/*
 	 * initPanelPartida1();
-	 * 
+	 * Método que iniciará el panel para empezar una partida
+	 * @param void
+	 * @return void
 	 */
 	private void initPanelPartida1(){
 		System.out.println("Se ha pulsado el botón Empezar aventura");
+		jugador.setAtaque(atqDefinitivo);
+		jugador.setDefensa(defDefinitiva);
+		jugador.setVelocidad(velDefinitiva);
+		jugador.describe();
 	}
 	
 	/*
 	 * comprobarDatosIniciales();
-	 * 
+	 * Método al que le pasaremos qué tipo de habilidad comprobar y verá que todo sea correcto
 	 * @param
 	 * @return boolean
 	 */
@@ -172,7 +196,8 @@ public class WelcomeWindow extends JFrame {
 			puntos = TotalPuntos; // Como la comprobación se tiene que hacer siempre, reseteamos la variable para que tenga 10 puntos, que se restarán si en los otros TextFields hay datos
 			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields
 			if(!tFDefensaRep.getText().isEmpty()) {
-				puntos = Integer.parseInt(tFDefensaRep.getText());
+				puntos = puntos - Integer.parseInt(tFDefensaRep.getText());
+				ctrlDefHab = true;
 			}
 			if(!tFVelocidadRep.getText().isEmpty()) {
 				if(puntos >= Integer.parseInt(tFVelocidadRep.getText())) {
@@ -180,6 +205,7 @@ public class WelcomeWindow extends JFrame {
 				} else {
 					puntos =  Integer.parseInt(tFVelocidadRep.getText()) - puntos;
 				}
+				ctrlVelHab = true;
 			}
 			boolean atqOk = true;
 			// Aquí comprobamos que lo que el usuario introduce sea un número y no una letra
@@ -204,6 +230,7 @@ public class WelcomeWindow extends JFrame {
 			if(atqOk) {
 				ctrlAtqHab = true;
 			}
+			lblReparticionHab.setText("Repartición de habilidad (Puntos totales: "+puntos+")");
 			break;
 		case "Defensa":
 			ctrlDefHab = false;
@@ -212,7 +239,8 @@ public class WelcomeWindow extends JFrame {
 			puntos = TotalPuntos;
 			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields
 			if(!tFAtaqueRep.getText().isEmpty()) {
-				puntos = Integer.parseInt(tFAtaqueRep.getText());
+				puntos = puntos - Integer.parseInt(tFAtaqueRep.getText());
+				ctrlAtqHab = true;
 			}
 			if(!tFVelocidadRep.getText().isEmpty()) {
 				if(puntos >= Integer.parseInt(tFVelocidadRep.getText())) {
@@ -220,6 +248,7 @@ public class WelcomeWindow extends JFrame {
 				} else {
 					puntos =  Integer.parseInt(tFVelocidadRep.getText()) - puntos;
 				}
+				ctrlVelHab = true;
 			}
 			boolean defOk = true;
 			try {
@@ -243,6 +272,7 @@ public class WelcomeWindow extends JFrame {
 			if(defOk) {
 				ctrlDefHab = true;
 			}
+			lblReparticionHab.setText("Repartición de habilidad (Puntos totales: "+puntos+")");
 			break;
 		case "Velocidad":
 			ctrlVelHab = false;
@@ -251,7 +281,8 @@ public class WelcomeWindow extends JFrame {
 			puntos = TotalPuntos;
 			// Calculamos cuantos puntos ha colocado el usuario en todos los TextFields anteriores
 			if(!tFAtaqueRep.getText().isEmpty()) {
-				puntos = Integer.parseInt(tFAtaqueRep.getText());
+				puntos = puntos - Integer.parseInt(tFAtaqueRep.getText());
+				ctrlAtqHab = true;
 			}
 			if(!tFDefensaRep.getText().isEmpty()) {
 				if(puntos >= Integer.parseInt(tFDefensaRep.getText())) {
@@ -259,6 +290,7 @@ public class WelcomeWindow extends JFrame {
 				} else {
 					puntos = Integer.parseInt(tFDefensaRep.getText()) - puntos;
 				}
+				ctrlDefHab = true;
 			}
 			boolean velOk = true;
 			try {
@@ -282,6 +314,7 @@ public class WelcomeWindow extends JFrame {
 			if(velOk) {
 				ctrlVelHab = true;
 			}
+			lblReparticionHab.setText("Repartición de habilidad (Puntos totales: "+puntos+")");
 			break;
 		default:
 			System.err.println("No se ha pasado una opción válida de habilidad");
@@ -290,25 +323,19 @@ public class WelcomeWindow extends JFrame {
 	}
 	/*
 	 * comprobacionFinal();
-	 * Método al que le pasaremos las variables de control de los diferentes JTextField y cambiará el botón en activo si todo está correcto
+	 * Método al que le pasaremos las variables de control y cambiará el botón en activo si todo está correcto
 	 * @param
 	 * @return
 	 */
 	private void comprobacionFinal() {
 		if(ctrlAtqHab && ctrlDefHab && ctrlVelHab) {
-			ctrlGeneral = true;
+			atqDefinitivo = Integer.parseInt(tFAtaqueRep.getText());
+			defDefinitiva = Integer.parseInt(tFDefensaRep.getText());
+			velDefinitiva = Integer.parseInt(tFVelocidadRep.getText());
 			btnCrearPersonaje.setEnabled(true);
-		} else { // Este else es para probar el control del ataque, eliminar una vez probado
-			ctrlGeneral = false;
+		} else {
 			btnCrearPersonaje.setEnabled(false);
 		}
-		/*
-		if(ctrlGeneral) {
-			btnCrearPersonaje.setEnabled(true);
-		}else {
-			//btnCrearPersonaje.setEnabled(false);
-		}
-		*/
 	}
 	/*
 	 * changePanel()
