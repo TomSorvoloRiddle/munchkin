@@ -338,7 +338,12 @@ public class WelcomeWindow extends JFrame {
 		
 		changePanel(panelRepartir, panelPartida1);
 	}
-	
+	/*
+	 * crearJugador();
+	 * Método que le da los stats iniciales al jugador (En realidad el jugador ya se ha creado en el panel anterior con el nombre)
+	 * @param void
+	 * @return void
+	 */
 	private void crearJugador() {
 		jugador.setAtaque(atqDefinitivo);
 		jugador.setDefensa(defDefinitiva);
