@@ -16,6 +16,7 @@ public class WelcomeWindow extends JFrame {
 	// Paneles con los que se trabaja
 	private JPanel panelStart;
 	private JPanel panelRepartir;
+	private JPanel panelPartida1;
 	
 	// Objetos de datos
 	private JTextField tFNombreP;
@@ -168,20 +169,6 @@ public class WelcomeWindow extends JFrame {
 	}
 	
 	/*
-	 * initPanelPartida1();
-	 * Método que iniciará el panel para empezar una partida
-	 * @param void
-	 * @return void
-	 */
-	private void initPanelPartida1(){
-		System.out.println("Se ha pulsado el botón Empezar aventura");
-		jugador.setAtaque(atqDefinitivo);
-		jugador.setDefensa(defDefinitiva);
-		jugador.setVelocidad(velDefinitiva);
-		jugador.describe();
-	}
-	
-	/*
 	 * comprobarDatosIniciales();
 	 * Método al que le pasaremos qué tipo de habilidad comprobar y verá que todo sea correcto
 	 * @param
@@ -321,6 +308,7 @@ public class WelcomeWindow extends JFrame {
 			break;
 		}
 	}
+	
 	/*
 	 * comprobacionFinal();
 	 * Método al que le pasaremos las variables de control y cambiará el botón en activo si todo está correcto
@@ -336,6 +324,26 @@ public class WelcomeWindow extends JFrame {
 		} else {
 			btnCrearPersonaje.setEnabled(false);
 		}
+	}
+	
+	/*
+	 * initPanelPartida1();
+	 * Método que iniciará el panel para empezar una partida
+	 * @param void
+	 * @return void
+	 */
+	private void initPanelPartida1(){
+		System.out.println("Se ha pulsado el botón Empezar aventura");
+		crearJugador();
+		
+		changePanel(panelRepartir, panelPartida1);
+	}
+	
+	private void crearJugador() {
+		jugador.setAtaque(atqDefinitivo);
+		jugador.setDefensa(defDefinitiva);
+		jugador.setVelocidad(velDefinitiva);
+		jugador.describe();
 	}
 	/*
 	 * changePanel()
