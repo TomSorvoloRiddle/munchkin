@@ -25,7 +25,6 @@ public class TestDesign extends JPanel {
 		cBtnCrearPersonaje.fill = GridBagConstraints.CENTER;
 		cBtnCrearPersonaje.gridx = 0;
 		cBtnCrearPersonaje.gridy = 5;
-		cBtnCrearPersonaje.gridwidth = (int) 0.5;
 		btnCrearPersonaje.setEnabled(false);
 		panelRepartir.add(btnCrearPersonaje, cBtnCrearPersonaje);
 		
@@ -34,23 +33,22 @@ public class TestDesign extends JPanel {
 		cLblReparticionHab.fill = GridBagConstraints.CENTER;
 		cLblReparticionHab.gridx = 0;
 		cLblReparticionHab.gridy = 1;
-		cLblReparticionHab.gridwidth = (int) 0.5;
 		panelRepartir.add(lblReparticionHab, cLblReparticionHab);
 		
 		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
 		GridBagConstraints cLblAtaqueRep = new GridBagConstraints();
+		cLblAtaqueRep.insets = new Insets(0, 0, 0, 10);
+		cLblAtaqueRep.anchor = GridBagConstraints.WEST;
 		cLblAtaqueRep.fill = GridBagConstraints.CENTER;
 		cLblAtaqueRep.gridx = 0;
 		cLblAtaqueRep.gridy = 2;
-		cLblAtaqueRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblAtaqueRep, cLblAtaqueRep);
 		
 		JTextField tFAtaqueRep = new JTextField();
 		GridBagConstraints cTFAtaqueRep = new GridBagConstraints();
-		cTFAtaqueRep.fill = GridBagConstraints.CENTER;
+		cTFAtaqueRep.fill = GridBagConstraints.HORIZONTAL;
 		cTFAtaqueRep.gridx = 2;
 		cTFAtaqueRep.gridy = 2;
-		cTFAtaqueRep.gridwidth = (int) 0.5;
 		panelRepartir.add(tFAtaqueRep, cTFAtaqueRep);
 		
 		JLabel lblDefensaRep = new JLabel("DEFENSA:");
@@ -58,15 +56,13 @@ public class TestDesign extends JPanel {
 		cLblDefensaRep.fill = GridBagConstraints.CENTER;
 		cLblDefensaRep.gridx = 0;
 		cLblDefensaRep.gridy = 3;
-		cLblDefensaRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblDefensaRep, cLblDefensaRep);
 		
 		JTextField tFDefensaRep = new JTextField();
 		GridBagConstraints cTFDefensaRep = new GridBagConstraints();
-		cTFDefensaRep.fill = GridBagConstraints.CENTER;
+		cTFDefensaRep.fill = GridBagConstraints.HORIZONTAL;
 		cTFDefensaRep.gridx = 2;
 		cTFDefensaRep.gridy = 3;
-		cTFDefensaRep.gridwidth = (int) 0.5;
 		panelRepartir.add(tFDefensaRep, cTFDefensaRep);
 		
 		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
@@ -74,15 +70,13 @@ public class TestDesign extends JPanel {
 		cLblVelocidadRep.fill = GridBagConstraints.CENTER;
 		cLblVelocidadRep.gridx = 0;
 		cLblVelocidadRep.gridy = 4;
-		cLblVelocidadRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblVelocidadRep, cLblVelocidadRep);
 		
 		JTextField tFVelocidadRep = new JTextField();
 		GridBagConstraints cTFVelocidadRep = new GridBagConstraints();
-		cTFVelocidadRep.fill = GridBagConstraints.CENTER;
+		cTFVelocidadRep.fill = GridBagConstraints.HORIZONTAL;
 		cTFVelocidadRep.gridx = 2;
 		cTFVelocidadRep.gridy = 4;
-		cTFVelocidadRep.gridwidth = (int) 0.5;
 		panelRepartir.add(tFVelocidadRep, cTFVelocidadRep);
 		
 		/*

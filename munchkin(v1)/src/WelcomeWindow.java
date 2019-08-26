@@ -171,7 +171,6 @@ public class WelcomeWindow extends JFrame {
 		cBtnCrearPersonaje.fill = GridBagConstraints.CENTER;
 		cBtnCrearPersonaje.gridx = 0;
 		cBtnCrearPersonaje.gridy = 6;
-		cBtnCrearPersonaje.gridwidth = (int) 0.5;
 		btnCrearPersonaje.setEnabled(false);
 		panelRepartir.add(btnCrearPersonaje, cBtnCrearPersonaje);
 		
@@ -180,7 +179,6 @@ public class WelcomeWindow extends JFrame {
 		cLblReparticionHab.fill = GridBagConstraints.CENTER;
 		cLblReparticionHab.gridx = 0;
 		cLblReparticionHab.gridy = 1;
-		cLblReparticionHab.gridwidth = (int) 0.5;
 		panelRepartir.add(lblReparticionHab, cLblReparticionHab);
 		
 		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
@@ -188,7 +186,6 @@ public class WelcomeWindow extends JFrame {
 		cLblAtaqueRep.fill = GridBagConstraints.CENTER;
 		cLblAtaqueRep.gridx = 0;
 		cLblAtaqueRep.gridy = 2;
-		cLblAtaqueRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblAtaqueRep, cLblAtaqueRep);
 		
 		tFAtaqueRep = new JTextField();
@@ -200,18 +197,17 @@ public class WelcomeWindow extends JFrame {
 			}
 		});
 		GridBagConstraints cTFAtaqueRep = new GridBagConstraints();
-		cTFAtaqueRep.fill = GridBagConstraints.CENTER;
-		cTFAtaqueRep.gridx = 1;
+		cTFAtaqueRep.fill = GridBagConstraints.HORIZONTAL;
+		cTFAtaqueRep.gridx = 2;
 		cTFAtaqueRep.gridy = 2;
-		cTFAtaqueRep.gridwidth = (int) 0.5;
+		
 		panelRepartir.add(tFAtaqueRep, cTFAtaqueRep);
 		
 		JLabel lblDefensaRep = new JLabel("DEFENSA:");
 		GridBagConstraints cLblDefensaRep = new GridBagConstraints();
-		cLblDefensaRep.fill = GridBagConstraints.CENTER;
+		cLblDefensaRep.fill = GridBagConstraints.WEST;
 		cLblDefensaRep.gridx = 0;
 		cLblDefensaRep.gridy = 3;
-		cLblDefensaRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblDefensaRep, cLblDefensaRep);
 		
 		tFDefensaRep = new JTextField();
@@ -223,18 +219,16 @@ public class WelcomeWindow extends JFrame {
 			}
 		});
 		GridBagConstraints cTFDefensaRep = new GridBagConstraints();
-		cTFDefensaRep.fill = GridBagConstraints.CENTER;
-		cTFDefensaRep.gridx = 1;
+		cTFDefensaRep.fill = GridBagConstraints.HORIZONTAL;
+		cTFDefensaRep.gridx = 2;
 		cTFDefensaRep.gridy = 3;
-		cTFDefensaRep.gridwidth = (int) 0.5;
 		panelRepartir.add(tFDefensaRep, cTFDefensaRep);
 		
 		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
 		GridBagConstraints cLblVelocidadRep = new GridBagConstraints();
-		cLblVelocidadRep.fill = GridBagConstraints.CENTER;
+		cLblVelocidadRep.fill = GridBagConstraints.WEST;
 		cLblVelocidadRep.gridx = 0;
 		cLblVelocidadRep.gridy = 4;
-		cLblVelocidadRep.gridwidth = (int) 0.5;
 		panelRepartir.add(lblVelocidadRep, cLblVelocidadRep);
 		
 		tFVelocidadRep = new JTextField();
@@ -246,10 +240,9 @@ public class WelcomeWindow extends JFrame {
 			}
 		});
 		GridBagConstraints cTFVelocidadRep = new GridBagConstraints();
-		cTFVelocidadRep.fill = GridBagConstraints.CENTER;
-		cTFVelocidadRep.gridx = 1;
+		cTFVelocidadRep.fill = GridBagConstraints.HORIZONTAL;
+		cTFVelocidadRep.gridx = 2;
 		cTFVelocidadRep.gridy = 4;
-		cTFVelocidadRep.gridwidth = (int) 0.5;
 		panelRepartir.add(tFVelocidadRep, cTFVelocidadRep);
 		
 		changePanel(panelStart, panelRepartir);
