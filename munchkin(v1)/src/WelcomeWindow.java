@@ -27,7 +27,13 @@ public class WelcomeWindow extends JFrame {
 	private JPanel panelContenedor;
 	private JPanel panelStart;
 	private JPanel panelRepartir;
-	private JPanel panelPartida1;
+	private JPanel panelHistoria;
+	private JPanel panelPartida;
+	private JPanel panelDiario;
+	private JPanel panelEnemigo;
+	private JPanel panelAccion;
+	private JPanel panelEstadistica;
+	private JPanel panelNarrativo;
 	
 	// Objetos de datos
 	private JTextField tFNombreP;
@@ -39,6 +45,7 @@ public class WelcomeWindow extends JFrame {
 	// Control de botones
 	private JButton btnEmpezar;
 	private JButton btnCrearPersonaje;
+	private JButton btnPrimerReto;
 	
 	// Player
 	private Player jugador;
@@ -52,7 +59,7 @@ public class WelcomeWindow extends JFrame {
 	private boolean ctrlVelHab = false;
 	private final int TotalPuntos = 10;
 	private int puntos = 10;
-
+	private int diaAventura = 1;
 	
 	// Constructor vacío de la clase
 	public WelcomeWindow() {
@@ -163,7 +170,7 @@ public class WelcomeWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent aE) {
 				try {
-					initPanelPartida1();
+					initPanelHistoria();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -415,49 +422,101 @@ public class WelcomeWindow extends JFrame {
 	}
 	
 	/*
-	 * initPanelPartida1();
+	 * initpanelHistoria();
 	 * Método que iniciará el panel para empezar una partida
 	 * @param void
 	 * @return void
 	 */
-	private void initPanelPartida1() throws InterruptedException{
+	private void initPanelHistoria() throws InterruptedException{
 		System.out.println("Se ha pulsado el botón Empezar aventura");
 		crearJugador();
 		
-		panelPartida1 = new JPanel();		
+		panelHistoria = new JPanel();		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		setLayout(gridBagLayout);
+		panelHistoria.setLayout(gridBagLayout);
 		
 		JLabel lblHistoria1 = new JLabel("Un buen día, "+jugador.getName()+" se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
 		GridBagConstraints cLblHistoria1 = new GridBagConstraints();
 		cLblHistoria1.fill = GridBagConstraints.CENTER;
 		cLblHistoria1.gridx = 0;
 		cLblHistoria1.gridy = 0;
-		cLblHistoria1.gridwidth = (int) 0.5;
-		this.add(lblHistoria1, cLblHistoria1);
+		cLblHistoria1.insets = new Insets(0,0,10,0);
+		panelHistoria.add(lblHistoria1, cLblHistoria1);
 		
 		JLabel lblHistoria2 = new JLabel("Lo que "+jugador.getName()+" no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
 		GridBagConstraints cLblHistoria2 = new GridBagConstraints();
 		cLblHistoria2.gridx = 0;
 		cLblHistoria2.gridy = 1;
-		cLblHistoria2.gridwidth = (int) 0.5;
-		this.add(lblHistoria2, cLblHistoria2);
+		cLblHistoria2.insets = new Insets(0,0,10,0);
+		panelHistoria.add(lblHistoria2, cLblHistoria2);
 		
-		JLabel lblHistoria3 = new JLabel("Bienvenido a esta aventura en la que para ganar, tendrás que enfrentarte a todo tipo de criaturas.");
+		JLabel lblHistoria3 = new JLabel("Bienvenido/a a esta aventura en la que para ganar, tendrás que enfrentarte a todo tipo de criaturas.");
 		GridBagConstraints cLblHistoria3 = new GridBagConstraints();
 		cLblHistoria3.gridx = 0;
 		cLblHistoria3.gridy = 2;
-		cLblHistoria3.gridwidth = (int) 0.5;
-		this.add(lblHistoria3, cLblHistoria3);
+		cLblHistoria3.insets = new Insets(0,0,10,0);
+		panelHistoria.add(lblHistoria3, cLblHistoria3);
 		
 		JLabel lblHistoria4 = new JLabel("Hazte fuerte y derrota al malvado jefe final");
 		GridBagConstraints cLblHistoria4 = new GridBagConstraints();
 		cLblHistoria4.gridx = 0;
 		cLblHistoria4.gridy = 3;
-		cLblHistoria4.gridwidth = (int) 0.5;
-		this.add(lblHistoria4, cLblHistoria4);
+		panelHistoria.add(lblHistoria4, cLblHistoria4);
 		
-		changePanel(panelRepartir, panelPartida1);
+		btnPrimerReto = new JButton("Ir en busca del primer reto");
+		btnPrimerReto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent aE) {
+				initPartidaPanel();
+			}
+		});
+		GridBagConstraints cBtnPrimerReto = new GridBagConstraints();
+		cBtnPrimerReto.gridx = 0;
+		cBtnPrimerReto.gridy = 4;
+		cBtnPrimerReto.insets = new Insets(10,0,0,0);
+		panelHistoria.add(btnPrimerReto, cBtnPrimerReto);
+		
+		changePanel(panelRepartir, panelHistoria);
+	}
+	
+	/*
+	 * initPrimerRetoPanel();
+	 * Método que iniciará el panel PrimerRetoPanel
+	 * @param void
+	 * @return void
+	 */
+	private void initPartidaPanel() {
+		System.out.println("Se ha pulsado el botón - Ir al primer reto");
+		
+		panelPartida = new JPanel();
+		panelPartida.setLayout(new BorderLayout());
+		
+		// Programación del apartado Norte de la pantalla
+		panelDiario = new JPanel();
+		panelPartida.add(panelDiario, BorderLayout.NORTH);
+		panelDiario.setLayout(new BoxLayout(panelDiario, BoxLayout.X_AXIS));
+		
+		JLabel lblDiario = new JLabel(" - Día "+ diaAventura +"de aventura");
+		panelDiario.add(lblDiario);
+		
+		// Programación del apartado Oeste de la pantalla
+		panelEnemigo = new JPanel();
+		panelPartida.add(panelEnemigo, BorderLayout.WEST);
+		
+		// Programación del apartado Central de la pantalla
+		panelAccion = new JPanel();
+		panelPartida.add(panelAccion, BorderLayout.CENTER);
+		
+		// Programación del apartado Este de la pantalla
+		panelEstadistica = new JPanel();
+		panelPartida.add(panelEstadistica, BorderLayout.EAST);
+		panelEstadistica.setLayout(new GridBagLayout());
+		
+		// Programación del apartado Sur de la pantalla
+		panelNarrativo = new JPanel();
+		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
+		
+		changePanel(panelHistoria, panelPartida);
 	}
 	
 	/*

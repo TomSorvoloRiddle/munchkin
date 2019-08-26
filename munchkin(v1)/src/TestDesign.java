@@ -11,109 +11,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.SwingConstants;
 
 public class TestDesign extends JPanel {	
-	JPanel panelRepartir;
+	
+	JPanel panelDiario;
+	JPanel panelAccion;
+	JPanel panelEnemigo;
+	JPanel panelEstadistica;
+	JPanel panelNarrativo;
+	private JLabel lblDiaXDe;
+	
 	public TestDesign() {
-		panelRepartir = new JPanel();
-		GridBagLayout gbl_panelRepartir = new GridBagLayout();
-		gbl_panelRepartir.columnWidths = new int[]{0, 60};
-		panelRepartir.setLayout(gbl_panelRepartir);
-		BorderLayout border_Layout = new BorderLayout();
-		setLayout(border_Layout);
 		
-		JButton btnCrearPersonaje = new JButton("Empezar aventura");
-		GridBagConstraints cBtnCrearPersonaje = new GridBagConstraints();
-		cBtnCrearPersonaje.fill = GridBagConstraints.CENTER;
-		cBtnCrearPersonaje.gridx = 0;
-		cBtnCrearPersonaje.gridy = 5;
-		btnCrearPersonaje.setEnabled(false);
-		panelRepartir.add(btnCrearPersonaje, cBtnCrearPersonaje);
+		this.setLayout(new BorderLayout());
 		
-		JLabel lblReparticionHab = new JLabel("Repartición de habilidad");
-		GridBagConstraints cLblReparticionHab = new GridBagConstraints();
-		cLblReparticionHab.insets = new Insets(0, 0, 10, 0);
-		cLblReparticionHab.fill = GridBagConstraints.CENTER;
-		cLblReparticionHab.gridx = 0;
-		cLblReparticionHab.gridy = 1;
-		panelRepartir.add(lblReparticionHab, cLblReparticionHab);
+		panelDiario = new JPanel();
+		this.add(panelDiario, BorderLayout.NORTH);
+		panelDiario.setLayout(new BoxLayout(panelDiario, BoxLayout.X_AXIS));
 		
-		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
-		GridBagConstraints cLblAtaqueRep = new GridBagConstraints();
-		cLblAtaqueRep.insets = new Insets(0, 0, 0, 10);
-		cLblAtaqueRep.anchor = GridBagConstraints.WEST;
-		cLblAtaqueRep.fill = GridBagConstraints.CENTER;
-		cLblAtaqueRep.gridx = 0;
-		cLblAtaqueRep.gridy = 2;
-		panelRepartir.add(lblAtaqueRep, cLblAtaqueRep);
+		lblDiaXDe = new JLabel("Dia X de aventura");
+		panelDiario.add(lblDiaXDe);
 		
-		JTextField tFAtaqueRep = new JTextField();
-		GridBagConstraints cTFAtaqueRep = new GridBagConstraints();
-		cTFAtaqueRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFAtaqueRep.gridx = 1;
-		cTFAtaqueRep.gridy = 2;
-		panelRepartir.add(tFAtaqueRep, cTFAtaqueRep);
+		panelEnemigo = new JPanel();
+		this.add(panelEnemigo, BorderLayout.WEST);
 		
-		JLabel lblDefensaRep = new JLabel("DEFENSA:");
-		GridBagConstraints cLblDefensaRep = new GridBagConstraints();
-		cLblDefensaRep.fill = GridBagConstraints.CENTER;
-		cLblDefensaRep.gridx = 0;
-		cLblDefensaRep.gridy = 3;
-		panelRepartir.add(lblDefensaRep, cLblDefensaRep);
+		panelAccion = new JPanel();
+		this.add(panelAccion, BorderLayout.CENTER);
 		
-		JTextField tFDefensaRep = new JTextField();
-		GridBagConstraints cTFDefensaRep = new GridBagConstraints();
-		cTFDefensaRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFDefensaRep.gridx = 1;
-		cTFDefensaRep.gridy = 3;
-		panelRepartir.add(tFDefensaRep, cTFDefensaRep);
+		panelEstadistica = new JPanel();
+		this.add(panelEstadistica, BorderLayout.EAST);
+		panelEstadistica.setLayout(new GridBagLayout());
 		
-		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
-		GridBagConstraints cLblVelocidadRep = new GridBagConstraints();
-		cLblVelocidadRep.fill = GridBagConstraints.CENTER;
-		cLblVelocidadRep.gridx = 0;
-		cLblVelocidadRep.gridy = 4;
-		panelRepartir.add(lblVelocidadRep, cLblVelocidadRep);
 		
-		JTextField tFVelocidadRep = new JTextField();
-		GridBagConstraints cTFVelocidadRep = new GridBagConstraints();
-		cTFVelocidadRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFVelocidadRep.gridx = 1;
-		cTFVelocidadRep.gridy = 4;
-		panelRepartir.add(tFVelocidadRep, cTFVelocidadRep);
+		panelNarrativo = new JPanel();
+		this.add(panelNarrativo, BorderLayout.SOUTH);
 		
-		/*
-		
-		JLabel lblHistoria1 = new JLabel("Un buen día, XXX se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
-		GridBagConstraints cLblHistoria1 = new GridBagConstraints();
-		cLblHistoria1.fill = GridBagConstraints.CENTER;
-		cLblHistoria1.gridx = 0;
-		cLblHistoria1.gridy = 0;
-		cLblHistoria1.gridwidth = (int) 0.5;
-		this.add(lblHistoria1, cLblHistoria1);
-		
-		JLabel lblHistoria2 = new JLabel("Lo que XXX no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
-		GridBagConstraints cLblHistoria2 = new GridBagConstraints();
-		cLblHistoria2.gridx = 0;
-		cLblHistoria2.gridy = 1;
-		cLblHistoria2.gridwidth = (int) 0.5;
-		this.add(lblHistoria2, cLblHistoria2);
-		
-		JLabel lblHistoria3 = new JLabel("Bienvenido a esta aventura en la que para ganar, tendrás que enfrentarte a todo tipo de criaturas.");
-		GridBagConstraints cLblHistoria3 = new GridBagConstraints();
-		cLblHistoria3.gridx = 0;
-		cLblHistoria3.gridy = 2;
-		cLblHistoria3.gridwidth = (int) 0.5;
-		this.add(lblHistoria3, cLblHistoria3);
-		
-		JLabel lblHistoria4 = new JLabel("Hazte fuerte y derrota al malvado jefe final");
-		GridBagConstraints cLblHistoria4 = new GridBagConstraints();
-		cLblHistoria4.gridx = 0;
-		cLblHistoria4.gridy = 3;
-		cLblHistoria4.gridwidth = (int) 0.5;
-		this.add(lblHistoria4, cLblHistoria4);
-		
-		*/
 		
 	}
 }
