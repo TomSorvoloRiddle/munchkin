@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -13,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 
 public class WelcomeWindow extends JFrame {
 	// Atributos de la clase
@@ -53,7 +56,7 @@ public class WelcomeWindow extends JFrame {
 		// ** Nuestra ventana:
 		this.setTitle("Aventura Munchkin");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Cuando cerramos con la X, el programa sigue en ejecución, con esta línea lo paramos
-		this.setSize(520,400); //Tamaño de la ventana
+		this.setSize(600,400); //Tamaño de la ventana
 		this.setLocationRelativeTo(null); // Esto hace que se centre la ventana
 		
 		panelContenedor = new JPanel();
@@ -358,16 +361,38 @@ public class WelcomeWindow extends JFrame {
 		System.out.println("Se ha pulsado el botón Empezar aventura");
 		crearJugador();
 		
-		panelPartida1 = new JPanel();
-		panelPartida1.setLayout(new FlowLayout());
+		panelPartida1 = new JPanel();		
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		setLayout(gridBagLayout);
+		
 		JLabel lblHistoria1 = new JLabel("Un buen día, "+jugador.getName()+" se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
-		panelPartida1.add(lblHistoria1);
+		GridBagConstraints cLblHistoria1 = new GridBagConstraints();
+		cLblHistoria1.fill = GridBagConstraints.CENTER;
+		cLblHistoria1.gridx = 0;
+		cLblHistoria1.gridy = 0;
+		cLblHistoria1.gridwidth = (int) 0.5;
+		this.add(lblHistoria1, cLblHistoria1);
+		
 		JLabel lblHistoria2 = new JLabel("Lo que "+jugador.getName()+" no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
-		panelPartida1.add(lblHistoria2);
+		GridBagConstraints cLblHistoria2 = new GridBagConstraints();
+		cLblHistoria2.gridx = 0;
+		cLblHistoria2.gridy = 1;
+		cLblHistoria2.gridwidth = (int) 0.5;
+		this.add(lblHistoria2, cLblHistoria2);
+		
 		JLabel lblHistoria3 = new JLabel("Bienvenido a esta aventura en la que para ganar, tendrás que enfrentarte a todo tipo de criaturas.");
-		panelPartida1.add(lblHistoria3);
+		GridBagConstraints cLblHistoria3 = new GridBagConstraints();
+		cLblHistoria3.gridx = 0;
+		cLblHistoria3.gridy = 2;
+		cLblHistoria3.gridwidth = (int) 0.5;
+		this.add(lblHistoria3, cLblHistoria3);
+		
 		JLabel lblHistoria4 = new JLabel("Hazte fuerte y derrota al malvado jefe final");
-		panelPartida1.add(lblHistoria4);
+		GridBagConstraints cLblHistoria4 = new GridBagConstraints();
+		cLblHistoria4.gridx = 0;
+		cLblHistoria4.gridy = 3;
+		cLblHistoria4.gridwidth = (int) 0.5;
+		this.add(lblHistoria4, cLblHistoria4);
 		
 		changePanel(panelRepartir, panelPartida1);
 	}
