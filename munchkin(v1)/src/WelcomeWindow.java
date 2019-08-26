@@ -10,10 +10,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 
 public class WelcomeWindow extends JFrame {
 	// Atributos de la clase
 	// Paneles con los que se trabaja
+	private JPanel panelContenedor;
 	private JPanel panelStart;
 	private JPanel panelRepartir;
 	private JPanel panelPartida1;
@@ -50,9 +55,14 @@ public class WelcomeWindow extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Cuando cerramos con la X, el programa sigue en ejecución, con esta línea lo paramos
 		this.setSize(520,400); //Tamaño de la ventana
 		this.setLocationRelativeTo(null); // Esto hace que se centre la ventana
+		
+		panelContenedor = new JPanel();
+		//panelContenedor.setBackground(Color.BLACK);
+		this.setContentPane(panelContenedor);
+		panelContenedor.setVisible(true);
+		
 		panelStart = new JPanel();
 		panelStart.setLayout(null);
-		this.getContentPane().add(panelStart);
 		
 		JLabel lblLogo = new JLabel("LOGO");
 		lblLogo.setBounds(234, 68, 46, 14);
@@ -70,7 +80,11 @@ public class WelcomeWindow extends JFrame {
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jugador = new Player(tFNombreP.getText());
-				initRepartirPanel();
+				try {
+					initRepartirPanel();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		btnEmpezar.setBounds(200, 241, 110, 23);
@@ -88,9 +102,13 @@ public class WelcomeWindow extends JFrame {
 				}
 			}
 		});
+		panelContenedor.setLayout(new BorderLayout(0, 0));
 		tFNombreP.setBounds(150, 193, 199, 20);
 		panelStart.add(tFNombreP);
 		tFNombreP.setColumns(20);
+
+		panelContenedor.add(panelStart);
+		panelStart.setVisible(true);
 		
 	}
 	
@@ -100,7 +118,7 @@ public class WelcomeWindow extends JFrame {
 	 * @param void
 	 * @return void
 	 */
-	private void initRepartirPanel() {
+	private void initRepartirPanel() throws InterruptedException{
 		panelRepartir = new JPanel();
 		panelRepartir.setLayout(null);
 		this.setTitle("Aventura Munchkin: "+ jugador.getName());
@@ -109,7 +127,11 @@ public class WelcomeWindow extends JFrame {
 		btnCrearPersonaje.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent aE) {
-				initPanelPartida1();
+				try {
+					initPanelPartida1();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		btnCrearPersonaje.setBounds(200, 47, 140, 70);
@@ -332,12 +354,24 @@ public class WelcomeWindow extends JFrame {
 	 * @param void
 	 * @return void
 	 */
-	private void initPanelPartida1(){
+	private void initPanelPartida1() throws InterruptedException{
 		System.out.println("Se ha pulsado el botón Empezar aventura");
 		crearJugador();
 		
+		panelPartida1 = new JPanel();
+		panelPartida1.setLayout(new FlowLayout());
+		JLabel lblHistoria1 = new JLabel("Un buen día, "+jugador.getName()+" se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
+		panelPartida1.add(lblHistoria1);
+		JLabel lblHistoria2 = new JLabel("Lo que "+jugador.getName()+" no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
+		panelPartida1.add(lblHistoria2);
+		JLabel lblHistoria3 = new JLabel("Bienvenido a esta aventura en la que para ganar, tendrás que enfrentarte a todo tipo de criaturas.");
+		panelPartida1.add(lblHistoria3);
+		JLabel lblHistoria4 = new JLabel("Hazte fuerte y derrota al malvado jefe final");
+		panelPartida1.add(lblHistoria4);
+		
 		changePanel(panelRepartir, panelPartida1);
 	}
+	
 	/*
 	 * crearJugador();
 	 * Método que le da los stats iniciales al jugador (En realidad el jugador ya se ha creado en el panel anterior con el nombre)
@@ -359,7 +393,17 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private void changePanel(JPanel pnlDesactivar, JPanel pnlActivar) {
 		pnlDesactivar.setVisible(false);
-		this.getContentPane().add(pnlActivar);
+		panelContenedor.add(pnlActivar);
 		pnlActivar.setVisible(true);
+	}
+	
+	/**
+	 * pausar();
+	 * Método que le indicas un tiempo en milisegundos (1000 -> 1seg) y pausará la ejecución del programa
+	 * @throws InterruptedException 
+	 * @param int - Tiempo que estará pausado el programa
+	 */
+	static void pausar(int tiempo) throws InterruptedException {
+		Thread.sleep(tiempo);
 	}
 }
