@@ -16,7 +16,9 @@ public class TestDesign extends JPanel {
 	JPanel panelRepartir;
 	public TestDesign() {
 		panelRepartir = new JPanel();
-		panelRepartir.setLayout(new GridBagLayout());
+		GridBagLayout gbl_panelRepartir = new GridBagLayout();
+		gbl_panelRepartir.columnWidths = new int[]{0, 60};
+		panelRepartir.setLayout(gbl_panelRepartir);
 		BorderLayout border_Layout = new BorderLayout();
 		setLayout(border_Layout);
 		
@@ -30,6 +32,7 @@ public class TestDesign extends JPanel {
 		
 		JLabel lblReparticionHab = new JLabel("Repartición de habilidad");
 		GridBagConstraints cLblReparticionHab = new GridBagConstraints();
+		cLblReparticionHab.insets = new Insets(0, 0, 10, 0);
 		cLblReparticionHab.fill = GridBagConstraints.CENTER;
 		cLblReparticionHab.gridx = 0;
 		cLblReparticionHab.gridy = 1;
@@ -47,7 +50,7 @@ public class TestDesign extends JPanel {
 		JTextField tFAtaqueRep = new JTextField();
 		GridBagConstraints cTFAtaqueRep = new GridBagConstraints();
 		cTFAtaqueRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFAtaqueRep.gridx = 2;
+		cTFAtaqueRep.gridx = 1;
 		cTFAtaqueRep.gridy = 2;
 		panelRepartir.add(tFAtaqueRep, cTFAtaqueRep);
 		
@@ -61,7 +64,7 @@ public class TestDesign extends JPanel {
 		JTextField tFDefensaRep = new JTextField();
 		GridBagConstraints cTFDefensaRep = new GridBagConstraints();
 		cTFDefensaRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFDefensaRep.gridx = 2;
+		cTFDefensaRep.gridx = 1;
 		cTFDefensaRep.gridy = 3;
 		panelRepartir.add(tFDefensaRep, cTFDefensaRep);
 		
@@ -75,7 +78,7 @@ public class TestDesign extends JPanel {
 		JTextField tFVelocidadRep = new JTextField();
 		GridBagConstraints cTFVelocidadRep = new GridBagConstraints();
 		cTFVelocidadRep.fill = GridBagConstraints.HORIZONTAL;
-		cTFVelocidadRep.gridx = 2;
+		cTFVelocidadRep.gridx = 1;
 		cTFVelocidadRep.gridy = 4;
 		panelRepartir.add(tFVelocidadRep, cTFVelocidadRep);
 		
