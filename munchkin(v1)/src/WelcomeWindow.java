@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -16,6 +17,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.BorderLayout;
 
@@ -57,7 +59,7 @@ public class WelcomeWindow extends JFrame {
 		// ** Nuestra ventana:
 		this.setTitle("Aventura Munchkin");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Cuando cerramos con la X, el programa sigue en ejecución, con esta línea lo paramos
-		this.setSize(600,400); //Tamaño de la ventana
+		this.setSize(800,650); //Tamaño de la ventana
 		this.setLocationRelativeTo(null); // Esto hace que se centre la ventana
 		
 		panelContenedor = new JPanel();
@@ -68,9 +70,11 @@ public class WelcomeWindow extends JFrame {
 		panelStart = new JPanel();
 		panelStart.setLayout(new GridBagLayout());
 		
-		JLabel lblLogo = new JLabel("LOGO");
+		ImageIcon imgIconoMunchkin = new ImageIcon("Munchkin_texto_personaje.jpg");
+		JLabel lblLogo = new JLabel();
+		lblLogo.setIcon(new ImageIcon(imgIconoMunchkin.getImage()));
 		GridBagConstraints cLblLogo = new GridBagConstraints();
-		cLblLogo.insets = new Insets(0, 0, 40, 0);
+		cLblLogo.insets = new Insets(0, 0, 30, 0);
 		cLblLogo.ipady = 50;
 		cLblLogo.fill = GridBagConstraints.CENTER;
 		cLblLogo.gridx = 0;
@@ -149,7 +153,7 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private void initRepartirPanel() throws InterruptedException{
 		panelRepartir = new JPanel();
-		panelRepartir.setLayout(null);
+		panelRepartir.setLayout(new GridBagLayout());
 		this.setTitle("Aventura Munchkin: "+ jugador.getName());
 		
 		btnCrearPersonaje = new JButton("Empezar aventura");
@@ -163,17 +167,29 @@ public class WelcomeWindow extends JFrame {
 				}
 			}
 		});
-		btnCrearPersonaje.setBounds(200, 47, 140, 70);
+		GridBagConstraints cBtnCrearPersonaje = new GridBagConstraints();
+		cBtnCrearPersonaje.fill = GridBagConstraints.CENTER;
+		cBtnCrearPersonaje.gridx = 0;
+		cBtnCrearPersonaje.gridy = 6;
+		cBtnCrearPersonaje.gridwidth = (int) 0.5;
 		btnCrearPersonaje.setEnabled(false);
-		panelRepartir.add(btnCrearPersonaje);
+		panelRepartir.add(btnCrearPersonaje, cBtnCrearPersonaje);
 		
 		lblReparticionHab = new JLabel("Repartición de habilidad (Puntos totales: "+puntos+")");
-		lblReparticionHab.setBounds(20, 20, 260, 15);
-		panelRepartir.add(lblReparticionHab);
+		GridBagConstraints cLblReparticionHab = new GridBagConstraints();
+		cLblReparticionHab.fill = GridBagConstraints.CENTER;
+		cLblReparticionHab.gridx = 0;
+		cLblReparticionHab.gridy = 1;
+		cLblReparticionHab.gridwidth = (int) 0.5;
+		panelRepartir.add(lblReparticionHab, cLblReparticionHab);
 		
 		JLabel lblAtaqueRep = new JLabel("ATAQUE:");
-		lblAtaqueRep.setBounds(25, 50, 70, 15);
-		panelRepartir.add(lblAtaqueRep);
+		GridBagConstraints cLblAtaqueRep = new GridBagConstraints();
+		cLblAtaqueRep.fill = GridBagConstraints.CENTER;
+		cLblAtaqueRep.gridx = 0;
+		cLblAtaqueRep.gridy = 2;
+		cLblAtaqueRep.gridwidth = (int) 0.5;
+		panelRepartir.add(lblAtaqueRep, cLblAtaqueRep);
 		
 		tFAtaqueRep = new JTextField();
 		tFAtaqueRep.addKeyListener(new KeyAdapter() {
@@ -183,12 +199,20 @@ public class WelcomeWindow extends JFrame {
 				comprobacionFinal();
 			}
 		});
-		tFAtaqueRep.setBounds(110, 47, 70, 20);
-		panelRepartir.add(tFAtaqueRep);
+		GridBagConstraints cTFAtaqueRep = new GridBagConstraints();
+		cTFAtaqueRep.fill = GridBagConstraints.CENTER;
+		cTFAtaqueRep.gridx = 1;
+		cTFAtaqueRep.gridy = 2;
+		cTFAtaqueRep.gridwidth = (int) 0.5;
+		panelRepartir.add(tFAtaqueRep, cTFAtaqueRep);
 		
 		JLabel lblDefensaRep = new JLabel("DEFENSA:");
-		lblDefensaRep.setBounds(25, 75, 70, 15);
-		panelRepartir.add(lblDefensaRep);
+		GridBagConstraints cLblDefensaRep = new GridBagConstraints();
+		cLblDefensaRep.fill = GridBagConstraints.CENTER;
+		cLblDefensaRep.gridx = 0;
+		cLblDefensaRep.gridy = 3;
+		cLblDefensaRep.gridwidth = (int) 0.5;
+		panelRepartir.add(lblDefensaRep, cLblDefensaRep);
 		
 		tFDefensaRep = new JTextField();
 		tFDefensaRep.addKeyListener(new KeyAdapter() {
@@ -198,12 +222,20 @@ public class WelcomeWindow extends JFrame {
 				comprobacionFinal();
 			}
 		});
-		tFDefensaRep.setBounds(110, 72, 70, 20);
-		panelRepartir.add(tFDefensaRep);
+		GridBagConstraints cTFDefensaRep = new GridBagConstraints();
+		cTFDefensaRep.fill = GridBagConstraints.CENTER;
+		cTFDefensaRep.gridx = 1;
+		cTFDefensaRep.gridy = 3;
+		cTFDefensaRep.gridwidth = (int) 0.5;
+		panelRepartir.add(tFDefensaRep, cTFDefensaRep);
 		
 		JLabel lblVelocidadRep = new JLabel("VELOCIDAD:");
-		lblVelocidadRep.setBounds(25, 100, 80, 15);
-		panelRepartir.add(lblVelocidadRep);
+		GridBagConstraints cLblVelocidadRep = new GridBagConstraints();
+		cLblVelocidadRep.fill = GridBagConstraints.CENTER;
+		cLblVelocidadRep.gridx = 0;
+		cLblVelocidadRep.gridy = 4;
+		cLblVelocidadRep.gridwidth = (int) 0.5;
+		panelRepartir.add(lblVelocidadRep, cLblVelocidadRep);
 		
 		tFVelocidadRep = new JTextField();
 		tFVelocidadRep.addKeyListener(new KeyAdapter() {		
@@ -213,8 +245,12 @@ public class WelcomeWindow extends JFrame {
 				comprobacionFinal();
 			}
 		});
-		tFVelocidadRep.setBounds(110, 97, 70, 20);
-		panelRepartir.add(tFVelocidadRep);
+		GridBagConstraints cTFVelocidadRep = new GridBagConstraints();
+		cTFVelocidadRep.fill = GridBagConstraints.CENTER;
+		cTFVelocidadRep.gridx = 1;
+		cTFVelocidadRep.gridy = 4;
+		cTFVelocidadRep.gridwidth = (int) 0.5;
+		panelRepartir.add(tFVelocidadRep, cTFVelocidadRep);
 		
 		changePanel(panelStart, panelRepartir);
 	}
