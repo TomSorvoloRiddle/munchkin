@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.BorderLayout;
 
 public class WelcomeWindow extends JFrame {
@@ -65,19 +66,35 @@ public class WelcomeWindow extends JFrame {
 		panelContenedor.setVisible(true);
 		
 		panelStart = new JPanel();
-		panelStart.setLayout(null);
+		panelStart.setLayout(new GridBagLayout());
 		
 		JLabel lblLogo = new JLabel("LOGO");
-		lblLogo.setBounds(234, 68, 46, 14);
-		panelStart.add(lblLogo);
+		GridBagConstraints cLblLogo = new GridBagConstraints();
+		cLblLogo.insets = new Insets(0, 0, 40, 0);
+		cLblLogo.ipady = 50;
+		cLblLogo.fill = GridBagConstraints.CENTER;
+		cLblLogo.gridx = 0;
+		cLblLogo.gridy = 0;
+		cLblLogo.gridwidth = (int) 0.5;
+		panelStart.add(lblLogo, cLblLogo);
 		
 		JLabel lblEmpezarPartida = new JLabel("¿Quieres empezar una nueva aventura?");
-		lblEmpezarPartida.setBounds(143, 131, 241, 14);
-		panelStart.add(lblEmpezarPartida);
+		GridBagConstraints cLblEmpezarPartida = new GridBagConstraints();
+		cLblEmpezarPartida.insets = new Insets(0, 0, 10, 0);
+		cLblEmpezarPartida.fill = GridBagConstraints.CENTER;
+		cLblEmpezarPartida.gridx = 0;
+		cLblEmpezarPartida.gridy = 1;
+		cLblEmpezarPartida.gridwidth = (int) 0.5;
+		panelStart.add(lblEmpezarPartida, cLblEmpezarPartida);
 		
-		JLabel lblNombrePersonaje = new JLabel("¿Cómo quieres que se llame el personaje?");
-		lblNombrePersonaje.setBounds(132, 156, 250, 14);
-		panelStart.add(lblNombrePersonaje);
+		JLabel lblNombrePersonaje = new JLabel("¿Cómo quieres que se llame tu personaje?");
+		GridBagConstraints cLblNombrePersonaje = new GridBagConstraints();
+		cLblNombrePersonaje.insets = new Insets(0, 0, 10, 0);
+		cLblNombrePersonaje.fill = GridBagConstraints.CENTER;
+		cLblNombrePersonaje.gridx = 0;
+		cLblNombrePersonaje.gridy = 2;
+		cLblNombrePersonaje.gridwidth = (int) 0.5;
+		panelStart.add(lblNombrePersonaje, cLblNombrePersonaje);
 		
 		btnEmpezar = new JButton("¡Empezar!");
 		btnEmpezar.addActionListener(new ActionListener() {
@@ -90,9 +107,13 @@ public class WelcomeWindow extends JFrame {
 				}
 			}
 		});
-		btnEmpezar.setBounds(200, 241, 110, 23);
+		GridBagConstraints cBtnEmpezar = new GridBagConstraints();
+		cBtnEmpezar.fill = GridBagConstraints.CENTER;
+		cBtnEmpezar.gridx = 0;
+		cBtnEmpezar.gridy = 4;
+		cBtnEmpezar.gridwidth = (int) 0.5;
 		btnEmpezar.setEnabled(false);
-		panelStart.add(btnEmpezar);
+		panelStart.add(btnEmpezar, cBtnEmpezar);
 		
 		tFNombreP = new JTextField();
 		tFNombreP.addKeyListener(new KeyAdapter() {
@@ -106,8 +127,13 @@ public class WelcomeWindow extends JFrame {
 			}
 		});
 		panelContenedor.setLayout(new BorderLayout(0, 0));
-		tFNombreP.setBounds(150, 193, 199, 20);
-		panelStart.add(tFNombreP);
+		GridBagConstraints cTFNombreP = new GridBagConstraints();
+		cTFNombreP.insets = new Insets(0, 0, 10, 0);
+		cTFNombreP.fill = GridBagConstraints.CENTER;
+		cTFNombreP.gridx = 0;
+		cTFNombreP.gridy = 3;
+		cTFNombreP.gridwidth = (int) 0.5;
+		panelStart.add(tFNombreP, cTFNombreP);
 		tFNombreP.setColumns(20);
 
 		panelContenedor.add(panelStart);
