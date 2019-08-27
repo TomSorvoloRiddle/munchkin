@@ -518,6 +518,7 @@ public class WelcomeWindow extends JFrame {
 		cLblStatsMunchkin.gridx = 0;
 		cLblStatsMunchkin.gridy = 0;
 		cLblStatsMunchkin.gridwidth = 2;
+		cLblStatsMunchkin.insets = new Insets(0,0,0,15);
 		panelEstadistica.add(lblStatsMunchkin, cLblStatsMunchkin);
 		
 		JLabel lblNombreMunchkin = new JLabel(jugador.getName());
@@ -525,7 +526,113 @@ public class WelcomeWindow extends JFrame {
 		cLblNombreMunchkin.gridx = 0;
 		cLblNombreMunchkin.gridy = 1;
 		cLblNombreMunchkin.gridwidth = 2;
+		cLblNombreMunchkin.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblNombreMunchkin, cLblNombreMunchkin);
+		
+		JLabel lblAtaque = new JLabel("ATAQUE:");
+		GridBagConstraints cLblAtaque = new GridBagConstraints();
+		cLblAtaque.gridx = 0;
+		cLblAtaque.gridy = 2;
+		cLblAtaque.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblAtaque, cLblAtaque);
+		
+		JLabel lblAtaqueMunchkin = new JLabel( String.valueOf( jugador.getAtaque() ) );
+		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
+		cLblAtaqueMunchkin.gridx = 1;
+		cLblAtaqueMunchkin.gridy = 2;
+		cLblAtaqueMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblAtaqueMunchkin, cLblAtaqueMunchkin);
+		
+		JLabel lblDefensa = new JLabel("DEFENSA:");
+		GridBagConstraints cLblDefensa = new GridBagConstraints();
+		cLblDefensa.gridx = 0;
+		cLblDefensa.gridy = 3;
+		cLblDefensa.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblDefensa, cLblDefensa);
+		
+		JLabel lblDefensaMunchkin = new JLabel( String.valueOf( jugador.getDefensa() ) );
+		GridBagConstraints cLblDefensaMunchkin = new GridBagConstraints();
+		cLblDefensaMunchkin.gridx = 1;
+		cLblDefensaMunchkin.gridy = 3;
+		cLblDefensaMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblDefensaMunchkin, cLblDefensaMunchkin);
+		
+		JLabel lblVelocidad = new JLabel("VELOCIDAD:");
+		GridBagConstraints cLblVelocidad = new GridBagConstraints();
+		cLblVelocidad.gridx = 0;
+		cLblVelocidad.gridy = 4;
+		cLblVelocidad.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVelocidad, cLblVelocidad);
+		
+		JLabel lblVelocidadMunchkin = new JLabel( String.valueOf( jugador.getVelocidad() ) );
+		GridBagConstraints cLblVelocidadMunchkin = new GridBagConstraints();
+		cLblVelocidadMunchkin.gridx = 1;
+		cLblVelocidadMunchkin.gridy = 4;
+		cLblVelocidadMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVelocidadMunchkin, cLblVelocidadMunchkin);
+		
+		JLabel lblNivel = new JLabel("NIVEL:");
+		GridBagConstraints cLblNivel = new GridBagConstraints();
+		cLblNivel.gridx = 0;
+		cLblNivel.gridy = 5;
+		cLblNivel.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblNivel, cLblNivel);
+		
+		JLabel lblNivelMunchkin = new JLabel( String.valueOf( jugador.getNivel() ) );
+		GridBagConstraints cLblNivelMunchkin = new GridBagConstraints();
+		cLblNivelMunchkin.gridx = 1;
+		cLblNivelMunchkin.gridy = 5;
+		cLblNivelMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblNivelMunchkin, cLblNivelMunchkin);
+		
+		JLabel lblVidas = new JLabel("VIDAS:");
+		GridBagConstraints cLblVidas = new GridBagConstraints();
+		cLblVidas.gridx = 0;
+		cLblVidas.gridy = 6;
+		cLblVidas.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVidas, cLblVidas);
+		
+		JLabel lblVidasMunchkin = new JLabel( String.valueOf( jugador.getVida() ) );
+		GridBagConstraints cLblVidasMunchkin = new GridBagConstraints();
+		cLblVidasMunchkin.gridx = 1;
+		cLblVidasMunchkin.gridy = 6;
+		cLblVidasMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVidasMunchkin, cLblVidasMunchkin);
+		
+		JLabel lblObjetos = new JLabel("OBJETOS:");
+		GridBagConstraints cLblObjetos = new GridBagConstraints();
+		cLblObjetos.gridx = 0;
+		cLblObjetos.gridy = 7;
+		cLblObjetos.gridwidth = 2;
+		cLblObjetos.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblObjetos, cLblObjetos);
+		
+		/* Aquí se mostrarían todos los objetos que tuviera el munchkin
+		 * Para ello, hay que montar una arraylist con todos los objetos
+		 * para poder hacer un list.count() y saber cuántos objetos mostrar
+		 * y en qué lugar colocar las siguientes estadísticas
+		 */
+		// Objeto de ejemplo
+		JLabel lblObjExample = new JLabel("Ejemplo 1");
+		GridBagConstraints cLblObjExample = new GridBagConstraints();
+		cLblObjExample.gridx = 0;
+		cLblObjExample.gridy = 8;
+		cLblObjExample.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblObjExample, cLblObjExample);
+		
+		JLabel lblCargaTotal = new JLabel("CARGA TOTAL:");
+		GridBagConstraints cLblCargaTotal = new GridBagConstraints();
+		cLblCargaTotal.gridx = 0;
+		cLblCargaTotal.gridy = 9;
+		cLblCargaTotal.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblCargaTotal, cLblCargaTotal);
+		
+		JLabel lblCargaMunchkin = new JLabel( String.valueOf( jugador.getCarga() ) );
+		GridBagConstraints cLblCargaMunchkin = new GridBagConstraints();
+		cLblCargaMunchkin.gridx = 1;
+		cLblCargaMunchkin.gridy = 9;
+		cLblCargaMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblCargaMunchkin, cLblCargaMunchkin);
 		
 		// Programación del apartado Sur de la pantalla
 		panelNarrativo = new JPanel();

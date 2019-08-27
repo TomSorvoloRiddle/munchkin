@@ -58,6 +58,18 @@ public class TestDesign extends JPanel {
 		cLblNombreMunchkin.gridwidth = 2;
 		panelEstadistica.add(lblNombreMunchkin, cLblNombreMunchkin);
 		
+		JLabel lblAtaque = new JLabel("ATAQUE:");
+		GridBagConstraints cLblAtaque = new GridBagConstraints();
+		cLblAtaque.gridx = 0;
+		cLblAtaque.gridy = 2;
+		panelEstadistica.add(lblAtaque, cLblAtaque);
+		
+		JLabel lblAtaqueMunchkin = new JLabel("4");
+		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
+		cLblAtaqueMunchkin.gridx = 1;
+		cLblAtaqueMunchkin.gridy = 2;
+		panelEstadistica.add(lblAtaqueMunchkin, cLblAtaqueMunchkin);
+		
 		panelNarrativo = new JPanel();
 		this.add(panelNarrativo, BorderLayout.SOUTH);
 		
