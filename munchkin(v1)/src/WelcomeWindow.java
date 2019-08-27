@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -34,6 +35,9 @@ public class WelcomeWindow extends JFrame {
 	private JPanel panelAccion;
 	private JPanel panelEstadistica;
 	private JPanel panelNarrativo;
+	
+	// Fuentes
+	public Font txtDiario = new Font("Calibri", Font.BOLD, 30);
 	
 	// Objetos de datos
 	private JTextField tFNombreP;
@@ -59,7 +63,11 @@ public class WelcomeWindow extends JFrame {
 	private boolean ctrlVelHab = false;
 	private final int TotalPuntos = 10;
 	private int puntos = 10;
+	
+	// Control de los dias
 	private int diaAventura = 1;
+	private int momentoDelDia = 1; // El número máximo de momentoDelDia será TotalMomentos
+	private final int TotalMomentos = 3;
 	
 	// Constructor vacío de la clase
 	public WelcomeWindow() {
@@ -496,7 +504,8 @@ public class WelcomeWindow extends JFrame {
 		panelPartida.add(panelDiario, BorderLayout.NORTH);
 		panelDiario.setLayout(new BoxLayout(panelDiario, BoxLayout.X_AXIS));
 		
-		JLabel lblDiario = new JLabel(" - Día "+ diaAventura +"de aventura");
+		JLabel lblDiario = new JLabel(" - Día "+ diaAventura +" de aventura");
+		lblDiario.setFont(txtDiario);
 		panelDiario.add(lblDiario);
 		
 		// Programación del apartado Oeste de la pantalla
