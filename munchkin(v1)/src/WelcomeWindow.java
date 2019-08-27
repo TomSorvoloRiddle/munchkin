@@ -510,7 +510,8 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Este de la pantalla
 		panelEstadistica = new JPanel();
 		panelPartida.add(panelEstadistica, BorderLayout.EAST);
-		panelEstadistica.setLayout(new GridBagLayout());
+		GridBagLayout gBLPnlEstadistica = new GridBagLayout();
+		panelEstadistica.setLayout(gBLPnlEstadistica);
 		
 		// Programación del apartado Sur de la pantalla
 		panelNarrativo = new JPanel();
