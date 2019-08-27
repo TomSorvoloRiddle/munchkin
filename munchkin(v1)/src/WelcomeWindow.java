@@ -513,6 +513,20 @@ public class WelcomeWindow extends JFrame {
 		GridBagLayout gBLPnlEstadistica = new GridBagLayout();
 		panelEstadistica.setLayout(gBLPnlEstadistica);
 		
+		JLabel lblStatsMunchkin = new JLabel("- STATS MUNCHKIN -");
+		GridBagConstraints cLblStatsMunchkin = new GridBagConstraints();
+		cLblStatsMunchkin.gridx = 0;
+		cLblStatsMunchkin.gridy = 0;
+		cLblStatsMunchkin.gridwidth = 2;
+		panelEstadistica.add(lblStatsMunchkin, cLblStatsMunchkin);
+		
+		JLabel lblNombreMunchkin = new JLabel(jugador.getName());
+		GridBagConstraints cLblNombreMunchkin = new GridBagConstraints();
+		cLblNombreMunchkin.gridx = 0;
+		cLblNombreMunchkin.gridy = 1;
+		cLblNombreMunchkin.gridwidth = 2;
+		panelEstadistica.add(lblNombreMunchkin, cLblNombreMunchkin);
+		
 		// Programación del apartado Sur de la pantalla
 		panelNarrativo = new JPanel();
 		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
