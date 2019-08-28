@@ -189,7 +189,7 @@ public class Player {
 	}
 	
 	public void clone(Player jugador) {
-		jugador = new Player(this.getName());
+		jugador.setName(this.getName());
 		jugador.setAtaque(this.getAtaque());
 		jugador.setDefensa(this.getDefensa());
 		jugador.setVelocidad(this.getVelocidad());

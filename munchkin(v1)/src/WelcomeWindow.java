@@ -131,6 +131,7 @@ public class WelcomeWindow extends JFrame {
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jugadorFull = new Player(tFNombreP.getText());
+				jugadorProgress = new Player();
 				try {
 					initRepartirPanel();
 				} catch (InterruptedException e) {
@@ -545,7 +546,7 @@ public class WelcomeWindow extends JFrame {
 		cLblStatsEnemigo.gridwidth = 2;
 		cLblStatsEnemigo.insets = new Insets(0,15,0,15);
 		panelEnemigo.add(lblStatsEnemigo, cLblStatsEnemigo);
-		panelEnemigo.setBackground(Color.RED);
+		//panelEnemigo.setBackground(Color.RED);
 		
 		// Programación del apartado Central de la pantalla
 		panelAccion = new JPanel();
@@ -684,7 +685,7 @@ public class WelcomeWindow extends JFrame {
 		panelNarrativo = new JPanel();
 		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
 		GridBagLayout gBLPanelNarrativo = new GridBagLayout();
-		panelNarrativo.setBackground(Color.YELLOW);
+		//panelNarrativo.setBackground(Color.YELLOW);
 		panelNarrativo.setLayout(gBLPanelNarrativo);
 		
 		// Borde para el JTextArea
