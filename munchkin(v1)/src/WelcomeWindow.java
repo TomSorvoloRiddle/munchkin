@@ -756,6 +756,7 @@ public class WelcomeWindow extends JFrame {
 	private void addToTextArea(String texto, JTextArea areaDestino) {
 		sMnsUser = areaDestino.getText();
 		sMnsUser = sMnsUser + texto;
+		areaDestino.setText(sMnsUser);
 	}
 	
 	/*
