@@ -1,7 +1,13 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,12 +56,17 @@ public class WelcomeWindow extends JFrame {
 	private JButton btnEmpezar;
 	private JButton btnCrearPersonaje;
 	private JButton btnPrimerReto;
+	private JButton btnBuscarProblemas;
+	private JButton btnDescansar;
+	private JButton btnAdmObjetos;
 	
 	// Player
 	private Player jugador;
 	private int atqDefinitivo;
 	private int defDefinitiva;
 	private int velDefinitiva;
+	private JTextArea tAMnsUser;
+	private String sMnsUser;
 	
 	// Variables de control
 	private boolean ctrlAtqHab = false;
@@ -502,23 +513,40 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Norte de la pantalla
 		panelDiario = new JPanel();
 		panelPartida.add(panelDiario, BorderLayout.NORTH);
-		panelDiario.setLayout(new BoxLayout(panelDiario, BoxLayout.X_AXIS));
+		
+		GridBagLayout gBLPnlDiario = new GridBagLayout();
+		panelDiario.setLayout(gBLPnlDiario);
+		//panelDiario.setBackground(Color.BLUE);
 		
 		JLabel lblDiario = new JLabel(" - Día "+ diaAventura +" de aventura");
 		lblDiario.setFont(txtDiario);
-		panelDiario.add(lblDiario);
+		GridBagConstraints cLblDiario = new GridBagConstraints();
+		cLblDiario.gridx = 0;
+		cLblDiario.gridy = 0;
+		cLblDiario.insets = new Insets(10,0,10,100);
+		panelDiario.add(lblDiario, cLblDiario);
+		
+		JLabel lblTurno = new JLabel("Turno "+ momentoDelDia +"/"+ TotalMomentos);
+		lblTurno.setFont(txtDiario);
+		GridBagConstraints cLblTurno = new GridBagConstraints();
+		cLblTurno.gridx = 1;
+		cLblTurno.gridy = 0;
+		panelDiario.add(lblTurno, cLblTurno);
 		
 		// Programación del apartado Oeste de la pantalla
 		panelEnemigo = new JPanel();
 		panelPartida.add(panelEnemigo, BorderLayout.WEST);
+		panelEnemigo.setBackground(Color.RED);
 		
 		// Programación del apartado Central de la pantalla
 		panelAccion = new JPanel();
 		panelPartida.add(panelAccion, BorderLayout.CENTER);
+		panelAccion.setBackground(Color.BLACK);
 		
 		// Programación del apartado Este de la pantalla
 		panelEstadistica = new JPanel();
 		panelPartida.add(panelEstadistica, BorderLayout.EAST);
+		panelEstadistica.setBackground(Color.GREEN);
 		GridBagLayout gBLPnlEstadistica = new GridBagLayout();
 		panelEstadistica.setLayout(gBLPnlEstadistica);
 		
@@ -527,7 +555,7 @@ public class WelcomeWindow extends JFrame {
 		cLblStatsMunchkin.gridx = 0;
 		cLblStatsMunchkin.gridy = 0;
 		cLblStatsMunchkin.gridwidth = 2;
-		cLblStatsMunchkin.insets = new Insets(0,0,0,15);
+		cLblStatsMunchkin.insets = new Insets(0,15,0,15);
 		panelEstadistica.add(lblStatsMunchkin, cLblStatsMunchkin);
 		
 		JLabel lblNombreMunchkin = new JLabel(jugador.getName());
@@ -633,7 +661,7 @@ public class WelcomeWindow extends JFrame {
 		GridBagConstraints cLblCargaTotal = new GridBagConstraints();
 		cLblCargaTotal.gridx = 0;
 		cLblCargaTotal.gridy = 9;
-		cLblCargaTotal.insets = new Insets(0,0,5,0);
+		cLblCargaTotal.insets = new Insets(0,15,5,0);
 		panelEstadistica.add(lblCargaTotal, cLblCargaTotal);
 		
 		JLabel lblCargaMunchkin = new JLabel( String.valueOf( jugador.getCarga() ) );
@@ -646,8 +674,98 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Sur de la pantalla
 		panelNarrativo = new JPanel();
 		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
+		GridBagLayout gBLPanelNarrativo = new GridBagLayout();
+		panelNarrativo.setBackground(Color.YELLOW);
+		panelNarrativo.setLayout(gBLPanelNarrativo);
+		
+		// Borde para el JTextArea
+		Border border = BorderFactory.createLineBorder(Color.BLACK);
+		tAMnsUser = new JTextArea("Puedes realizar 3 acciones durante cada día.\n ¿Qué deseas hacer?\n", 10, 40);
+		tAMnsUser.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		tAMnsUser.setEditable(false);
+		GridBagConstraints cTAMnsUser = new GridBagConstraints();
+		cTAMnsUser.gridx = 0;
+		cTAMnsUser.gridy = 0;
+		cTAMnsUser.gridheight = 5;
+		cTAMnsUser.insets = new Insets(10,0,10,75);
+		//panelNarrativo.add(tAMnsUser, cTAMnsUser);
+		
+		JScrollPane bDesplazamiento = new JScrollPane(tAMnsUser);
+		bDesplazamiento.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		bDesplazamiento.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		panelNarrativo.add(bDesplazamiento, cTAMnsUser);
+		
+		JLabel lblAcciones = new JLabel(" - ACCIONES - ");
+		GridBagConstraints cLblAcciones = new GridBagConstraints();
+		cLblAcciones.gridx = 1;
+		cLblAcciones.gridy = 0;
+		cLblAcciones.gridwidth = 2;
+		cLblAcciones.insets = new Insets(10,5,10,0);
+		panelNarrativo.add(lblAcciones, cLblAcciones);
+		
+		btnBuscarProblemas = new JButton("Buscar problemas");
+		btnBuscarProblemas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				accionTurno("Problemas");
+			}
+		});
+		GridBagConstraints cBtnBuscarProblemas = new GridBagConstraints();
+		cBtnBuscarProblemas.gridx = 1;
+		cBtnBuscarProblemas.gridy = 1;
+		panelNarrativo.add(btnBuscarProblemas, cBtnBuscarProblemas);
+		
+		btnDescansar = new JButton("Descansar");
+		GridBagConstraints cBtnDescansar = new GridBagConstraints();
+		cBtnDescansar.gridx = 1;
+		cBtnDescansar.gridy = 2;
+		cBtnDescansar.insets = new Insets(5,0,5,0);
+		panelNarrativo.add(btnDescansar, cBtnDescansar);
+		
+		btnAdmObjetos = new JButton("Administrar Objetos");
+		GridBagConstraints cBtnAdmObjetos = new GridBagConstraints();
+		cBtnAdmObjetos.gridx = 1;
+		cBtnAdmObjetos.gridy = 3;
+		panelNarrativo.add(btnAdmObjetos, cBtnAdmObjetos);
 		
 		changePanel(panelHistoria, panelPartida);
+	}
+	
+	/*
+	 * accionTurno();
+	 * Método que realizará los cambios al decidir el usuario qué hacer en su turno (turno que no sea combate)
+	 * @param String Lo que quiere realizar el usuario
+	 * @return void
+	 */
+	private void accionTurno(String accion) {
+		
+		switch(accion) {
+		case "Problemas":
+			sMnsUser = tAMnsUser.getText();
+			tAMnsUser.setText(sMnsUser +" Has pulsado buscarte problemas\n");
+			break;
+		case "Descansar":
+			break;
+		case "Objetos":
+			break;
+		default:
+			System.err.println("No está contemplada esta opción en este método");
+			break;
+		}
+	}
+	
+	/*
+	 * isTurn3();
+	 * Método que devolverá True si estamos en el 3r turno
+	 * @param
+	 * @return boolean
+	 */
+	private boolean isTurn3() {
+		boolean finDelDia = false;
+		if(momentoDelDia >= TotalMomentos) {
+			finDelDia = true;
+		}
+		return finDelDia;
 	}
 	
 	/*
