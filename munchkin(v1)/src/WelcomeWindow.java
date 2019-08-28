@@ -80,6 +80,7 @@ public class WelcomeWindow extends JFrame {
 	private int diaAventura = 1;
 	private int momentoDelDia = 1; // El número máximo de momentoDelDia será TotalMomentos
 	private final int TotalMomentos = 3;
+	private int descanso = 0;
 	
 	// Constructor vacío de la clase
 	public WelcomeWindow() {
@@ -767,6 +768,9 @@ public class WelcomeWindow extends JFrame {
 			break;
 		case "Descansar":
 			addToTextArea("Has pulsado descansar\n", tAMnsUser);
+			testRestarVida();
+			recuperacion();
+			avanzaTurno();
 			break;
 		case "Objetos":
 			addToTextArea("Has pulsado administrarte los objetos\n", tAMnsUser);
@@ -777,12 +781,51 @@ public class WelcomeWindow extends JFrame {
 		}
 	}
 	
+	/*
+	 * addToTextArea();
+	 * Método que al pasarle un texto y un area de texto, agrega el texto pasado
+	 * @param String, JTextArea
+	 * @return void
+	 */
 	private void addToTextArea(String texto, JTextArea areaDestino) {
 		sMnsUser = areaDestino.getText();
 		sMnsUser = sMnsUser + texto;
 		areaDestino.setText(sMnsUser);
 	}
 	
+	/*
+	 * testRestarVida();
+	 * Método que quitará la mitad de la vida del jugador para probar los métodos de recuperación de vida.
+	 * @param void
+	 * @return void
+	 */
+	private void testRestarVida() {
+		jugadorProgress.setDefensa(jugadorFull.getDefensa()/2);
+	}
+	
+	/*
+	 * recuperacion();
+	 * Método que se usa para recuperar defensa del personaje, puede suceder porque lo elija el jugador o porque se termine el día
+	 * Tendrá varios aspectos a tener en cuenta:
+	 * - Se recuperará tanta defensa como nivel tenga el jugador
+	 * - Si descansa 2 veces durante el mismo día, la recuperación será la mitad a la del nvl redondeando a la alza. Ej: 3/2= 1,5 --> 2
+	 * - Si se descansa por 3 vez, no tendrá efecto o incluso puede que tenga un efecto negativo (Tirar dado de pifia) --> Programable más adelante
+	 * @param void
+	 * @return void
+	 */
+	private void recuperacion() {
+		int defMax = jugadorFull.getDefensa();
+		boolean descansoOk = false;
+		if(descanso >= 2) { // Tirada de pifia para que le ocurra una desgracia mientras descansa. Ej: descansa y tenía una piedra en el culo y le hace perder velocidad... 
+			// TO - DO
+		} else if(descanso == 1) { // El jugador se recupera la mitad de su nivel redondeado a la alza
+			
+		}
+	}
+	
+	private void avanzaTurno() {
+		
+	}
 	/*
 	 * isTurn3();
 	 * Método que devolverá True si estamos en el 3r turno
