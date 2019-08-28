@@ -187,4 +187,15 @@ public class Player {
 		System.out.println("Velocidad: "+ this.velocidad);
 		System.out.println("Vidas: "+ this.vida);
 	}
+	
+	public void clone(Player jugador) {
+		jugador = new Player(this.getName());
+		jugador.setAtaque(this.getAtaque());
+		jugador.setDefensa(this.getDefensa());
+		jugador.setVelocidad(this.getVelocidad());
+		jugador.setVida(this.getVida());
+		jugador.setGenero(this.getGenero());
+		jugador.setRaza(this.getRaza());
+		jugador.setClase(this.getClase());
+	}
 }
