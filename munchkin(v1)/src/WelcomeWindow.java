@@ -61,7 +61,8 @@ public class WelcomeWindow extends JFrame {
 	private JButton btnAdmObjetos;
 	
 	// Player
-	private Player jugador;
+	private Player jugadorFull;
+	private Player jugadorProgress;
 	private int atqDefinitivo;
 	private int defDefinitiva;
 	private int velDefinitiva;
@@ -129,7 +130,7 @@ public class WelcomeWindow extends JFrame {
 		btnEmpezar = new JButton("¡Empezar!");
 		btnEmpezar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				jugador = new Player(tFNombreP.getText());
+				jugadorFull = new Player(tFNombreP.getText());
 				try {
 					initRepartirPanel();
 				} catch (InterruptedException e) {
@@ -182,7 +183,7 @@ public class WelcomeWindow extends JFrame {
 		GridBagLayout gBLayoutPnlRepartir = new GridBagLayout();
 		gBLayoutPnlRepartir.columnWidths = new int[]{40, 40};
 		panelRepartir.setLayout(gBLayoutPnlRepartir);
-		this.setTitle("Aventura Munchkin: "+ jugador.getName());
+		this.setTitle("Aventura Munchkin: "+ jugadorFull.getName());
 		
 		btnCrearPersonaje = new JButton("Empezar aventura");
 		btnCrearPersonaje.addActionListener(new ActionListener() {
@@ -454,7 +455,7 @@ public class WelcomeWindow extends JFrame {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		panelHistoria.setLayout(gridBagLayout);
 		
-		JLabel lblHistoria1 = new JLabel("Un buen día, "+jugador.getName()+" se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
+		JLabel lblHistoria1 = new JLabel("Un buen día, "+jugadorFull.getName()+" se levantó de la cama y dijo: ¡Voy a cambiar el mundo!");
 		GridBagConstraints cLblHistoria1 = new GridBagConstraints();
 		cLblHistoria1.fill = GridBagConstraints.CENTER;
 		cLblHistoria1.gridx = 0;
@@ -462,7 +463,7 @@ public class WelcomeWindow extends JFrame {
 		cLblHistoria1.insets = new Insets(0,0,10,0);
 		panelHistoria.add(lblHistoria1, cLblHistoria1);
 		
-		JLabel lblHistoria2 = new JLabel("Lo que "+jugador.getName()+" no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
+		JLabel lblHistoria2 = new JLabel("Lo que "+jugadorFull.getName()+" no sabía es que el camino para cambiar el mundo no iba a ser fácil...");
 		GridBagConstraints cLblHistoria2 = new GridBagConstraints();
 		cLblHistoria2.gridx = 0;
 		cLblHistoria2.gridy = 1;
@@ -536,6 +537,14 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Oeste de la pantalla
 		panelEnemigo = new JPanel();
 		panelPartida.add(panelEnemigo, BorderLayout.WEST);
+		
+		JLabel lblStatsEnemigo = new JLabel("- STATS ENEMIGO -");
+		GridBagConstraints cLblStatsEnemigo = new GridBagConstraints();
+		cLblStatsEnemigo.gridx = 0;
+		cLblStatsEnemigo.gridy = 0;
+		cLblStatsEnemigo.gridwidth = 2;
+		cLblStatsEnemigo.insets = new Insets(0,15,0,15);
+		panelEnemigo.add(lblStatsEnemigo, cLblStatsEnemigo);
 		panelEnemigo.setBackground(Color.RED);
 		
 		// Programación del apartado Central de la pantalla
@@ -546,7 +555,7 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Este de la pantalla
 		panelEstadistica = new JPanel();
 		panelPartida.add(panelEstadistica, BorderLayout.EAST);
-		panelEstadistica.setBackground(Color.GREEN);
+		//panelEstadistica.setBackground(Color.GREEN);
 		GridBagLayout gBLPnlEstadistica = new GridBagLayout();
 		panelEstadistica.setLayout(gBLPnlEstadistica);
 		
@@ -558,7 +567,7 @@ public class WelcomeWindow extends JFrame {
 		cLblStatsMunchkin.insets = new Insets(0,15,0,15);
 		panelEstadistica.add(lblStatsMunchkin, cLblStatsMunchkin);
 		
-		JLabel lblNombreMunchkin = new JLabel(jugador.getName());
+		JLabel lblNombreMunchkin = new JLabel(jugadorFull.getName());
 		GridBagConstraints cLblNombreMunchkin = new GridBagConstraints();
 		cLblNombreMunchkin.gridx = 0;
 		cLblNombreMunchkin.gridy = 1;
@@ -573,7 +582,7 @@ public class WelcomeWindow extends JFrame {
 		cLblAtaque.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblAtaque, cLblAtaque);
 		
-		JLabel lblAtaqueMunchkin = new JLabel( String.valueOf( jugador.getAtaque() ) );
+		JLabel lblAtaqueMunchkin = new JLabel( String.valueOf( jugadorProgress.getAtaque() ) );
 		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
 		cLblAtaqueMunchkin.gridx = 1;
 		cLblAtaqueMunchkin.gridy = 2;
@@ -587,7 +596,7 @@ public class WelcomeWindow extends JFrame {
 		cLblDefensa.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblDefensa, cLblDefensa);
 		
-		JLabel lblDefensaMunchkin = new JLabel( String.valueOf( jugador.getDefensa() ) );
+		JLabel lblDefensaMunchkin = new JLabel( String.valueOf( jugadorProgress.getDefensa() ) );
 		GridBagConstraints cLblDefensaMunchkin = new GridBagConstraints();
 		cLblDefensaMunchkin.gridx = 1;
 		cLblDefensaMunchkin.gridy = 3;
@@ -601,7 +610,7 @@ public class WelcomeWindow extends JFrame {
 		cLblVelocidad.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblVelocidad, cLblVelocidad);
 		
-		JLabel lblVelocidadMunchkin = new JLabel( String.valueOf( jugador.getVelocidad() ) );
+		JLabel lblVelocidadMunchkin = new JLabel( String.valueOf( jugadorProgress.getVelocidad() ) );
 		GridBagConstraints cLblVelocidadMunchkin = new GridBagConstraints();
 		cLblVelocidadMunchkin.gridx = 1;
 		cLblVelocidadMunchkin.gridy = 4;
@@ -615,7 +624,7 @@ public class WelcomeWindow extends JFrame {
 		cLblNivel.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblNivel, cLblNivel);
 		
-		JLabel lblNivelMunchkin = new JLabel( String.valueOf( jugador.getNivel() ) );
+		JLabel lblNivelMunchkin = new JLabel( String.valueOf( jugadorFull.getNivel() ) );
 		GridBagConstraints cLblNivelMunchkin = new GridBagConstraints();
 		cLblNivelMunchkin.gridx = 1;
 		cLblNivelMunchkin.gridy = 5;
@@ -629,7 +638,7 @@ public class WelcomeWindow extends JFrame {
 		cLblVidas.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblVidas, cLblVidas);
 		
-		JLabel lblVidasMunchkin = new JLabel( String.valueOf( jugador.getVida() ) );
+		JLabel lblVidasMunchkin = new JLabel( String.valueOf( jugadorProgress.getVida() ) );
 		GridBagConstraints cLblVidasMunchkin = new GridBagConstraints();
 		cLblVidasMunchkin.gridx = 1;
 		cLblVidasMunchkin.gridy = 6;
@@ -664,7 +673,7 @@ public class WelcomeWindow extends JFrame {
 		cLblCargaTotal.insets = new Insets(0,15,5,0);
 		panelEstadistica.add(lblCargaTotal, cLblCargaTotal);
 		
-		JLabel lblCargaMunchkin = new JLabel( String.valueOf( jugador.getCarga() ) );
+		JLabel lblCargaMunchkin = new JLabel( String.valueOf( jugadorProgress.getCarga() ) );
 		GridBagConstraints cLblCargaMunchkin = new GridBagConstraints();
 		cLblCargaMunchkin.gridx = 1;
 		cLblCargaMunchkin.gridy = 9;
@@ -716,6 +725,12 @@ public class WelcomeWindow extends JFrame {
 		panelNarrativo.add(btnBuscarProblemas, cBtnBuscarProblemas);
 		
 		btnDescansar = new JButton("Descansar");
+		btnDescansar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				accionTurno("Descansar");
+			}
+		});
 		GridBagConstraints cBtnDescansar = new GridBagConstraints();
 		cBtnDescansar.gridx = 1;
 		cBtnDescansar.gridy = 2;
@@ -723,6 +738,12 @@ public class WelcomeWindow extends JFrame {
 		panelNarrativo.add(btnDescansar, cBtnDescansar);
 		
 		btnAdmObjetos = new JButton("Administrar Objetos");
+		btnAdmObjetos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				accionTurno("Objetos");
+			}
+		});
 		GridBagConstraints cBtnAdmObjetos = new GridBagConstraints();
 		cBtnAdmObjetos.gridx = 1;
 		cBtnAdmObjetos.gridy = 3;
@@ -744,8 +765,10 @@ public class WelcomeWindow extends JFrame {
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
 			break;
 		case "Descansar":
+			addToTextArea("Has pulsado descansar\n", tAMnsUser);
 			break;
 		case "Objetos":
+			addToTextArea("Has pulsado administrarte los objetos\n", tAMnsUser);
 			break;
 		default:
 			System.err.println("No está contemplada esta opción en este método");
@@ -780,10 +803,11 @@ public class WelcomeWindow extends JFrame {
 	 * @return void
 	 */
 	private void crearJugador() {
-		jugador.setAtaque(atqDefinitivo);
-		jugador.setDefensa(defDefinitiva);
-		jugador.setVelocidad(velDefinitiva);
-		jugador.describe();
+		jugadorFull.setAtaque(atqDefinitivo);
+		jugadorFull.setDefensa(defDefinitiva);
+		jugadorFull.setVelocidad(velDefinitiva);
+		jugadorFull.describe();
+		jugadorFull.clone(jugadorProgress);
 	}
 	/*
 	 * changePanel()
