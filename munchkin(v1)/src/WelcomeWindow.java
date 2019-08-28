@@ -741,8 +741,7 @@ public class WelcomeWindow extends JFrame {
 		
 		switch(accion) {
 		case "Problemas":
-			sMnsUser = tAMnsUser.getText();
-			tAMnsUser.setText(sMnsUser +" Has pulsado buscarte problemas\n");
+			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
 			break;
 		case "Descansar":
 			break;
@@ -752,6 +751,11 @@ public class WelcomeWindow extends JFrame {
 			System.err.println("No está contemplada esta opción en este método");
 			break;
 		}
+	}
+	
+	private void addToTextArea(String texto, JTextArea areaDestino) {
+		sMnsUser = areaDestino.getText();
+		sMnsUser = sMnsUser + texto;
 	}
 	
 	/*
