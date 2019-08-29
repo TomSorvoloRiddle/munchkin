@@ -50,7 +50,15 @@ public class WelcomeWindow extends JFrame {
 	private JTextField tFAtaqueRep;
 	private JTextField tFDefensaRep;
 	private JTextField tFVelocidadRep;
+	private JLabel lblTurno;
+	private JLabel lblDiario;
 	private JLabel lblReparticionHab;
+	private JLabel lblAtaqueMunchkin;
+	private JLabel lblDefensaMunchkin;
+	private JLabel lblVelocidadMunchkin;
+	private JLabel lblNivelMunchkin;
+	private JLabel lblVidasMunchkin;
+	private JLabel lblCargaMunchkin;
 	
 	// Control de botones
 	private JButton btnEmpezar;
@@ -521,7 +529,7 @@ public class WelcomeWindow extends JFrame {
 		panelDiario.setLayout(gBLPnlDiario);
 		//panelDiario.setBackground(Color.BLUE);
 		
-		JLabel lblDiario = new JLabel(" - Día "+ diaAventura +" de aventura");
+		lblDiario = new JLabel(" - Día "+ diaAventura +" de aventura");
 		lblDiario.setFont(txtDiario);
 		GridBagConstraints cLblDiario = new GridBagConstraints();
 		cLblDiario.gridx = 0;
@@ -529,7 +537,7 @@ public class WelcomeWindow extends JFrame {
 		cLblDiario.insets = new Insets(10,0,10,100);
 		panelDiario.add(lblDiario, cLblDiario);
 		
-		JLabel lblTurno = new JLabel("Turno "+ momentoDelDia +"/"+ TotalMomentos);
+		lblTurno = new JLabel("Turno "+ momentoDelDia +"/"+ TotalMomentos);
 		lblTurno.setFont(txtDiario);
 		GridBagConstraints cLblTurno = new GridBagConstraints();
 		cLblTurno.gridx = 1;
@@ -584,7 +592,7 @@ public class WelcomeWindow extends JFrame {
 		cLblAtaque.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblAtaque, cLblAtaque);
 		
-		JLabel lblAtaqueMunchkin = new JLabel( String.valueOf( jugadorProgress.getAtaque() ) );
+		lblAtaqueMunchkin = new JLabel( String.valueOf( jugadorProgress.getAtaque() ) );
 		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
 		cLblAtaqueMunchkin.gridx = 1;
 		cLblAtaqueMunchkin.gridy = 2;
@@ -598,7 +606,7 @@ public class WelcomeWindow extends JFrame {
 		cLblDefensa.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblDefensa, cLblDefensa);
 		
-		JLabel lblDefensaMunchkin = new JLabel( String.valueOf( jugadorProgress.getDefensa() ) );
+		lblDefensaMunchkin = new JLabel( String.valueOf( jugadorProgress.getDefensa() ) );
 		GridBagConstraints cLblDefensaMunchkin = new GridBagConstraints();
 		cLblDefensaMunchkin.gridx = 1;
 		cLblDefensaMunchkin.gridy = 3;
@@ -612,7 +620,7 @@ public class WelcomeWindow extends JFrame {
 		cLblVelocidad.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblVelocidad, cLblVelocidad);
 		
-		JLabel lblVelocidadMunchkin = new JLabel( String.valueOf( jugadorProgress.getVelocidad() ) );
+		lblVelocidadMunchkin = new JLabel( String.valueOf( jugadorProgress.getVelocidad() ) );
 		GridBagConstraints cLblVelocidadMunchkin = new GridBagConstraints();
 		cLblVelocidadMunchkin.gridx = 1;
 		cLblVelocidadMunchkin.gridy = 4;
@@ -626,7 +634,7 @@ public class WelcomeWindow extends JFrame {
 		cLblNivel.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblNivel, cLblNivel);
 		
-		JLabel lblNivelMunchkin = new JLabel( String.valueOf( jugadorFull.getNivel() ) );
+		lblNivelMunchkin = new JLabel( String.valueOf( jugadorFull.getNivel() ) );
 		GridBagConstraints cLblNivelMunchkin = new GridBagConstraints();
 		cLblNivelMunchkin.gridx = 1;
 		cLblNivelMunchkin.gridy = 5;
@@ -640,7 +648,7 @@ public class WelcomeWindow extends JFrame {
 		cLblVidas.insets = new Insets(0,0,5,0);
 		panelEstadistica.add(lblVidas, cLblVidas);
 		
-		JLabel lblVidasMunchkin = new JLabel( String.valueOf( jugadorProgress.getVida() ) );
+		lblVidasMunchkin = new JLabel( String.valueOf( jugadorProgress.getVida() ) );
 		GridBagConstraints cLblVidasMunchkin = new GridBagConstraints();
 		cLblVidasMunchkin.gridx = 1;
 		cLblVidasMunchkin.gridy = 6;
@@ -675,7 +683,7 @@ public class WelcomeWindow extends JFrame {
 		cLblCargaTotal.insets = new Insets(0,15,5,0);
 		panelEstadistica.add(lblCargaTotal, cLblCargaTotal);
 		
-		JLabel lblCargaMunchkin = new JLabel( String.valueOf( jugadorProgress.getCarga() ) );
+		lblCargaMunchkin = new JLabel( String.valueOf( jugadorProgress.getCarga() ) );
 		GridBagConstraints cLblCargaMunchkin = new GridBagConstraints();
 		cLblCargaMunchkin.gridx = 1;
 		cLblCargaMunchkin.gridy = 9;
@@ -768,9 +776,16 @@ public class WelcomeWindow extends JFrame {
 			break;
 		case "Descansar":
 			addToTextArea("Has pulsado descansar\n", tAMnsUser);
-			testRestarVida();
+			if(descanso == 0) {
+				testRestarVida();
+				System.err.println("Le quitamos vida de prueba al jugador");
+				jugadorProgress.describe();
+			}
 			recuperacion();
-			avanzaTurno();
+			System.err.println("Después de pasar por el descanso...");
+			jugadorProgress.describe();
+			descanso++;
+			avanzaTurno(); // Do nothing
 			break;
 		case "Objetos":
 			addToTextArea("Has pulsado administrarte los objetos\n", tAMnsUser);
@@ -810,21 +825,49 @@ public class WelcomeWindow extends JFrame {
 	 * - Se recuperará tanta defensa como nivel tenga el jugador
 	 * - Si descansa 2 veces durante el mismo día, la recuperación será la mitad a la del nvl redondeando a la alza. Ej: 3/2= 1,5 --> 2
 	 * - Si se descansa por 3 vez, no tendrá efecto o incluso puede que tenga un efecto negativo (Tirar dado de pifia) --> Programable más adelante
+	 * ------ POSIBILIDADES DE PIFIA ------
+	 * Te vas a sentar y te cortas con una roca afilada -> -X en defensa
+	 * Duermes con mala postura -> -X en velocidad
+	 * Al despertarte te colocas mal tu forma de ataque -> -X en ataque
+	 * Te colocas el calzado al revés -> -X en velocidad
 	 * @param void
 	 * @return void
 	 */
 	private void recuperacion() {
 		int defMax = jugadorFull.getDefensa();
+		float puntosARecuperar = 0;
 		boolean descansoOk = false;
 		if(descanso >= 2) { // Tirada de pifia para que le ocurra una desgracia mientras descansa. Ej: descansa y tenía una piedra en el culo y le hace perder velocidad... 
 			// TO - DO
+			System.out.println("El descanso ya no sirve de nada...");
 		} else if(descanso == 1) { // El jugador se recupera la mitad de su nivel redondeado a la alza
-			
+			System.out.println("No llegas a descansar lo que te gustaría...");
+			if(jugadorFull.getNivel()%2 != 0) {
+				jugadorFull.setNivel(3);
+				puntosARecuperar = (float) (jugadorFull.getNivel()/2 + 0.5);
+				System.err.println("Division: " + (float)(jugadorFull.getNivel()/2));
+				System.err.println("Puntos a recuperar: " + puntosARecuperar);
+			} else {
+				puntosARecuperar = jugadorFull.getNivel()/2;
+			}
+			descansoOk = true;
+		} else { // Es el primer turno de descanso y puede recuperarse sin problemas
+			puntosARecuperar = jugadorFull.getNivel();
+			descansoOk = true;
+		}
+		if(jugadorProgress.getDefensa() == defMax) {
+			System.err.println("El jugador está con su defensa máxima. Puede tener consecuencias negativas...");
+		} else if(jugadorProgress.getDefensa() + puntosARecuperar > defMax){
+			puntosARecuperar = 0;
+			jugadorProgress.setDefensa(jugadorFull.getDefensa());
+		}
+		if(descansoOk) {
+			jugadorProgress.setDefensa(jugadorProgress.getDefensa() + (int)puntosARecuperar);
 		}
 	}
 	
 	private void avanzaTurno() {
-		
+		// TO - DO
 	}
 	/*
 	 * isTurn3();
