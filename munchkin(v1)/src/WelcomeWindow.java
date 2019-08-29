@@ -4,6 +4,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
@@ -776,15 +777,15 @@ public class WelcomeWindow extends JFrame {
 			break;
 		case "Descansar":
 			addToTextArea("Has pulsado descansar\n", tAMnsUser);
-			/*
+			/* Trozo de prueba para el botón descansar
 			if(descanso == 0) {
 				testRestarVida();
 				System.err.println("Le quitamos vida de prueba al jugador");
 				jugadorProgress.describe();
 			}*/
 			recuperacion();
-			System.err.println("Después de pasar por el descanso...");
-			jugadorProgress.describe();
+			//System.err.println("Después de pasar por el descanso...");
+			//jugadorProgress.describe();
 			descanso++;
 			avanzaTurno(); // Do nothing
 			break;
@@ -844,10 +845,9 @@ public class WelcomeWindow extends JFrame {
 		} else if(descanso == 1) { // El jugador se recupera la mitad de su nivel redondeado a la alza
 			System.out.println("No llegas a descansar lo que te gustaría...");
 			if(jugadorFull.getNivel()%2 != 0) {
-				jugadorFull.setNivel(9);
 				puntosARecuperar = (float) (jugadorFull.getNivel()/2 + 1);
-				System.err.println("Division: " + (float)(jugadorFull.getNivel()/2));
-				System.err.println("Puntos a recuperar: " + puntosARecuperar);
+				//System.err.println("Division: " + (float)(jugadorFull.getNivel()/2));
+				//System.err.println("Puntos a recuperar: " + puntosARecuperar);
 			} else {
 				puntosARecuperar = jugadorFull.getNivel()/2;
 			}
@@ -869,9 +869,23 @@ public class WelcomeWindow extends JFrame {
 		}
 	}
 	
+	/*
+	 * avanzaTurno();
+	 * Método que revisa si estamos en el último turno del día y hace pasar de turno
+	 * Modifica la variable momentoDelDia
+	 * @param void
+	 * @return void
+	 */
 	private void avanzaTurno() {
-		// TO - DO
+		if(isTurn3()) {
+			diaAventura++;
+			avanzaDia();
+			momentoDelDia = 0;
+		} else {
+			momentoDelDia++;
+		}
 	}
+	
 	/*
 	 * isTurn3();
 	 * Método que devolverá True si estamos en el 3r turno
@@ -884,6 +898,15 @@ public class WelcomeWindow extends JFrame {
 			finDelDia = true;
 		}
 		return finDelDia;
+	}
+	
+	/*
+	 * avanzaDía();
+	 * Método que hará avanzar un día 
+	 * 
+	 */
+	private void avanzaDia() {
+		JOptionPane.showMessageDialog(panelPartida, "Después de un largo día, "+ jugadorFull.getName() + " descansa y se prepara para un nuevo día.");
 	}
 	
 	/*
