@@ -785,9 +785,10 @@ public class WelcomeWindow extends JFrame {
 			}*/
 			recuperacion();
 			//System.err.println("Después de pasar por el descanso...");
-			//jugadorProgress.describe();
+			refreshLblPlayer();
+			jugadorProgress.describe(); // Quitar cuando se actualicen los datos de pantalla
 			descanso++;
-			avanzaTurno(); // Do nothing
+			avanzaTurno();
 			break;
 		case "Objetos":
 			addToTextArea("Has pulsado administrarte los objetos\n", tAMnsUser);
@@ -867,6 +868,31 @@ public class WelcomeWindow extends JFrame {
 		if(descansoOk) {
 			jugadorProgress.setDefensa(jugadorProgress.getDefensa() + (int)puntosARecuperar);
 		}
+	}
+	
+	/*
+	 * refresLblPlayer();
+	 * Método que actualizará los datos de los JLabels que hay en pantalla
+	 * @param void
+	 * @return void
+	 */
+	private void refreshLblPlayer() {
+		lblAtaqueMunchkin.setText( String.valueOf( jugadorProgress.getAtaque() ) );
+		lblDefensaMunchkin.setText( String.valueOf( jugadorProgress.getDefensa() ) );
+		lblVelocidadMunchkin.setText( String.valueOf( jugadorProgress.getVelocidad() ) );
+		lblNivelMunchkin.setText( String.valueOf( jugadorProgress.getNivel() ) );
+		lblVidasMunchkin.setText( String.valueOf( jugadorProgress.getVida() ) );
+		lblCargaMunchkin.setText( String.valueOf( jugadorProgress.getCarga() ) );
+	}
+	
+	/*
+	 * resfreshLblDiario();
+	 * Método que actualiza los datos del panelDiario.
+	 * @param void
+	 * @return void
+	 */
+	private void refreshLblDiario() {
+		
 	}
 	
 	/*
