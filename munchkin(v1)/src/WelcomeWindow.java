@@ -892,7 +892,8 @@ public class WelcomeWindow extends JFrame {
 	 * @return void
 	 */
 	private void refreshLblDiario() {
-		
+		lblTurno.setText( String.valueOf( "Turno "+ momentoDelDia +"/"+ TotalMomentos ) );
+		lblDiario.setText( String.valueOf( " - Día "+ diaAventura +" de aventura" ) );
 	}
 	
 	/*
@@ -904,12 +905,12 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private void avanzaTurno() {
 		if(isTurn3()) {
-			diaAventura++;
 			avanzaDia();
-			momentoDelDia = 0;
+			momentoDelDia = 1;
 		} else {
 			momentoDelDia++;
 		}
+		refreshLblDiario();
 	}
 	
 	/*
@@ -932,6 +933,8 @@ public class WelcomeWindow extends JFrame {
 	 * 
 	 */
 	private void avanzaDia() {
+		diaAventura++;
+		descanso = 0;
 		JOptionPane.showMessageDialog(panelPartida, "Después de un largo día, "+ jugadorFull.getName() + " descansa y se prepara para un nuevo día.");
 	}
 	
