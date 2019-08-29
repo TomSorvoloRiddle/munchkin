@@ -776,11 +776,12 @@ public class WelcomeWindow extends JFrame {
 			break;
 		case "Descansar":
 			addToTextArea("Has pulsado descansar\n", tAMnsUser);
+			/*
 			if(descanso == 0) {
 				testRestarVida();
 				System.err.println("Le quitamos vida de prueba al jugador");
 				jugadorProgress.describe();
-			}
+			}*/
 			recuperacion();
 			System.err.println("Después de pasar por el descanso...");
 			jugadorProgress.describe();
@@ -843,8 +844,8 @@ public class WelcomeWindow extends JFrame {
 		} else if(descanso == 1) { // El jugador se recupera la mitad de su nivel redondeado a la alza
 			System.out.println("No llegas a descansar lo que te gustaría...");
 			if(jugadorFull.getNivel()%2 != 0) {
-				jugadorFull.setNivel(3);
-				puntosARecuperar = (float) (jugadorFull.getNivel()/2 + 0.5);
+				jugadorFull.setNivel(9);
+				puntosARecuperar = (float) (jugadorFull.getNivel()/2 + 1);
 				System.err.println("Division: " + (float)(jugadorFull.getNivel()/2));
 				System.err.println("Puntos a recuperar: " + puntosARecuperar);
 			} else {
@@ -857,9 +858,11 @@ public class WelcomeWindow extends JFrame {
 		}
 		if(jugadorProgress.getDefensa() == defMax) {
 			System.err.println("El jugador está con su defensa máxima. Puede tener consecuencias negativas...");
+			descansoOk = false;
 		} else if(jugadorProgress.getDefensa() + puntosARecuperar > defMax){
 			puntosARecuperar = 0;
 			jugadorProgress.setDefensa(jugadorFull.getDefensa());
+			descansoOk = false;
 		}
 		if(descansoOk) {
 			jugadorProgress.setDefensa(jugadorProgress.getDefensa() + (int)puntosARecuperar);
