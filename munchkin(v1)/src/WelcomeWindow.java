@@ -777,7 +777,9 @@ public class WelcomeWindow extends JFrame {
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
 			// Tirada para pifia
 			// Encontrar enemigo
+			Enemy enemigo = new Enemy(1, false);
 			// Mostrar stats en el panelEnemigo
+			
 			// Imagen del enemigo en panelAccion
 			// Combate
 			avanzaTurno();
