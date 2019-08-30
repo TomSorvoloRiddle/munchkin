@@ -17,6 +17,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
@@ -774,8 +775,11 @@ public class WelcomeWindow extends JFrame {
 		switch(accion) {
 		case "Problemas":
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
+			// Tirada para pifia
 			// Encontrar enemigo
-			// 
+			// Mostrar stats en el panelEnemigo
+			// Imagen del enemigo en panelAccion
+			// Combate
 			avanzaTurno();
 			break;
 		case "Descansar":
@@ -976,5 +980,21 @@ public class WelcomeWindow extends JFrame {
 	 */
 	static void pausar(int tiempo) throws InterruptedException {
 		Thread.sleep(tiempo);
+	}
+	
+	/**
+	 *  Método randomNumber(int);
+	 *  Método que genera un número aleatorio dependiendo del número que le pases
+	 *  @return int aleatorio
+	 */
+	static int randomNumber(int dice) {
+		int number;
+		Random rnd = new Random();
+		number = rnd.nextInt()%dice;
+		number = Math.abs(number);
+		if(number == 0) {
+			number = dice;
+		}
+		return number;
 	}
 }
