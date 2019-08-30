@@ -185,14 +185,28 @@ public class Player {
 		System.out.println("Ataque: "+ this.ataque);
 		System.out.println("Defensa: "+ this.defensa);
 		System.out.println("Velocidad: "+ this.velocidad);
+		System.out.println("Nivel: "+ this.nivel);
 		System.out.println("Vidas: "+ this.vida);
 	}
 	
+	public String toString() {
+		String sPlayer = "";
+		sPlayer = "El personaje tiene las siguientes características:\n Nombre: "+ this.name +"\n Ataque: "+ this.ataque +"\n Defensa: "+ this.defensa + "\n Velocidad: "+ this.velocidad +"\n Nivel: "+ this.nivel +" \n Vidas: "+ this.vida;
+		return sPlayer;
+	}
+	
+	/*
+	 * clone();
+	 * Método que le pasas un jugador inicializado y te clona los stats
+	 * @param Player donde se copiarán los stats
+	 * @return void
+	 */
 	public void clone(Player jugador) {
 		jugador.setName(this.getName());
 		jugador.setAtaque(this.getAtaque());
 		jugador.setDefensa(this.getDefensa());
 		jugador.setVelocidad(this.getVelocidad());
+		jugador.setNivel(this.getNivel());
 		jugador.setVida(this.getVida());
 		jugador.setGenero(this.getGenero());
 		jugador.setRaza(this.getRaza());
