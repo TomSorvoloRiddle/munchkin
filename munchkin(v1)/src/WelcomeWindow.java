@@ -774,6 +774,9 @@ public class WelcomeWindow extends JFrame {
 		switch(accion) {
 		case "Problemas":
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
+			// Encontrar enemigo
+			// 
+			avanzaTurno();
 			break;
 		case "Descansar":
 			addToTextArea("Has pulsado descansar\n", tAMnsUser);
@@ -792,6 +795,7 @@ public class WelcomeWindow extends JFrame {
 			break;
 		case "Objetos":
 			addToTextArea("Has pulsado administrarte los objetos\n", tAMnsUser);
+			avanzaTurno();
 			break;
 		default:
 			System.err.println("No está contemplada esta opción en este método");
