@@ -79,6 +79,9 @@ public class WelcomeWindow extends JFrame {
 	private JTextArea tAMnsUser;
 	private String sMnsUser;
 	
+	//Enemigo
+	private Enemy enemigo;
+	
 	// Variables de control
 	private boolean ctrlAtqHab = false;
 	private boolean ctrlDefHab = false;
@@ -765,6 +768,65 @@ public class WelcomeWindow extends JFrame {
 	}
 	
 	/*
+	 * initPanelEnemigo();
+	 * Método que rellenará el panelEnemigo con los datos del enemigo
+	 * @param void
+	 * @return void
+	 */
+	private void initPanelEnemigo() {
+		
+		JLabel lblNombreEnemigo = new JLabel( enemigo.getNombre() );
+		GridBagConstraints cLblNombreEnemigo = new GridBagConstraints();
+		cLblNombreEnemigo.gridx = 0;
+		cLblNombreEnemigo.gridy = 1;
+		cLblNombreEnemigo.gridwidth = 2;
+		cLblNombreEnemigo.insets = new Insets(0,0,5,0);
+		panelEnemigo.add(lblNombreEnemigo, cLblNombreEnemigo);
+		
+		JLabel lblAtaque = new JLabel("ATAQUE:");
+		GridBagConstraints cLblAtaque = new GridBagConstraints();
+		cLblAtaque.gridx = 0;
+		cLblAtaque.gridy = 2;
+		cLblAtaque.insets = new Insets(0,0,5,0);
+		panelEnemigo.add(lblAtaque, cLblAtaque);
+		
+		lblAtaqueMunchkin = new JLabel( String.valueOf( jugadorProgress.getAtaque() ) );
+		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
+		cLblAtaqueMunchkin.gridx = 1;
+		cLblAtaqueMunchkin.gridy = 2;
+		cLblAtaqueMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblAtaqueMunchkin, cLblAtaqueMunchkin);
+		
+		JLabel lblDefensa = new JLabel("DEFENSA:");
+		GridBagConstraints cLblDefensa = new GridBagConstraints();
+		cLblDefensa.gridx = 0;
+		cLblDefensa.gridy = 3;
+		cLblDefensa.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblDefensa, cLblDefensa);
+		
+		lblDefensaMunchkin = new JLabel( String.valueOf( jugadorProgress.getDefensa() ) );
+		GridBagConstraints cLblDefensaMunchkin = new GridBagConstraints();
+		cLblDefensaMunchkin.gridx = 1;
+		cLblDefensaMunchkin.gridy = 3;
+		cLblDefensaMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblDefensaMunchkin, cLblDefensaMunchkin);
+		
+		JLabel lblVelocidad = new JLabel("VELOCIDAD:");
+		GridBagConstraints cLblVelocidad = new GridBagConstraints();
+		cLblVelocidad.gridx = 0;
+		cLblVelocidad.gridy = 4;
+		cLblVelocidad.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVelocidad, cLblVelocidad);
+		
+		lblVelocidadMunchkin = new JLabel( String.valueOf( jugadorProgress.getVelocidad() ) );
+		GridBagConstraints cLblVelocidadMunchkin = new GridBagConstraints();
+		cLblVelocidadMunchkin.gridx = 1;
+		cLblVelocidadMunchkin.gridy = 4;
+		cLblVelocidadMunchkin.insets = new Insets(0,0,5,0);
+		panelEstadistica.add(lblVelocidadMunchkin, cLblVelocidadMunchkin);
+	}
+	
+	/*
 	 * accionTurno();
 	 * Método que realizará los cambios al decidir el usuario qué hacer en su turno (turno que no sea combate)
 	 * @param String Lo que quiere realizar el usuario
@@ -777,9 +839,9 @@ public class WelcomeWindow extends JFrame {
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
 			// Tirada para pifia
 			// Encontrar enemigo
-			Enemy enemigo = new Enemy(1, false);
+			enemigo = new Enemy(1, false);
 			// Mostrar stats en el panelEnemigo
-			
+			initPanelEnemigo();
 			// Imagen del enemigo en panelAccion
 			// Combate
 			avanzaTurno();
@@ -961,6 +1023,7 @@ public class WelcomeWindow extends JFrame {
 		jugadorFull.describe();
 		jugadorFull.clone(jugadorProgress);
 	}
+	
 	/*
 	 * changePanel()
 	 * Método que cambiará el panel visible.
