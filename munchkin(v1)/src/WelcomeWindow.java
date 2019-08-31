@@ -81,6 +81,9 @@ public class WelcomeWindow extends JFrame {
 	
 	//Enemigo
 	private Enemy enemigo;
+	private JLabel lblAtaqueEnemigo;
+	private JLabel lblDefensaEnemigo;
+	private JLabel lblVelocidadEnemigo;
 	
 	// Variables de control
 	private boolean ctrlAtqHab = false;
@@ -552,6 +555,8 @@ public class WelcomeWindow extends JFrame {
 		// Programación del apartado Oeste de la pantalla
 		panelEnemigo = new JPanel();
 		panelPartida.add(panelEnemigo, BorderLayout.WEST);
+		GridBagLayout gBLPnlEnemigo = new GridBagLayout();
+		panelEnemigo.setLayout(gBLPnlEnemigo);
 		
 		JLabel lblStatsEnemigo = new JLabel("- STATS ENEMIGO -");
 		GridBagConstraints cLblStatsEnemigo = new GridBagConstraints();
@@ -790,40 +795,41 @@ public class WelcomeWindow extends JFrame {
 		cLblAtaque.insets = new Insets(0,0,5,0);
 		panelEnemigo.add(lblAtaque, cLblAtaque);
 		
-		lblAtaqueMunchkin = new JLabel( String.valueOf( jugadorProgress.getAtaque() ) );
-		GridBagConstraints cLblAtaqueMunchkin = new GridBagConstraints();
-		cLblAtaqueMunchkin.gridx = 1;
-		cLblAtaqueMunchkin.gridy = 2;
-		cLblAtaqueMunchkin.insets = new Insets(0,0,5,0);
-		panelEstadistica.add(lblAtaqueMunchkin, cLblAtaqueMunchkin);
+		lblAtaqueEnemigo = new JLabel( String.valueOf( enemigo.getAtaque() ) );
+		GridBagConstraints cLblAtaqueEnemigo = new GridBagConstraints();
+		cLblAtaqueEnemigo.gridx = 1;
+		cLblAtaqueEnemigo.gridy = 2;
+		cLblAtaqueEnemigo.insets = new Insets(0,0,5,0);
+		panelEnemigo.add(lblAtaqueEnemigo, cLblAtaqueEnemigo);
 		
 		JLabel lblDefensa = new JLabel("DEFENSA:");
 		GridBagConstraints cLblDefensa = new GridBagConstraints();
 		cLblDefensa.gridx = 0;
 		cLblDefensa.gridy = 3;
 		cLblDefensa.insets = new Insets(0,0,5,0);
-		panelEstadistica.add(lblDefensa, cLblDefensa);
+		panelEnemigo.add(lblDefensa, cLblDefensa);
 		
-		lblDefensaMunchkin = new JLabel( String.valueOf( jugadorProgress.getDefensa() ) );
-		GridBagConstraints cLblDefensaMunchkin = new GridBagConstraints();
-		cLblDefensaMunchkin.gridx = 1;
-		cLblDefensaMunchkin.gridy = 3;
-		cLblDefensaMunchkin.insets = new Insets(0,0,5,0);
-		panelEstadistica.add(lblDefensaMunchkin, cLblDefensaMunchkin);
+		lblDefensaEnemigo = new JLabel( String.valueOf( enemigo.getDefensa() ) );
+		GridBagConstraints cLblDefensaEnemigo = new GridBagConstraints();
+		cLblDefensaEnemigo.gridx = 1;
+		cLblDefensaEnemigo.gridy = 3;
+		cLblDefensaEnemigo.insets = new Insets(0,0,5,0);
+		panelEnemigo.add(lblDefensaEnemigo, cLblDefensaEnemigo);
 		
 		JLabel lblVelocidad = new JLabel("VELOCIDAD:");
 		GridBagConstraints cLblVelocidad = new GridBagConstraints();
 		cLblVelocidad.gridx = 0;
 		cLblVelocidad.gridy = 4;
-		cLblVelocidad.insets = new Insets(0,0,5,0);
-		panelEstadistica.add(lblVelocidad, cLblVelocidad);
+		cLblVelocidad.insets = new Insets(0,15,5,0);
+		panelEnemigo.add(lblVelocidad, cLblVelocidad);
 		
-		lblVelocidadMunchkin = new JLabel( String.valueOf( jugadorProgress.getVelocidad() ) );
-		GridBagConstraints cLblVelocidadMunchkin = new GridBagConstraints();
-		cLblVelocidadMunchkin.gridx = 1;
-		cLblVelocidadMunchkin.gridy = 4;
-		cLblVelocidadMunchkin.insets = new Insets(0,0,5,0);
-		panelEstadistica.add(lblVelocidadMunchkin, cLblVelocidadMunchkin);
+		lblVelocidadEnemigo = new JLabel( String.valueOf( enemigo.getVelocidad() ) );
+		GridBagConstraints cLblVelocidadEnemigo= new GridBagConstraints();
+		cLblVelocidadEnemigo.gridx = 1;
+		cLblVelocidadEnemigo.gridy = 4;
+		cLblVelocidadEnemigo.insets = new Insets(0,0,5,0);
+		panelEnemigo.add(lblVelocidadEnemigo, cLblVelocidadEnemigo);
+		
 	}
 	
 	/*
