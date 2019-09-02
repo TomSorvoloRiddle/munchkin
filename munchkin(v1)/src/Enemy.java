@@ -8,7 +8,7 @@ import java.util.Random;
 public class Enemy {
 	private String nombre;
 	private int ataque;
-	private byte defensa;
+	private int defensa;
 	private int velocidad;
 	private String genero;
 	private String raza;
@@ -229,17 +229,17 @@ public class Enemy {
 	
 	/**
 	 * Getter defensa
-	 * @return byte defensa
+	 * @return int defensa
 	 */
-	public byte getDefensa() {
+	public int getDefensa() {
 		return defensa;
 	}
 	/**
 	 * Setter defensa
 	 * @param byte defensa
 	 */
-	public void setDefensa(byte defensa) {
-		this.defensa = defensa;
+	public void setDefensa(int i) {
+		this.defensa = i;
 	}
 	
 	/**
