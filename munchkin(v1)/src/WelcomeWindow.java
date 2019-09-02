@@ -43,6 +43,7 @@ public class WelcomeWindow extends JFrame {
 	private JPanel panelAccion;
 	private JPanel panelEstadistica;
 	private JPanel panelNarrativo;
+	private JPanel panelCombate;
 	
 	// Fuentes
 	public Font txtDiario = new Font("Calibri", Font.BOLD, 30);
@@ -69,6 +70,10 @@ public class WelcomeWindow extends JFrame {
 	private JButton btnBuscarProblemas;
 	private JButton btnDescansar;
 	private JButton btnAdmObjetos;
+	private JButton btnCombAtq;
+	private JButton btnCombPrt;
+	private JButton btnCombCrg;
+	private JButton btnCombItm;
 	
 	// Player
 	private Player jugadorFull;
@@ -839,7 +844,36 @@ public class WelcomeWindow extends JFrame {
 	 * @retunr void 
 	 */
 	private void initPanelCombate() {
+		panelCombate = new JPanel();
+		GridBagLayout gBLPnlCombate = new GridBagLayout();
+		panelCombate.setLayout(gBLPnlCombate);
 		
+		//JTextArea de sucesos:
+		GridBagConstraints cTAMnsUser = new GridBagConstraints();
+		cTAMnsUser.gridx = 0;
+		cTAMnsUser.gridy = 0;
+		cTAMnsUser.gridheight = 5;
+		cTAMnsUser.insets = new Insets(10,0,10,75);
+		panelCombate.add(tAMnsUser, cTAMnsUser);
+		
+		//Zona de botones de combate:
+		JLabel lblAccionesComb = new JLabel("- Acciones de combate -");
+		GridBagConstraints gBCLblAccionesComb = new GridBagConstraints();
+		gBCLblAccionesComb.gridx = 1;
+		gBCLblAccionesComb.gridy = 0;
+		gBCLblAccionesComb.gridwidth = 4;
+		panelCombate.add(lblAccionesComb, gBCLblAccionesComb);
+		
+		btnCombAtq = new JButton("Atacar");
+		GridBagConstraints gBCBtnCombAtq = new GridBagConstraints();
+		gBCBtnCombAtq.gridx = 1;
+		gBCBtnCombAtq.gridy = 2;
+		panelCombate.add(btnCombAtq, gBCBtnCombAtq);
+		
+		// Cambio de panel
+		panelNarrativo.setVisible(false);
+		panelPartida.add(panelCombate, BorderLayout.SOUTH);
+		panelCombate.setVisible(true);
 	}
 	
 	/*
@@ -860,7 +894,6 @@ public class WelcomeWindow extends JFrame {
 			initPanelEnemigo();
 			// Cambiar el panelNarrativo por panelCombate
 			initPanelCombate();
-			
 			// Imagen del enemigo en panelAccion
 			// Combate
 			avanzaTurno();
