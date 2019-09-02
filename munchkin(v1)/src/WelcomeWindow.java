@@ -862,13 +862,39 @@ public class WelcomeWindow extends JFrame {
 		gBCLblAccionesComb.gridx = 1;
 		gBCLblAccionesComb.gridy = 0;
 		gBCLblAccionesComb.gridwidth = 4;
+		gBCLblAccionesComb.insets = new Insets(15,0,15,0);
 		panelCombate.add(lblAccionesComb, gBCLblAccionesComb);
 		
 		btnCombAtq = new JButton("Atacar");
 		GridBagConstraints gBCBtnCombAtq = new GridBagConstraints();
 		gBCBtnCombAtq.gridx = 1;
 		gBCBtnCombAtq.gridy = 2;
+		gBCBtnCombAtq.gridwidth = 2;
+		gBCBtnCombAtq.insets = new Insets(0,0,5,5);
 		panelCombate.add(btnCombAtq, gBCBtnCombAtq);
+		
+		btnCombPrt = new JButton("Proteger");
+		GridBagConstraints gBCBtnCombPrt = new GridBagConstraints();
+		gBCBtnCombPrt.gridx = 3;
+		gBCBtnCombPrt.gridy = 2;
+		gBCBtnCombPrt.gridwidth = 2;
+		gBCBtnCombPrt.insets = new Insets(0,0,5,0);
+		panelCombate.add(btnCombPrt, gBCBtnCombPrt);
+		
+		btnCombCrg = new JButton("Cargar Atq");
+		GridBagConstraints gBCBtnCombCrg = new GridBagConstraints();
+		gBCBtnCombCrg.gridx = 1;
+		gBCBtnCombCrg.gridy = 3;
+		gBCBtnCombCrg.gridwidth = 2;
+		gBCBtnCombCrg.insets = new Insets(0,0,0,5);
+		panelCombate.add(btnCombCrg, gBCBtnCombCrg);
+		
+		btnCombItm = new JButton("Usar Item");
+		GridBagConstraints gBCBtnCombItm = new GridBagConstraints();
+		gBCBtnCombItm.gridx = 3;
+		gBCBtnCombItm.gridy = 3;
+		gBCBtnCombItm.gridwidth = 2;
+		panelCombate.add(btnCombItm, gBCBtnCombItm);
 		
 		// Cambio de panel
 		panelNarrativo.setVisible(false);
