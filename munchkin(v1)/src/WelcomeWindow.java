@@ -866,6 +866,13 @@ public class WelcomeWindow extends JFrame {
 		panelCombate.add(lblAccionesComb, gBCLblAccionesComb);
 		
 		btnCombAtq = new JButton("Atacar");
+		btnCombAtq.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Has pulsado atacar!");
+				addToTextArea("Has pulsado el botón atacar", tAMnsUser);
+			}
+		});
 		GridBagConstraints gBCBtnCombAtq = new GridBagConstraints();
 		gBCBtnCombAtq.gridx = 1;
 		gBCBtnCombAtq.gridy = 2;
@@ -914,8 +921,16 @@ public class WelcomeWindow extends JFrame {
 		case "Problemas":
 			addToTextArea("Has pulsado buscarte problemas\n", tAMnsUser);
 			// Tirada para pifia
+			int pifia = randomNumber(100);
 			// Encontrar enemigo
-			enemigo = new Enemy(1, false);
+			if(pifia == 0) { // El jugador ha tenido mala suerte y el monstruo se verá con mejora
+				enemigo = new Enemy(1, false);
+				enemigo.setAtaque(enemigo.getAtaque()+5);
+				enemigo.setDefensa(enemigo.getDefensa()+5);
+				enemigo.setVelocidad(enemigo.getVelocidad()+5);
+			} else {
+				enemigo = new Enemy(1, false);
+			}
 			// Mostrar el panelEnemigo
 			initPanelEnemigo();
 			// Cambiar el panelNarrativo por panelCombate
