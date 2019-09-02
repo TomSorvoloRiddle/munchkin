@@ -833,6 +833,16 @@ public class WelcomeWindow extends JFrame {
 	}
 	
 	/*
+	 * initPanelCombate();
+	 * Método que iniciará los objetos en el panelCombate();
+	 * @param void
+	 * @retunr void 
+	 */
+	private void initPanelCombate() {
+		
+	}
+	
+	/*
 	 * accionTurno();
 	 * Método que realizará los cambios al decidir el usuario qué hacer en su turno (turno que no sea combate)
 	 * @param String Lo que quiere realizar el usuario
@@ -846,8 +856,11 @@ public class WelcomeWindow extends JFrame {
 			// Tirada para pifia
 			// Encontrar enemigo
 			enemigo = new Enemy(1, false);
-			// Mostrar stats en el panelEnemigo
+			// Mostrar el panelEnemigo
 			initPanelEnemigo();
+			// Cambiar el panelNarrativo por panelCombate
+			initPanelCombate();
+			
 			// Imagen del enemigo en panelAccion
 			// Combate
 			avanzaTurno();
