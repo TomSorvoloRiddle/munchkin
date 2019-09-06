@@ -881,6 +881,12 @@ public class WelcomeWindow extends JFrame {
 		panelCombate.add(btnCombAtq, gBCBtnCombAtq);
 		
 		btnCombPrt = new JButton("Proteger");
+		btnCombPrt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent aE) {
+				System.out.println("Has pulsado proteger");
+			}
+		});
 		GridBagConstraints gBCBtnCombPrt = new GridBagConstraints();
 		gBCBtnCombPrt.gridx = 3;
 		gBCBtnCombPrt.gridy = 2;
@@ -889,6 +895,12 @@ public class WelcomeWindow extends JFrame {
 		panelCombate.add(btnCombPrt, gBCBtnCombPrt);
 		
 		btnCombCrg = new JButton("Cargar Atq");
+		btnCombCrg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent aE) {
+				System.out.println("Has pulsado cargar ataque");
+			}
+		});
 		GridBagConstraints gBCBtnCombCrg = new GridBagConstraints();
 		gBCBtnCombCrg.gridx = 1;
 		gBCBtnCombCrg.gridy = 3;
@@ -897,6 +909,12 @@ public class WelcomeWindow extends JFrame {
 		panelCombate.add(btnCombCrg, gBCBtnCombCrg);
 		
 		btnCombItm = new JButton("Usar Item");
+		btnCombItm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent aE) {
+				System.out.println("Has pulsado usar item");
+			}
+		});
 		GridBagConstraints gBCBtnCombItm = new GridBagConstraints();
 		gBCBtnCombItm.gridx = 3;
 		gBCBtnCombItm.gridy = 3;
