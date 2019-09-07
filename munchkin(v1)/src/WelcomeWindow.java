@@ -96,6 +96,8 @@ public class WelcomeWindow extends JFrame {
 	private boolean ctrlVelHab = false;
 	private final int TotalPuntos = 10;
 	private int puntos = 10;
+	private String rapido = "";
+	private String enemyAct = "";
 	
 	// Control de los dias
 	private int diaAventura = 1;
@@ -871,6 +873,12 @@ public class WelcomeWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Has pulsado atacar!");
 				addToTextArea("Has pulsado el botón atacar", tAMnsUser);
+				// Se comparan las velocidades
+				rapido = compararVelocidades();
+				// Se mira qué hace cada parte (desde el player se ataca)
+				enemyAct = enemyAction();
+				// Se ejecutan las órdenes
+				toFight("atacar", enemyAct, rapido);
 			}
 		});
 		GridBagConstraints gBCBtnCombAtq = new GridBagConstraints();
@@ -925,6 +933,76 @@ public class WelcomeWindow extends JFrame {
 		panelNarrativo.setVisible(false);
 		panelPartida.add(panelCombate, BorderLayout.SOUTH);
 		panelCombate.setVisible(true);
+	}
+	
+	/*
+	 * compararVelocidades();
+	 * Método que sirve para comparar dos velocidades, entre un player y un enemigo..
+	 * @param
+	 * @return
+	 */
+	private String compararVelocidades() {
+		String veloz;
+		if(jugadorProgress.getVelocidad()>enemigo.getVelocidad()) {
+			veloz = "jugador";
+		} else if(enemigo.getVelocidad()>jugadorProgress.getVelocidad()){
+			veloz = "enemigo";
+		} else { // En caso de que la velocidad sea la misma, se realizará de forma aleatoria
+			int rnd = randomNumber(2);
+			if (rnd == 1) {
+				veloz = "jugador";
+				//addToTextArea("Pese a que la velocidad es la misma, "+jugadorProgress.getName()+" se adelanta.", tAMnsUser);
+			} else {
+				veloz = "enemigo";
+				//addToTextArea("Pese a que la velocidad es la misma, el enemigo se adelanta.", tAMnsUser);
+			}
+		}
+		return veloz;
+	}
+	
+	/*
+	 * enemyAction();
+	 * Método que determina la acción del enemigo de forma aleatoria
+	 * @param void
+	 * @return String "atacar", "proteger" o "cargar" según resultado
+	 */
+	private String enemyAction() {
+		String accion = "";
+		int x = 0;
+		x = randomNumber(3);
+		if(x == 1) {
+			accion = "atacar";
+		} else if(x == 2) {
+			accion = "proteger";
+		} else {
+			accion = "cargar";
+		}
+		
+		return accion;
+	}
+	
+	private void toFight(String playerAction, String enemyAction, String veloz) {
+		switch(veloz) {
+		case "jugador":
+			playerAttack();
+			break;
+		case "enemigo":
+			
+			break;
+		default:
+			System.err.println("Parece ser que ninguno de los dos es el más rápido");
+			break;
+		}
+	}
+	
+	/*
+	 * playerAttack();
+	 * Mëtodo que inicia el ataque del jugador hacia el enemigo
+	 * @param void
+	 * @retunr void
+	 */
+	private void playerAttack() {
+		
 	}
 	
 	/*
@@ -1160,7 +1238,8 @@ public class WelcomeWindow extends JFrame {
 	
 	/**
 	 *  Método randomNumber(int);
-	 *  Método que genera un número aleatorio dependiendo del número que le pases
+	 *  Método que genera un número aleatorio dependiendo del número que le pases, jamás dará como resultado 0
+	 *  @param int (posibilidades de aleatoriedad).
 	 *  @return int aleatorio
 	 */
 	static int randomNumber(int dice) {
