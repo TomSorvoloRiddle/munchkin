@@ -992,9 +992,22 @@ public class WelcomeWindow extends JFrame {
 		case "jugador":
 			if(playerAction.equalsIgnoreCase("atacar")) {
 				playerAttack();
+				if(!isDeath("enemigo")) {
+					if(enemyAction.equalsIgnoreCase("atacar")) {
+						// enemyAttack();
+					} else if(enemyAction.equalsIgnoreCase("proteger")) {
+						// enemyDefend();
+					} else {
+						// enemyCharge();
+					}
+				} else {
+					System.out.println("El enemigo ha sido debilitado");
+				}
 			} else if (playerAction.equalsIgnoreCase("proteger")) {
 				// TO - DO
 			} else if (playerAction.equalsIgnoreCase("cargar")) {
+				// TO - DO
+			} else if(playerAction.equalsIgnoreCase("item")) {
 				// TO - DO
 			} else {
 				// TO - DO
@@ -1016,6 +1029,7 @@ public class WelcomeWindow extends JFrame {
 	 * @retunr void
 	 */
 	private void playerAttack() {
+		addToTextArea(jugadorProgress.getName()+" ataca", tAMnsUser);
 		if(jugadorProgress.getAtaque() >= enemigo.getDefensa()) {
 			enemigo.setDefensa(0);
 		} else {
@@ -1045,8 +1059,6 @@ public class WelcomeWindow extends JFrame {
 		}
 		return death;
 	}
-	
-	
 	
 	/*
 	 * accionTurno();
