@@ -981,13 +981,27 @@ public class WelcomeWindow extends JFrame {
 		return accion;
 	}
 	
+	/*
+	 * toFight();
+	 * 
+	 * @param
+	 * @return
+	 */
 	private void toFight(String playerAction, String enemyAction, String veloz) {
 		switch(veloz) {
 		case "jugador":
-			playerAttack();
+			if(playerAction.equalsIgnoreCase("atacar")) {
+				playerAttack();
+			} else if (playerAction.equalsIgnoreCase("proteger")) {
+				// TO - DO
+			} else if (playerAction.equalsIgnoreCase("cargar")) {
+				// TO - DO
+			} else {
+				// TO - DO
+			}
 			break;
 		case "enemigo":
-			
+			// TO - DO
 			break;
 		default:
 			System.err.println("Parece ser que ninguno de los dos es el más rápido");
@@ -1002,8 +1016,37 @@ public class WelcomeWindow extends JFrame {
 	 * @retunr void
 	 */
 	private void playerAttack() {
-		
+		if(jugadorProgress.getAtaque() >= enemigo.getDefensa()) {
+			enemigo.setDefensa(0);
+		} else {
+			enemigo.setDefensa(enemigo.getDefensa() - jugadorProgress.getAtaque());
+		}
 	}
+
+	/*
+	 * isDeath();
+	 * Método que al pasarle un String "jugador" o "enemigo" nos dirá si está muerto o no
+	 * @param String alguien ("jugador"/"enemigo")
+	 * @return boolean death - true si está muerto
+	 */
+	private boolean isDeath(String alguien) {
+		boolean death = false;
+		switch(alguien) {
+		case "jugador":
+			if(jugadorProgress.getDefensa() == 0) {
+				death = true;
+			}
+			break;
+		case "enemigo":
+			if(enemigo.getDefensa() == 0) {
+				death = true;
+			}
+			break;
+		}
+		return death;
+	}
+	
+	
 	
 	/*
 	 * accionTurno();
