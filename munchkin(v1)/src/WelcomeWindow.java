@@ -63,6 +63,7 @@ public class WelcomeWindow extends JFrame {
 	private JLabel lblVidasMunchkin;
 	private JLabel lblCargaMunchkin;
 	private JTextArea tAMnsUser;
+	private JScrollPane bDesplazamiento;
 	private GridBagConstraints cTAMnsUser;
 	private String sMnsUser;
 	
@@ -88,6 +89,7 @@ public class WelcomeWindow extends JFrame {
 	
 	//Enemigo
 	private Enemy enemigo;
+	private JLabel lblNombreEnemigo;
 	private JLabel lblAtaqueEnemigo;
 	private JLabel lblDefensaEnemigo;
 	private JLabel lblVelocidadEnemigo;
@@ -730,7 +732,7 @@ public class WelcomeWindow extends JFrame {
 		cTAMnsUser.insets = new Insets(10,0,10,75);
 		//panelNarrativo.add(tAMnsUser, cTAMnsUser);
 		
-		JScrollPane bDesplazamiento = new JScrollPane(tAMnsUser);
+		bDesplazamiento = new JScrollPane(tAMnsUser);
 		bDesplazamiento.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		bDesplazamiento.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		panelNarrativo.add(bDesplazamiento, cTAMnsUser);
@@ -791,7 +793,7 @@ public class WelcomeWindow extends JFrame {
 	 */
 	private void initPanelEnemigo() {
 		
-		JLabel lblNombreEnemigo = new JLabel( enemigo.getNombre() );
+		lblNombreEnemigo = new JLabel( enemigo.getNombre() );
 		GridBagConstraints cLblNombreEnemigo = new GridBagConstraints();
 		cLblNombreEnemigo.gridx = 0;
 		cLblNombreEnemigo.gridy = 1;
@@ -861,7 +863,7 @@ public class WelcomeWindow extends JFrame {
 		cTAMnsUser.gridheight = 5;
 		cTAMnsUser.insets = new Insets(10,0,10,75);
 		*/
-		panelCombate.add(tAMnsUser, cTAMnsUser);
+		panelCombate.add(bDesplazamiento, cTAMnsUser);
 		
 		//Zona de botones de combate:
 		JLabel lblAccionesComb = new JLabel("- Acciones de combate -");
@@ -1004,7 +1006,7 @@ public class WelcomeWindow extends JFrame {
 		case "jugador":
 			if(playerAction.equalsIgnoreCase("atacar")) {
 				if(enemyAction.equalsIgnoreCase("proteger")) {
-					addToTextArea("El enemigo se protege del ataque", tAMnsUser);
+					addToTextArea("El enemigo se protege del ataque\n", tAMnsUser);
 				} else {
 					playerAttack();
 				}
@@ -1012,14 +1014,17 @@ public class WelcomeWindow extends JFrame {
 					if(enemyAction.equalsIgnoreCase("atacar")) {
 						// enemyAttack();
 						addToTextArea("El enemigo contra-ataca\n", tAMnsUser);
+						refreshLblEnemigo();
 						System.out.println("El enemigo ataca despues del jugador");
 					} else {
 						// enemyCharge();
 						addToTextArea("El enemigo se prepara para atacar más fuerte\n", tAMnsUser);
+						refreshLblEnemigo();
 						System.out.println("El enemigo carga el ataque despues del jugador");
 					}
 				} else {
 					playerWinsFight();
+					restartLblEnemigo();
 				}
 			} else if (playerAction.equalsIgnoreCase("proteger")) {
 				// TO - DO
@@ -1050,8 +1055,10 @@ public class WelcomeWindow extends JFrame {
 			if(!isDeath("jugador")) {
 				if(playerAction.equalsIgnoreCase("atacar")) {
 					playerAttack();
+					refreshLblEnemigo();
 					if(isDeath("enemigo")) {
 						playerWinsFight();
+						restartLblEnemigo();
 					}
 				} else if (playerAction.equalsIgnoreCase("proteger")) {
 					// TO - DO
@@ -1127,9 +1134,9 @@ public class WelcomeWindow extends JFrame {
 		// TO - DO "Repartición de recompensas"
 		// TO - DO "Cambio de paneles, panelCombate -> panelNarrativo
 		panelCombate.setVisible(false);
-		panelCombate.remove(tAMnsUser);
+		panelCombate.remove(bDesplazamiento);
 		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
-		panelNarrativo.add(tAMnsUser, cTAMnsUser);
+		panelNarrativo.add(bDesplazamiento, cTAMnsUser);
 		panelNarrativo.setVisible(true);
 	}
 	
@@ -1284,6 +1291,33 @@ public class WelcomeWindow extends JFrame {
 	private void refreshLblDiario() {
 		lblTurno.setText( String.valueOf( "Turno "+ momentoDelDia +"/"+ TotalMomentos ) );
 		lblDiario.setText( String.valueOf( " - Día "+ diaAventura +" de aventura" ) );
+	}
+	
+	/*
+	 * refreshLblEnemigo();
+	 * Método que actualizará los datos del panelEnemigo para saber cómo va la batalla
+	 * @param void
+	 * @return void
+	 */
+	private void refreshLblEnemigo(){
+		lblAtaqueEnemigo.setText(String.valueOf(enemigo.getAtaque()));
+		lblDefensaEnemigo.setText(String.valueOf(enemigo.getDefensa()));
+		lblVelocidadEnemigo.setText(String.valueOf(enemigo.getVelocidad()));
+	}
+	
+	/*
+	 * restartLblEnemigo();
+	 * Método que borra los labels que tienen que ver con el enemigo para que se quede vacío
+	 * Esto se necesita cuando el enemigo ha sido debilitado o cuando el jugador ha perdido
+	 * @param void
+	 * @return void
+	 */
+	private void restartLblEnemigo() {
+		panelEnemigo.remove(lblNombreEnemigo);
+		panelEnemigo.remove(lblAtaqueEnemigo);
+		panelEnemigo.remove(lblDefensaEnemigo);
+		panelEnemigo.remove(lblVelocidadEnemigo);
+		panelEnemigo.repaint();
 	}
 	
 	/*
