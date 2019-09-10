@@ -1045,31 +1045,28 @@ public class WelcomeWindow extends JFrame {
 			if(enemyAction.equalsIgnoreCase("atacar")) {
 				// enemyAttack();
 				System.out.println("El enemigo ataca");
-			} else if(enemyAction.equalsIgnoreCase("proteger")) {
-				// enemyDefend();
-				System.out.println("El enemigo se defiende");
-			} else {
+			}  else {
 				// enemyCharge();
 				System.out.println("El enemigo carga el ataque");
 			}
 			if(!isDeath("jugador")) {
-				if(playerAction.equalsIgnoreCase("atacar")) {
-					playerAttack();
-					refreshLblEnemigo();
-					if(isDeath("enemigo")) {
-						playerWinsFight();
-						restartLblEnemigo();
+				if(!enemyAction.equalsIgnoreCase("proteger")) {
+					if(playerAction.equalsIgnoreCase("atacar")) {
+						playerAttack();
+						refreshLblEnemigo();
+						if(isDeath("enemigo")) {
+							playerWinsFight();
+							restartLblEnemigo();
+						}
 					}
-				} else if (playerAction.equalsIgnoreCase("proteger")) {
-					// TO - DO
-					System.out.println("El jugador se defiende después del enemigo");
-				} else if (playerAction.equalsIgnoreCase("cargar")) {
+				}
+				if (playerAction.equalsIgnoreCase("cargar")) {
 					// TO - DO
 					System.out.println("El jugador carga su ataque después del enemigo");
 				} else if(playerAction.equalsIgnoreCase("item")) {
 					// TO - DO
 					System.out.println("El jugador usa un item después del enemigo");
-				} else {
+				} else if(playerAction.equalsIgnoreCase("recuperar")) {
 					// TO - DO
 					System.out.println("El jugador se recupera después del enemigo");
 				}
@@ -1132,6 +1129,8 @@ public class WelcomeWindow extends JFrame {
 		addToTextArea("Has vencido al enemigo!\n", tAMnsUser);
 		System.out.println("El enemigo ha sido debilitado");
 		// TO - DO "Repartición de recompensas"
+		jugadorFull.setNivel(jugadorFull.getNivel()+1);
+		refreshLblPlayer();
 		// TO - DO "Cambio de paneles, panelCombate -> panelNarrativo
 		panelCombate.setVisible(false);
 		panelCombate.remove(bDesplazamiento);
@@ -1277,7 +1276,7 @@ public class WelcomeWindow extends JFrame {
 		lblAtaqueMunchkin.setText( String.valueOf( jugadorProgress.getAtaque() ) );
 		lblDefensaMunchkin.setText( String.valueOf( jugadorProgress.getDefensa() ) );
 		lblVelocidadMunchkin.setText( String.valueOf( jugadorProgress.getVelocidad() ) );
-		lblNivelMunchkin.setText( String.valueOf( jugadorProgress.getNivel() ) );
+		lblNivelMunchkin.setText( String.valueOf( jugadorFull.getNivel() ) );
 		lblVidasMunchkin.setText( String.valueOf( jugadorProgress.getVida() ) );
 		lblCargaMunchkin.setText( String.valueOf( jugadorProgress.getCarga() ) );
 	}
