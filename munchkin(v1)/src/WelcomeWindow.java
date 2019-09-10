@@ -877,7 +877,7 @@ public class WelcomeWindow extends JFrame {
 				addToTextArea("Has pulsado el botón atacar\n", tAMnsUser);
 				// Se comparan las velocidades
 				rapido = compararVelocidades();
-				// Se mira qué hace cada parte (desde el player se ataca)
+				// Se mira qué hace cada parte (desde el player ataca)
 				enemyAct = enemyAction();
 				// Se ejecutan las órdenes
 				toFight("atacar", enemyAct, rapido);
@@ -987,7 +987,6 @@ public class WelcomeWindow extends JFrame {
 		} else {
 			accion = "cargar";
 		}
-		
 		return accion;
 	}
 	
@@ -1017,9 +1016,7 @@ public class WelcomeWindow extends JFrame {
 						System.out.println("El enemigo carga el ataque despues del jugador");
 					}
 				} else {
-					addToTextArea("Has vencido al enemigo!\n", tAMnsUser);
-					System.out.println("El enemigo ha sido debilitado");
-					// TO - DO "Repartición de recompensas"
+					playerWinsFight();
 				}
 			} else if (playerAction.equalsIgnoreCase("proteger")) {
 				// TO - DO
@@ -1050,6 +1047,9 @@ public class WelcomeWindow extends JFrame {
 			if(!isDeath("jugador")) {
 				if(playerAction.equalsIgnoreCase("atacar")) {
 					playerAttack();
+					if(isDeath("enemigo")) {
+						playerWinsFight();
+					}
 				} else if (playerAction.equalsIgnoreCase("proteger")) {
 					// TO - DO
 					System.out.println("El jugador se defiende después del enemigo");
@@ -1113,6 +1113,22 @@ public class WelcomeWindow extends JFrame {
 	}
 	
 	/*
+	 * playerWinsFight();
+	 * Método al que llamaremos cuando el jugador gane un combate
+	 * @param void
+	 * @return void
+	 */
+	private void playerWinsFight() {
+		addToTextArea("Has vencido al enemigo!\n", tAMnsUser);
+		System.out.println("El enemigo ha sido debilitado");
+		// TO - DO "Repartición de recompensas"
+		// TO - DO "Cambio de paneles, panelCombate -> panelNarracion
+		panelCombate.setVisible(false);
+		panelNarrativo.add(tAMnsUser);
+		panelNarrativo.setVisible(true);
+	}
+	
+	/*
 	 * accionTurno();
 	 * Método que realizará los cambios al decidir el usuario qué hacer en su turno (turno que no sea combate)
 	 * @param String Lo que quiere realizar el usuario
@@ -1126,11 +1142,12 @@ public class WelcomeWindow extends JFrame {
 			// Tirada para pifia
 			int pifia = randomNumber(100);
 			// Encontrar enemigo
-			if(pifia == 0) { // El jugador ha tenido mala suerte y el monstruo se verá con mejora
+			if(pifia == 1) { // El jugador ha tenido mala suerte y el monstruo se verá con mejora
 				enemigo = new Enemy(1, false);
 				enemigo.setAtaque(enemigo.getAtaque()+5);
 				enemigo.setDefensa(enemigo.getDefensa()+5);
 				enemigo.setVelocidad(enemigo.getVelocidad()+5);
+				addToTextArea(jugadorProgress.getName()+ " ha tenido mala suerte y se encuentra un enemigo más poderoso\n", tAMnsUser);
 			} else {
 				enemigo = new Enemy(1, false);
 			}
