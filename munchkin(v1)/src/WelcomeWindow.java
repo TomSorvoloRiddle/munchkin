@@ -62,6 +62,9 @@ public class WelcomeWindow extends JFrame {
 	private JLabel lblNivelMunchkin;
 	private JLabel lblVidasMunchkin;
 	private JLabel lblCargaMunchkin;
+	private JTextArea tAMnsUser;
+	private GridBagConstraints cTAMnsUser;
+	private String sMnsUser;
 	
 	// Control de botones
 	private JButton btnEmpezar;
@@ -81,8 +84,7 @@ public class WelcomeWindow extends JFrame {
 	private int atqDefinitivo;
 	private int defDefinitiva;
 	private int velDefinitiva;
-	private JTextArea tAMnsUser;
-	private String sMnsUser;
+	
 	
 	//Enemigo
 	private Enemy enemigo;
@@ -721,7 +723,7 @@ public class WelcomeWindow extends JFrame {
 		tAMnsUser = new JTextArea("Puedes realizar 3 acciones durante cada día.\n ¿Qué deseas hacer?\n", 10, 40);
 		tAMnsUser.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		tAMnsUser.setEditable(false);
-		GridBagConstraints cTAMnsUser = new GridBagConstraints();
+		cTAMnsUser = new GridBagConstraints();
 		cTAMnsUser.gridx = 0;
 		cTAMnsUser.gridy = 0;
 		cTAMnsUser.gridheight = 5;
@@ -853,11 +855,12 @@ public class WelcomeWindow extends JFrame {
 		panelCombate.setLayout(gBLPnlCombate);
 		
 		//JTextArea de sucesos:
-		GridBagConstraints cTAMnsUser = new GridBagConstraints();
+		/*GridBagConstraints cTAMnsUser = new GridBagConstraints();
 		cTAMnsUser.gridx = 0;
 		cTAMnsUser.gridy = 0;
 		cTAMnsUser.gridheight = 5;
 		cTAMnsUser.insets = new Insets(10,0,10,75);
+		*/
 		panelCombate.add(tAMnsUser, cTAMnsUser);
 		
 		//Zona de botones de combate:
@@ -1122,9 +1125,11 @@ public class WelcomeWindow extends JFrame {
 		addToTextArea("Has vencido al enemigo!\n", tAMnsUser);
 		System.out.println("El enemigo ha sido debilitado");
 		// TO - DO "Repartición de recompensas"
-		// TO - DO "Cambio de paneles, panelCombate -> panelNarracion
+		// TO - DO "Cambio de paneles, panelCombate -> panelNarrativo
 		panelCombate.setVisible(false);
-		panelNarrativo.add(tAMnsUser);
+		panelCombate.remove(tAMnsUser);
+		panelPartida.add(panelNarrativo, BorderLayout.SOUTH);
+		panelNarrativo.add(tAMnsUser, cTAMnsUser);
 		panelNarrativo.setVisible(true);
 	}
 	
