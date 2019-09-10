@@ -98,6 +98,8 @@ public class WelcomeWindow extends JFrame {
 	private int puntos = 10;
 	private String rapido = "";
 	private String enemyAct = "";
+	private boolean ctrlTurnoPlayer = false;
+	private boolean ctrlTurnoEnemigo = false;
 	
 	// Control de los dias
 	private int diaAventura = 1;
@@ -872,7 +874,7 @@ public class WelcomeWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Has pulsado atacar!");
-				addToTextArea("Has pulsado el botón atacar", tAMnsUser);
+				addToTextArea("Has pulsado el botón atacar\n", tAMnsUser);
 				// Se comparan las velocidades
 				rapido = compararVelocidades();
 				// Se mira qué hace cada parte (desde el player se ataca)
@@ -945,15 +947,23 @@ public class WelcomeWindow extends JFrame {
 		String veloz;
 		if(jugadorProgress.getVelocidad()>enemigo.getVelocidad()) {
 			veloz = "jugador";
+			ctrlTurnoPlayer = false;
+			ctrlTurnoEnemigo = true;
 		} else if(enemigo.getVelocidad()>jugadorProgress.getVelocidad()){
 			veloz = "enemigo";
+			ctrlTurnoPlayer = true;
+			ctrlTurnoEnemigo = false;
 		} else { // En caso de que la velocidad sea la misma, se realizará de forma aleatoria
 			int rnd = randomNumber(2);
 			if (rnd == 1) {
 				veloz = "jugador";
+				ctrlTurnoPlayer = false;
+				ctrlTurnoEnemigo = true;
 				//addToTextArea("Pese a que la velocidad es la misma, "+jugadorProgress.getName()+" se adelanta.", tAMnsUser);
 			} else {
 				veloz = "enemigo";
+				ctrlTurnoPlayer = true;
+				ctrlTurnoEnemigo = false;
 				//addToTextArea("Pese a que la velocidad es la misma, el enemigo se adelanta.", tAMnsUser);
 			}
 		}
@@ -991,30 +1001,72 @@ public class WelcomeWindow extends JFrame {
 		switch(veloz) {
 		case "jugador":
 			if(playerAction.equalsIgnoreCase("atacar")) {
-				playerAttack();
+				if(enemyAction.equalsIgnoreCase("proteger")) {
+					addToTextArea("El enemigo se protege del ataque", tAMnsUser);
+				} else {
+					playerAttack();
+				}
 				if(!isDeath("enemigo")) {
 					if(enemyAction.equalsIgnoreCase("atacar")) {
 						// enemyAttack();
-					} else if(enemyAction.equalsIgnoreCase("proteger")) {
-						// enemyDefend();
+						addToTextArea("El enemigo contra-ataca\n", tAMnsUser);
+						System.out.println("El enemigo ataca despues del jugador");
 					} else {
 						// enemyCharge();
+						addToTextArea("El enemigo se prepara para atacar más fuerte\n", tAMnsUser);
+						System.out.println("El enemigo carga el ataque despues del jugador");
 					}
 				} else {
+					addToTextArea("Has vencido al enemigo!\n", tAMnsUser);
 					System.out.println("El enemigo ha sido debilitado");
+					// TO - DO "Repartición de recompensas"
 				}
 			} else if (playerAction.equalsIgnoreCase("proteger")) {
 				// TO - DO
+				System.out.println("El jugador se defiende del enemigo");
 			} else if (playerAction.equalsIgnoreCase("cargar")) {
 				// TO - DO
+				System.out.println("El jugador carga su ataque del enemigo");
 			} else if(playerAction.equalsIgnoreCase("item")) {
 				// TO - DO
+				System.out.println("El jugador usa un item del enemigo");
 			} else {
 				// TO - DO
+				System.out.println("El jugador se recupera del enemigo");
 			}
 			break;
 		case "enemigo":
-			// TO - DO
+			System.err.println( "El enemigo es más rápido, realiza su acción antes que "+jugadorProgress.getName() );
+			if(enemyAction.equalsIgnoreCase("atacar")) {
+				// enemyAttack();
+				System.out.println("El enemigo ataca");
+			} else if(enemyAction.equalsIgnoreCase("proteger")) {
+				// enemyDefend();
+				System.out.println("El enemigo se defiende");
+			} else {
+				// enemyCharge();
+				System.out.println("El enemigo carga el ataque");
+			}
+			if(!isDeath("jugador")) {
+				if(playerAction.equalsIgnoreCase("atacar")) {
+					playerAttack();
+				} else if (playerAction.equalsIgnoreCase("proteger")) {
+					// TO - DO
+					System.out.println("El jugador se defiende después del enemigo");
+				} else if (playerAction.equalsIgnoreCase("cargar")) {
+					// TO - DO
+					System.out.println("El jugador carga su ataque después del enemigo");
+				} else if(playerAction.equalsIgnoreCase("item")) {
+					// TO - DO
+					System.out.println("El jugador usa un item después del enemigo");
+				} else {
+					// TO - DO
+					System.out.println("El jugador se recupera después del enemigo");
+				}
+			} else {
+				// TO - DO "Comprobar si le quedan vidas al jugador"
+				System.out.println( jugadorProgress.getName() + " ha perdido sus puntos de defensa, pierde una vida");
+			}
 			break;
 		default:
 			System.err.println("Parece ser que ninguno de los dos es el más rápido");
@@ -1029,7 +1081,7 @@ public class WelcomeWindow extends JFrame {
 	 * @retunr void
 	 */
 	private void playerAttack() {
-		addToTextArea(jugadorProgress.getName()+" ataca", tAMnsUser);
+		addToTextArea(jugadorProgress.getName()+" ataca\n", tAMnsUser);
 		if(jugadorProgress.getAtaque() >= enemigo.getDefensa()) {
 			enemigo.setDefensa(0);
 		} else {
