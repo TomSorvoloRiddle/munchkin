@@ -13,9 +13,7 @@ import java.util.Random;
 public class Main {
 	//Constantes que no varían durante la partida
 	public static final int DifPifia = 40; // Posibilidades de que cada turno te salga una pifia...
-	
-	
-	
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		// Realizando la aplicación de forma visual
